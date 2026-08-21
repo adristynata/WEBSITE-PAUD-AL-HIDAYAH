@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', 'PAUD Al-Hidayah')</title>
+    {{-- Fonts: sistem lokal, tidak butuh internet --}}
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* System font stack — tidak butuh Google Fonts */
+        @font-face {
+            font-family: 'Inter';
+            src: local('Segoe UI'), local('Inter'), local('Roboto'), local('Helvetica Neue');
+        }
+
+        :root {
+            --green-50:  #f0fdf4;
+            --green-100: #dcfce7;
+            --green-400: #4ade80;
+            --green-500: #22c55e;
+            --green-600: #16a34a;
+            --green-700: #15803d;
+            --green-900: #14532d;
+
+            --sidebar-bg:        #0d1f10;
+            --sidebar-surface:   rgba(255,255,255,0.06);
+            --sidebar-hover:     rgba(255,255,255,0.08);
+            --sidebar-active-bg: rgba(74, 222, 128, 0.15);
+            --sidebar-active-border: #4ade80;
+            --sidebar-text:      rgba(255,255,255,0.62);
+            --sidebar-text-hi:   #ffffff;
+            --sidebar-w:         256px;
+
+            --bg:     #f4f6f5;
+            --card:   #ffffff;
+            --text:   #111827;
+            --muted:  #6b7280;
+            --border: #e5e7eb;
+            --topbar-h: 64px;
+
+            --blue:   #3b82f6;
+            --purple: #8b5cf6;
+            --orange: #f97316;
+            --red:    #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ════════════════════════════════
+           LAYOUT
+        ════════════════════════════════ */
+        .app-layout { display: flex; min-height: 100vh; }
+
+        /* ════════════════════════════════
+           SIDEBAR
+        ════════════════════════════════ */
+        .sidebar {
+            width: var(--sidebar-w);
+            min-height: 100vh;
+            background: var(--sidebar-bg);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 200;
+            transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        /* Brand */
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 18px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .brand-logo {
+            width: 36px; height: 36px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+        .brand-name {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: #fff;
+            display: block;
+            line-height: 1.2;
+            letter-spacing: 0.3px;
+        }
+        .brand-sub {
+            font-size: 0.68rem;
+            color: var(--sidebar-text);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Sidebar user profile */
+        .sidebar-user {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 16px 18px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            margin-bottom: 6px;
+        }
+        .su-avatar-img {
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255,255,255,0.18);
+            flex-shrink: 0;
+        }
+        .su-avatar-init {
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--green-500), var(--green-900));
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1rem; color: #fff;
+            flex-shrink: 0;
+            border: 2px solid rgba(255,255,255,0.18);
+        }
+        .su-name {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #fff;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px;
+        }
+        .su-role {
+            font-size: 0.7rem;
+            color: var(--green-400);
+            font-weight: 500;
+        }
+
+        /* Nav */
+        .sidebar-nav { flex: 1; padding: 4px 0; overflow-y: auto; }
+
+        /* Section header — support both old (.sidebar-section) and new (.nav-section) class */
+        .nav-section, .sidebar-section {
+            padding: 12px 18px 4px;
+            font-size: 0.64rem;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.3);
+            display: block;
+        }
+
+        /* Nav links — support both old bare <a> and new .nav-link class */
+        .sidebar-nav a,
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 18px;
+            margin: 1px 10px;
+            border-radius: 8px;
+            color: var(--sidebar-text);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-left: 3px solid transparent;
+            transition: all 0.18s ease;
+        }
+        .sidebar-nav a:hover,
+        .nav-link:hover {
+            background: var(--sidebar-hover);
+            color: var(--sidebar-text-hi);
+        }
+        .sidebar-nav a.active,
+        .nav-link.active {
+            background: var(--sidebar-active-bg);
+            color: var(--green-400);
+            border-left-color: var(--sidebar-active-border);
+            font-weight: 600;
+        }
+        /* Lucide SVG icons in nav links */
+        .sidebar-nav a svg,
+        .nav-link svg {
+            width: 18px; height: 18px;
+            flex-shrink: 0;
+            stroke-width: 1.8;
+        }
+        /* Hide old emoji <span class="icon"> — replaced by Lucide SVG */
+        .sidebar-nav a .icon {
+            display: none;
+        }
+        .sidebar-nav a span:not(.icon) { flex: 1; }
+        .nav-link span { flex: 1; }
+
+        /* Sidebar footer */
+        .sidebar-footer {
+            padding: 12px 10px 20px;
+            border-top: 1px solid rgba(255,255,255,0.07);
+        }
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: none;
+            background: rgba(239, 68, 68, 0.1);
+            color: rgba(252, 165, 165, 0.9);
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.18s ease;
+        }
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+        }
+        .logout-btn svg { width: 18px; height: 18px; stroke-width: 1.8; flex-shrink: 0; }
+
+        /* ════════════════════════════════
+           MAIN CONTENT
+        ════════════════════════════════ */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-w);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Topbar */
+        .topbar {
+            height: var(--topbar-h);
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .topbar-left { display: flex; align-items: center; gap: 16px; }
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--muted);
+            padding: 4px;
+        }
+        .hamburger svg { width: 22px; height: 22px; }
+        .page-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .topbar-right { display: flex; align-items: center; gap: 16px; }
+        .topbar-date {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: var(--muted);
+            font-weight: 500;
+        }
+        .topbar-date svg { width: 15px; height: 15px; stroke-width: 1.8; color: var(--muted); }
+
+        /* Notification bell (ortu) */
+        .notif-container { position: relative; }
+        .notif-bell-btn {
+            display: flex; align-items: center; justify-content: center;
+            width: 36px; height: 36px;
+            border-radius: 8px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            color: var(--muted);
+            transition: all 0.15s;
+        }
+        .notif-bell-btn:hover { background: #e9f0eb; color: var(--green-600); }
+        .notif-bell-btn svg { width: 17px; height: 17px; }
+        .notif-badge {
+            position: absolute; top: -4px; right: -4px;
+            background: var(--red); color: #fff;
+            font-size: 0.6rem; font-weight: 800;
+            width: 16px; height: 16px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid #fff;
+        }
+        .notif-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            width: 320px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            z-index: 999;
+            overflow: hidden;
+        }
+        .notif-dropdown.show { display: block; }
+        .notif-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            font-weight: 700;
+            font-size: 0.83rem;
+            color: var(--text);
+            background: #f9fafb;
+        }
+        .notif-list { max-height: 280px; overflow-y: auto; }
+        .notif-item {
+            display: block;
+            padding: 11px 16px;
+            border-bottom: 1px solid #f3f4f6;
+            text-decoration: none;
+            color: var(--text);
+            transition: background 0.15s;
+        }
+        .notif-item:hover { background: #f9fafb; }
+        .notif-item.unread { background: #f0fdf4; }
+        .notif-item-title { font-weight: 700; font-size: 0.8rem; color: var(--green-700); margin-bottom: 2px; }
+        .notif-item-msg { font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
+        .notif-item-time { font-size: 0.68rem; color: #9ca3af; margin-top: 4px; }
+        .notif-empty { padding: 24px 16px; text-align: center; color: var(--muted); font-size: 0.8rem; }
+
+        /* User chip */
+        .user-chip {
+            display: flex; align-items: center; gap: 8px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 5px 12px 5px 6px;
+            border-radius: 24px;
+        }
+        .chip-avatar {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .chip-avatar-init {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--green-500), var(--green-700));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem; font-weight: 700; color: #fff;
+        }
+        .chip-name { font-size: 0.8rem; font-weight: 600; color: var(--text); }
+
+        /* Page content */
+        .page-content { padding: 24px 28px; flex: 1; }
+
+        /* ════════════════════════════════
+           ALERTS
+        ════════════════════════════════ */
+        .alert {
+            display: flex; align-items: flex-start; gap: 10px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .alert svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px; }
+        .alert ul { padding-left: 16px; margin: 0; }
+        .alert-success { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+        .alert-danger  { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+        .alert-info    { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+
+        /* ════════════════════════════════
+           CARDS
+        ════════════════════════════════ */
+        .card {
+            background: var(--card);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            overflow: hidden;
+        }
+        .card-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 16px 22px;
+            border-bottom: 1px solid var(--border);
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+        .card-header-left { display: flex; align-items: center; gap: 8px; }
+        .card-header svg { width: 18px; height: 18px; color: var(--green-600); }
+        .card-body { padding: 22px; }
+
+        /* ════════════════════════════════
+           STAT CARDS
+        ════════════════════════════════ */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        @media (max-width: 1100px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 540px)  { .stats-grid { grid-template-columns: 1fr; } }
+
+        .stat-card {
+            background: var(--card);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .stat-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+
+        .stat-icon {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .stat-icon svg { width: 22px; height: 22px; stroke-width: 1.8; }
+        .stat-icon.green  { background: #dcfce7; color: var(--green-600); }
+        .stat-icon.blue   { background: #dbeafe; color: #2563eb; }
+        .stat-icon.purple { background: #ede9fe; color: #7c3aed; }
+        .stat-icon.orange { background: #ffedd5; color: #ea580c; }
+        .stat-icon.red    { background: #fee2e2; color: #dc2626; }
+
+        .stat-body { flex: 1; min-width: 0; }
+        .stat-value {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .stat-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+        .stat-trend {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--green-600);
+            margin-top: 6px;
+        }
+
+        /* ════════════════════════════════
+           BUTTONS
+        ════════════════════════════════ */
+        .btn {
+            display: inline-flex; align-items: center; gap: 7px;
+            padding: 9px 18px;
+            border-radius: 9px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            transition: all 0.18s ease;
+        }
+        .btn svg { width: 15px; height: 15px; stroke-width: 2; flex-shrink: 0; }
+        .btn-primary   { background: var(--green-600); color: #fff; }
+        .btn-primary:hover { background: var(--green-700); box-shadow: 0 4px 12px rgba(22,163,74,0.35); }
+        .btn-secondary { background: #f3f4f6; color: var(--text); border: 1px solid var(--border); }
+        .btn-secondary:hover { background: #e5e7eb; }
+        .btn-danger    { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+        .btn-danger:hover { background: #fee2e2; }
+        .btn-outline   { background: transparent; color: var(--green-600); border: 1.5px solid var(--green-600); }
+        .btn-outline:hover { background: var(--green-50); }
+        .btn-sm { padding: 6px 12px; font-size: 0.78rem; border-radius: 7px; }
+        .btn-sm svg { width: 13px; height: 13px; }
+
+        /* ════════════════════════════════
+           BADGE
+        ════════════════════════════════ */
+        .badge {
+            display: inline-flex; align-items: center;
+            padding: 2px 9px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .badge-green  { background: #dcfce7; color: #15803d; }
+        .badge-red    { background: #fee2e2; color: #b91c1c; }
+        .badge-orange { background: #ffedd5; color: #c2410c; }
+        .badge-purple { background: #ede9fe; color: #6d28d9; }
+        .badge-blue   { background: #dbeafe; color: #1d4ed8; }
+        .badge-gray   { background: #f3f4f6; color: #4b5563; }
+
+        /* ════════════════════════════════
+           TABLE
+        ════════════════════════════════ */
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+        thead th {
+            padding: 11px 16px;
+            text-align: left;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--muted);
+            background: #f9fafb;
+            border-bottom: 2px solid var(--border);
+        }
+        tbody td { padding: 13px 16px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: #fafafa; }
+
+        /* ════════════════════════════════
+           FORM
+        ════════════════════════════════ */
+        .form-group { margin-bottom: 18px; }
+        .form-label { display: block; font-size: 0.825rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+        .form-control {
+            width: 100%; padding: 10px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 9px;
+            font-family: inherit; font-size: 0.875rem;
+            color: var(--text); background: #fafafa;
+            transition: border-color 0.18s, box-shadow 0.18s;
+        }
+        .form-control:focus { outline: none; border-color: var(--green-500); background: #fff; box-shadow: 0 0 0 3px rgba(34,197,94,0.1); }
+        .form-control.is-invalid { border-color: var(--red); }
+        .invalid-feedback { color: var(--red); font-size: 0.78rem; margin-top: 4px; font-weight: 600; }
+        .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        @media (max-width: 640px) { .form-grid-2 { grid-template-columns: 1fr; } }
+
+        /* ════════════════════════════════
+           SEARCH BAR
+        ════════════════════════════════ */
+        .search-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
+        .search-bar .form-control { max-width: 280px; }
+        select.form-control { max-width: 200px; }
+
+        /* ════════════════════════════════
+           PAGINATION
+        ════════════════════════════════ */
+        .pagination { display: flex; gap: 4px; list-style: none; margin-top: 20px; justify-content: center; }
+        .pagination .page-item .page-link {
+            display: flex; align-items: center; justify-content: center;
+            width: 34px; height: 34px; border-radius: 8px;
+            background: var(--card); border: 1px solid var(--border);
+            font-size: 0.85rem; font-weight: 600; color: var(--text); text-decoration: none;
+            transition: all 0.15s;
+        }
+        .pagination .page-item.active .page-link { background: var(--green-600); color: #fff; border-color: var(--green-600); }
+        .pagination .page-item.disabled .page-link { opacity: 0.4; pointer-events: none; }
+
+        /* ════════════════════════════════
+           OVERLAY + MOBILE
+        ════════════════════════════════ */
+        .sidebar-overlay {
+            display: none; position: fixed;
+            inset: 0; background: rgba(0,0,0,0.45);
+            z-index: 150;
+        }
+        @media (max-width: 768px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .sidebar-overlay.show { display: block; }
+            .main-content { margin-left: 0 !important; }
+            .hamburger { display: flex; }
+            .page-content { padding: 16px; }
+            .topbar { padding: 0 16px; }
+            .topbar-date { display: none; }
+            .chip-name { display: none; }
+        }
+    </style>
+    @stack('styles')
+</head>
+<body>
+<div class="app-layout">
+
+    {{-- ══ SIDEBAR ══ --}}
+    <aside class="sidebar" id="sidebar">
+        {{-- Brand --}}
+        <div class="sidebar-brand">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="brand-logo">
+            <div>
+                <span class="brand-name">KB AL HIDAYAH</span>
+                <span class="brand-sub">Sekolah Usia Dini</span>
+            </div>
+        </div>
+
+        {{-- User --}}
+        <div class="sidebar-user">
+            @if(auth()->user()->role === 'admin')
+                <img src="{{ asset('images/foto kepsek1.jpg') }}" alt="Profile" class="su-avatar-img">
+            @else
+                <div class="su-avatar-init">{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</div>
+            @endif
+            <div style="min-width:0">
+                <span class="su-name">{{ auth()->user()->name }}</span>
+                <span class="su-role">
+                    @if(auth()->user()->role === 'admin') Kepala Sekolah
+                    @elseif(auth()->user()->role === 'guru') Guru / Wali Kelas
+                    @else Orang Tua / Wali
+                    @endif
+                </span>
+            </div>
+        </div>
+
+        {{-- Nav --}}
+        <nav class="sidebar-nav">
+            @yield('sidebar-menu')
+        </nav>
+
+        {{-- Logout --}}
+        <div class="sidebar-footer">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="logout-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                    <span>Keluar dari Akun</span>
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    {{-- ══ MAIN ══ --}}
+    <div class="main-content" id="mainContent">
+        {{-- Topbar --}}
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="hamburger" onclick="toggleSidebar()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+                <span class="page-title">@yield('page-title', 'Dashboard')</span>
+            </div>
+            <div class="topbar-right">
+                <div class="topbar-date">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    <span>{{ \Carbon\Carbon::now()->locale('id')->isoFormat('D MMMM YYYY') }}</span>
+                </div>
+
+                {{-- Notification bell (Orang Tua only) --}}
+                @if(auth()->user()->role === 'orang_tua' && isset($notifications))
+                    @php $unreadCount = $notifications->where('is_read', false)->count(); @endphp
+                    <div class="notif-container">
+                        <button class="notif-bell-btn" onclick="toggleNotif(event)" id="bell-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                        </button>
+                        @if($unreadCount > 0)
+                            <span class="notif-badge">{{ $unreadCount }}</span>
+                        @endif
+                        <div class="notif-dropdown" id="notif-dropdown">
+                            <div class="notif-header">Notifikasi</div>
+                            <div class="notif-list">
+                                @forelse($notifications as $notif)
+                                    <a href="{{ route('ortu.notifikasi.read', $notif->id) }}"
+                                       class="notif-item {{ !$notif->is_read ? 'unread' : '' }}">
+                                        <div class="notif-item-title">{{ $notif->judul }}</div>
+                                        <div class="notif-item-msg">{{ $notif->pesan }}</div>
+                                        <div class="notif-item-time">{{ $notif->created_at->diffForHumans() }}</div>
+                                    </a>
+                                @empty
+                                    <div class="notif-empty">Belum ada notifikasi.</div>
+                                @endforelse
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+                <div class="user-chip">
+                    @if(auth()->user()->role === 'admin')
+                        <img src="{{ asset('images/foto kepsek1.jpg') }}" alt="" class="chip-avatar">
+                    @else
+                        <div class="chip-avatar-init">{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</div>
+                    @endif
+                    <span class="chip-name">{{ auth()->user()->name }}</span>
+                </div>
+            </div>
+        </header>
+
+        {{-- Flash messages --}}
+        <div class="page-content">
+            @if(session('success'))
+                <div class="alert alert-success">
+                    <i data-lucide="check-circle-2"></i>
+                    <span>{{ session('success') }}</span>
+                </div>
+            @endif
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    <i data-lucide="x-circle"></i>
+                    <span>{{ session('error') }}</span>
+                </div>
+            @endif
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <i data-lucide="alert-circle"></i>
+                    <div>
+                        <ul style="padding-left:16px;margin:0">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
+
+            @yield('content')
+        </div>
+    </div>
+</div>
+
+{{-- Mobile overlay --}}
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+{{-- Inline SVG Sprite — tidak butuh CDN/internet --}}
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="ic-layout-dashboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></symbol>
+  <symbol id="ic-school" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+  <symbol id="ic-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="ic-file-bar-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="18" x2="9" y2="15"/><line x1="15" y1="18" x2="15" y2="10"/></symbol>
+  <symbol id="ic-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+  <symbol id="ic-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></symbol>
+  <symbol id="ic-notebook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+  <symbol id="ic-log-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
+  <symbol id="ic-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></symbol>
+  <symbol id="ic-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+  <symbol id="ic-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></symbol>
+  <symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+  <symbol id="ic-x-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></symbol>
+  <symbol id="ic-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></symbol>
+  <symbol id="ic-graduation" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+  <symbol id="ic-user-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></symbol>
+  <symbol id="ic-users-round" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 21a8 8 0 0 0-16 0"/><circle cx="10" cy="8" r="5"/><path d="M22 21a8 8 0 0 0-7.5-7.95"/><circle cx="17" cy="8" r="3" style="stroke-width:2"/></symbol>
+  <symbol id="ic-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></symbol>
+  <symbol id="ic-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+  <symbol id="ic-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
+  <symbol id="ic-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+  <symbol id="ic-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="ic-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+  <symbol id="ic-pencil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></symbol>
+  <symbol id="ic-user-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></symbol>
+  <symbol id="ic-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="ic-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+  <symbol id="ic-file-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></symbol>
+  <symbol id="ic-cake" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2 1 2 1"/><path d="M2 21h20"/><path d="M7 8v2"/><path d="M12 8v2"/><path d="M17 8v2"/><path d="M7 4h.01"/><path d="M12 4h.01"/><path d="M17 4h.01"/></symbol>
+  <symbol id="ic-baby" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h.01"/><path d="M15 12h.01"/><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/><path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1"/></symbol>
+  <symbol id="ic-file-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9.5" y1="12.5" x2="14.5" y2="17.5"/><line x1="14.5" y1="12.5" x2="9.5" y2="17.5"/></symbol>
+</svg>
+
+<script>
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('open');
+        document.getElementById('sidebarOverlay').classList.toggle('show');
+    }
+
+    function toggleNotif(e) {
+        e.stopPropagation();
+        document.getElementById('notif-dropdown').classList.toggle('show');
+    }
+    document.addEventListener('click', function(e) {
+        const d = document.getElementById('notif-dropdown');
+        if (d && !d.contains(e.target) && e.target.id !== 'bell-btn') {
+            d.classList.remove('show');
+        }
+    });
+</script>
+@stack('scripts')
+</body>
+</html>
