@@ -110,7 +110,8 @@
                     'rekap_motorik_halus' => 'Motorik Halus',
                     'rekap_kognitif' => 'Kognitif',
                     'rekap_bahasa' => 'Bahasa',
-                    'rekap_sosial_emosional' => 'Sosial Emosional'
+                    'rekap_sosial_emosional' => 'Sosial Emosional',
+                    'rekap_seni' => 'Seni'
                 ];
                 $no = 1;
             @endphp

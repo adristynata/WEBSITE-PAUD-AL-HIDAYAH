@@ -67,6 +67,7 @@ class LaporanBulananController extends Controller
             'rekap_kognitif' => 'required|string',
             'rekap_bahasa' => 'required|string',
             'rekap_sosial_emosional' => 'required|string',
+            'rekap_seni' => 'required|string',
             'status' => 'required|in:draft,published',
         ]);
 
@@ -124,13 +125,14 @@ class LaporanBulananController extends Controller
             'rekap_kognitif' => 'required|string',
             'rekap_bahasa' => 'required|string',
             'rekap_sosial_emosional' => 'required|string',
+            'rekap_seni' => 'required|string',
             'status' => 'required|in:draft,published',
         ]);
 
         $oldStatus = $laporan->status;
         $laporan->update($request->only([
             'rekap_agama_moral', 'rekap_motorik_kasar', 'rekap_motorik_halus',
-            'rekap_kognitif', 'rekap_bahasa', 'rekap_sosial_emosional', 'status'
+            'rekap_kognitif', 'rekap_bahasa', 'rekap_sosial_emosional', 'rekap_seni', 'status'
         ]));
 
         // Kirim notifikasi jika status baru dipublish

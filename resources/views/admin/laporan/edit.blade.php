@@ -46,7 +46,8 @@
             'motorik_halus' => ['Motorik Halus', 'motorik_halus', 'catatan_motorik_halus', '#F59E0B', 'rekap_motorik_halus'],
             'kognitif' => ['Kognitif', 'kognitif', 'catatan_kognitif', '#10B981', 'rekap_kognitif'],
             'bahasa' => ['Bahasa', 'bahasa', 'catatan_bahasa', '#3B82F6', 'rekap_bahasa'],
-            'sosial_emosional' => ['Sosial Emosional', 'sosial_emosional', 'catatan_sosial_emosional', '#EC4899', 'rekap_sosial_emosional']
+            'sosial_emosional' => ['Sosial Emosional', 'sosial_emosional', 'catatan_sosial_emosional', '#EC4899', 'rekap_sosial_emosional'],
+            'seni' => ['Seni', 'seni', 'catatan_seni', '#8B5CF6', 'rekap_seni']
         ];
 
         $scaleBadges = [

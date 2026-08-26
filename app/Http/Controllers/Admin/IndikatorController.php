@@ -10,13 +10,26 @@ class IndikatorController extends Controller
 {
     public function index(Request $request)
     {
-        $aspekFilter = $request->input('aspek');
-        $nilaiFilter = $request->input('nilai');
+        $aspekFilter = $request->input('aspek', []);
+        if (is_string($aspekFilter)) {
+            $aspekFilter = array_filter(explode(',', $aspekFilter));
+        }
+        $aspekFilter = array_filter((array) $aspekFilter);
+
+        $nilaiFilter = $request->input('nilai', []);
+        if (is_string($nilaiFilter)) {
+            $nilaiFilter = array_filter(explode(',', $nilaiFilter));
+        }
+        $nilaiFilter = array_filter((array) $nilaiFilter);
 
         $query = IndikatorPenilaian::query()->orderBy('aspek')->orderBy('nilai')->orderBy('urutan');
 
-        if ($aspekFilter) $query->where('aspek', $aspekFilter);
-        if ($nilaiFilter) $query->where('nilai', $nilaiFilter);
+        if (!empty($aspekFilter)) {
+            $query->whereIn('aspek', $aspekFilter);
+        }
+        if (!empty($nilaiFilter)) {
+            $query->whereIn('nilai', $nilaiFilter);
+        }
 
         $indikators = $query->get();
 

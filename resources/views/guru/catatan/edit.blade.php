@@ -74,6 +74,7 @@
                 'kognitif'          => ['Kognitif', 'catatan_kognitif', 'kognitif', 'Pemecahan masalah, mengenal bentuk, angka, logika sederhana.'],
                 'bahasa'            => ['Bahasa', 'catatan_bahasa', 'bahasa', 'Kosakata, berbicara, mendengarkan cerita, memahami instruksi.'],
                 'sosial_emosional'  => ['Sosial Emosional', 'catatan_sosial_emosional', 'sosial_emosional', 'Kemandirian, berbagi, empati, mengendalikan emosi, kerja sama.'],
+                'seni'              => ['Seni', 'catatan_seni', 'seni', 'Kemampuan mengekspresikan diri melalui seni: mewarnai, menggambar, bernyanyi, karya kreasi.'],
             ];
         @endphp
 

@@ -15,6 +15,7 @@ class IndikatorPenilaian extends Model
         'kognitif'         => 'Kognitif',
         'bahasa'           => 'Bahasa',
         'sosial_emosional' => 'Sosial Emosional',
+        'seni'             => 'Seni',
     ];
 
     public static array $nilaiLabels = [

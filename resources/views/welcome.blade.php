@@ -870,28 +870,53 @@
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0,0,0,0.02);
     transition: transform .25s ease, box-shadow .25s ease;
+    cursor: pointer;
+    position: relative;
   }
   .gallery-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 20px rgba(0,0,0,0.06);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 28px rgba(27,43,75,0.12);
   }
   .gallery-img-wrapper {
     width: 100%;
-    height: 200px;
+    height: 220px;
     overflow: hidden;
     background: #eee;
+    position: relative;
   }
   .gallery-img-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform .3s ease;
+    transition: transform .35s ease;
   }
   .gallery-card:hover .gallery-img-wrapper img {
-    transform: scale(1.05);
+    transform: scale(1.08);
+  }
+  .gallery-overlay-badge {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(20, 56, 24, 0.85);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 20px;
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: all 0.25s ease;
+  }
+  .gallery-card:hover .gallery-overlay-badge {
+    opacity: 1;
+    transform: translateY(0);
   }
   .gallery-info {
-    padding: 16px 20px;
+    padding: 18px 20px;
   }
   .gallery-info h4 {
     font-size: 16px;
@@ -902,7 +927,12 @@
   .gallery-info p {
     font-size: 13px;
     color: #666;
-    line-height: 1.5;
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .gallery-empty {
     grid-column: 1 / -1;
@@ -912,6 +942,200 @@
     border: 1px dashed var(--line);
     border-radius: 20px;
     color: #777;
+  }
+
+  /* ── FULLSCREEN GALLERY LIGHTBOX MODAL ── */
+  .lightbox-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(10, 15, 29, 0.96);
+    backdrop-filter: blur(16px);
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+  }
+  .lightbox-modal.active {
+    display: flex;
+    opacity: 1;
+  }
+  .lightbox-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 10px;
+    z-index: 10;
+  }
+  .lightbox-counter {
+    background: rgba(255,255,255,0.12);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #E2E8F0;
+  }
+  .lightbox-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .lightbox-btn {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+  .lightbox-btn:hover {
+    background: rgba(255,255,255,0.25);
+    color: #F4B93E;
+    transform: scale(1.05);
+  }
+  .lightbox-close-btn {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: #FCA5A5;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .lightbox-close-btn:hover {
+    background: #EF4444;
+    color: #fff;
+    transform: rotate(90deg);
+  }
+  .lightbox-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    gap: 30px;
+  }
+  .lightbox-image-container {
+    flex: 1.4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    max-height: 68vh;
+  }
+  .lightbox-image-container img {
+    max-width: 100%;
+    max-height: 68vh;
+    object-fit: contain;
+    border-radius: 14px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    transition: transform 0.3s ease;
+  }
+  .lightbox-detail-panel {
+    flex: 0.9;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 28px 24px;
+    color: #fff;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-height: 68vh;
+    overflow-y: auto;
+  }
+  .lightbox-detail-panel h3 {
+    font-size: 22px;
+    color: #FFFFFF;
+    font-family: 'Baloo 2', sans-serif;
+    line-height: 1.3;
+  }
+  .lightbox-date-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(244, 185, 62, 0.15);
+    color: #F4B93E;
+    border: 1px solid rgba(244, 185, 62, 0.3);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    width: fit-content;
+  }
+  .lightbox-desc {
+    font-size: 14.5px;
+    color: #CBD5E1;
+    line-height: 1.7;
+    white-space: pre-line;
+  }
+  .lightbox-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+  }
+  .lightbox-nav-btn:hover {
+    background: #143818;
+    border-color: #F4B93E;
+    color: #F4B93E;
+    transform: translateY(-50%) scale(1.1);
+  }
+  .lightbox-prev { left: -24px; }
+  .lightbox-next { right: -24px; }
+
+  @media (max-width: 900px) {
+    .lightbox-body {
+      flex-direction: column;
+      overflow-y: auto;
+      gap: 16px;
+    }
+    .lightbox-image-container {
+      max-height: 45vh;
+      width: 100%;
+    }
+    .lightbox-image-container img {
+      max-height: 45vh;
+    }
+    .lightbox-detail-panel {
+      width: 100%;
+      max-height: none;
+      padding: 20px;
+    }
+    .lightbox-prev { left: 10px; }
+    .lightbox-next { right: 10px; }
   }
 </style>
 </head>
@@ -1476,12 +1700,17 @@
     <div class="gallery-head">
       <div class="eyebrow eyebrow-green">GALERI KEGIATAN</div>
       <h2>Dokumentasi &amp; Aktivitas Belajar Siswa</h2>
+      <p style="color:#64748B; font-size:14px; max-width:600px; margin:8px auto 0;">Klik pada salah satu foto untuk melihat dokumentasi kegiatan secara layar penuh (fullscreen) beserta cerita lengkapnya.</p>
     </div>
     <div class="gallery-grid">
-      @forelse($galeris as $galeri)
-        <div class="gallery-card">
+      @forelse($galeris as $index => $galeri)
+        <div class="gallery-card" onclick="openLightbox({{ $index }})" title="Klik untuk lihat foto dan detail">
           <div class="gallery-img-wrapper">
             <img src="{{ asset($galeri->foto) }}" alt="{{ $galeri->judul }}" loading="lazy">
+            <div class="gallery-overlay-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span>Lihat Detail</span>
+            </div>
           </div>
           <div class="gallery-info">
             <h4>{{ $galeri->judul }}</h4>
@@ -1496,6 +1725,68 @@
     </div>
   </div>
 </section>
+
+{{-- ── FULLSCREEN GALLERY LIGHTBOX MODAL ── --}}
+<div class="lightbox-modal" id="galleryLightbox" onclick="handleLightboxBackdrop(event)">
+  {{-- Topbar --}}
+  <div class="lightbox-topbar">
+    <div class="lightbox-counter" id="lightboxCounter">
+      Foto 1 dari {{ count($galeris) }}
+    </div>
+    <div class="lightbox-actions">
+      <a href="#" id="lightboxDownloadBtn" download class="lightbox-btn" title="Unduh Foto HD">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Unduh Foto</span>
+      </a>
+      <button type="button" class="lightbox-close-btn" onclick="closeLightbox()" title="Tutup (Esc)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:20px;height:20px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  {{-- Body with Image and Detail Panel --}}
+  <div class="lightbox-body" onclick="event.stopPropagation()">
+    {{-- Prev Button --}}
+    @if(count($galeris) > 1)
+      <button type="button" class="lightbox-nav-btn lightbox-prev" onclick="prevLightbox()" title="Foto Sebelumnya (Panah Kiri)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:24px;height:24px;"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+    @endif
+
+    {{-- Main Image Area --}}
+    <div class="lightbox-image-container">
+      <img id="lightboxImg" src="" alt="Dokumentasi Kegiatan">
+    </div>
+
+    {{-- Detail Panel --}}
+    <div class="lightbox-detail-panel">
+      <div class="lightbox-date-badge" id="lightboxDateBadge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span id="lightboxDate">Dokumentasi PAUD</span>
+      </div>
+
+      <h3 id="lightboxTitle">Judul Kegiatan</h3>
+      
+      <div class="lightbox-desc" id="lightboxDesc">
+        Deskripsi lengkap cerita kegiatan dokumentasi sekolah...
+      </div>
+
+      <div style="margin-top:auto; padding-top:16px; border-top:1px solid rgba(255,255,255,0.1); font-size:12px; color:#94A3B8; display:flex; align-items:center; justify-content:space-between;">
+        <span>🏫 KB-PAUD Al-Hidayah Jepara</span>
+        <span style="font-size:11px;">Gunakan tombol panah ⬅️ ➡️ pada keyboard</span>
+      </div>
+    </div>
+
+    {{-- Next Button --}}
+    @if(count($galeris) > 1)
+      <button type="button" class="lightbox-nav-btn lightbox-next" onclick="nextLightbox()" title="Foto Selanjutnya (Panah Kanan)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:24px;height:24px;"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    @endif
+  </div>
+
+  <div style="height:10px;"></div>
+</div>
 
 {{-- ── PORTAL ORANG TUA ────────────────────────────────────────────────── --}}
 <section class="portal-ortu" id="portal-ortu">
@@ -1554,7 +1845,7 @@
         <p>Kami dengan senang hati menyambut Anda dan buah hati untuk bergabung bersama keluarga besar PAUD Al-Hidayah.</p>
         <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px">
           <div style="display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:#c7cde0">
-            <span>📍</span> <span>Desa Wedelan, Kecamatan Bangsri, Kabupaten Jepara, Jawa Tengah</span>
+            <span>📍</span> <span>FQMJ+FVG, Jl. Jepara - Bangsri, Batosari, Wedelan, Kec. Bangsri, Jepara, Jawa Tengah 59453</span>
           </div>
           <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#c7cde0">
             <span>📞</span> <span>0812-3456-7890</span>
@@ -1569,7 +1860,7 @@
       {{-- Google Maps Card --}}
       <div class="map-card">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31693.4159512345!2d110.7650!3d-6.5200!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e711867c464c205%3A0x4027a76e352f200!2sWedelan%2C%20Bangsri%2C%20Jepara%20Regency%2C%20Central%20Java!5e0!3m2!1sen!2sid!4v1620000000000!5m2!1sen!2sid"
+          src="https://maps.google.com/maps?q=FQMJ%2BFVG%2C+Jl.+Jepara+-+Bangsri%2C+Batosari%2C+Wedelan%2C+Kec.+Bangsri%2C+Kabupaten+Jepara%2C+Jawa+Tengah+59453&t=&z=16&ie=UTF8&iwloc=&output=embed"
           width="100%"
           height="100%"
           style="border:0;"
@@ -1694,6 +1985,79 @@
       target.classList.add('active');
     }
   }
+
+  // ── GALLERY FULLSCREEN LIGHTBOX CONTROLLER ──
+  @php
+    $galleryList = $galeris->map(function($g) {
+        return [
+            'judul' => $g->judul,
+            'deskripsi' => $g->deskripsi,
+            'foto' => asset($g->foto),
+            'tanggal' => $g->created_at ? $g->created_at->translatedFormat('d F Y') : 'Dokumentasi Sekolah'
+        ];
+    });
+  @endphp
+  const galleryData = @json($galleryList);
+
+  let currentGalleryIndex = 0;
+
+  function openLightbox(index) {
+      if (!galleryData || galleryData.length === 0) return;
+      currentGalleryIndex = index;
+      updateLightboxContent();
+      const modal = document.getElementById('galleryLightbox');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+      const modal = document.getElementById('galleryLightbox');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+  }
+
+  function handleLightboxBackdrop(e) {
+      if (e.target.id === 'galleryLightbox') {
+          closeLightbox();
+      }
+  }
+
+  function updateLightboxContent() {
+      const item = galleryData[currentGalleryIndex];
+      if (!item) return;
+
+      document.getElementById('lightboxImg').src = item.foto;
+      document.getElementById('lightboxTitle').textContent = item.judul;
+      document.getElementById('lightboxDesc').textContent = item.deskripsi || 'Dokumentasi kegiatan pembelajaran dan kreativitas anak di KB-PAUD Al-Hidayah.';
+      document.getElementById('lightboxDate').textContent = item.tanggal;
+      document.getElementById('lightboxCounter').textContent = `Foto ${currentGalleryIndex + 1} dari ${galleryData.length}`;
+      
+      const downloadBtn = document.getElementById('lightboxDownloadBtn');
+      downloadBtn.href = item.foto;
+      downloadBtn.setAttribute('download', item.judul.toLowerCase().replace(/[^a-z0-9]/g, '_') + '.jpg');
+  }
+
+  function nextLightbox() {
+      if (galleryData.length <= 1) return;
+      currentGalleryIndex = (currentGalleryIndex + 1) % galleryData.length;
+      updateLightboxContent();
+  }
+
+  function prevLightbox() {
+      if (galleryData.length <= 1) return;
+      currentGalleryIndex = (currentGalleryIndex - 1 + galleryData.length) % galleryData.length;
+      updateLightboxContent();
+  }
+
+  // Keyboard navigation for Lightbox
+  document.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('galleryLightbox');
+      if (modal && modal.classList.contains('active')) {
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowRight') nextLightbox();
+          if (e.key === 'ArrowLeft') prevLightbox();
+      }
+  });
 </script>
 </body>
 </html>

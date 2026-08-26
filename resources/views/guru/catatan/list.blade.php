@@ -73,6 +73,9 @@
                             <span class="badge badge-purple" style="font-size:0.7rem;padding:2px 8px;">KOG: <strong>{{ $c->kognitif }}</strong></span>
                             <span class="badge badge-purple" style="font-size:0.7rem;padding:2px 8px;">BHS: <strong>{{ $c->bahasa }}</strong></span>
                             <span class="badge badge-purple" style="font-size:0.7rem;padding:2px 8px;">SOSEM: <strong>{{ $c->sosial_emosional }}</strong></span>
+                            @if($c->seni)
+                            <span class="badge badge-purple" style="font-size:0.7rem;padding:2px 8px;">SNI: <strong>{{ $c->seni }}</strong></span>
+                            @endif
                         </div>
                         <div style="font-size:0.82rem;color:var(--muted);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis;">
                             📝 <em>{{ $c->catatan_kognitif }}</em>

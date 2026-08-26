@@ -80,6 +80,9 @@ class CatatanMingguanController extends Controller
             
             'sosial_emosional' => 'required|in:BB,MB,BSH,BSB',
             'catatan_sosial_emosional' => 'required|string',
+
+            'seni' => 'required|in:BB,MB,BSH,BSB',
+            'catatan_seni' => 'required|string',
         ], [
             'required' => 'Kolom :attribute wajib diisi.',
             'in' => 'Format penilaian :attribute tidak valid.',
@@ -148,6 +151,9 @@ class CatatanMingguanController extends Controller
             
             'sosial_emosional' => 'required|in:BB,MB,BSH,BSB',
             'catatan_sosial_emosional' => 'required|string',
+
+            'seni' => 'required|in:BB,MB,BSH,BSB',
+            'catatan_seni' => 'required|string',
         ]);
 
         $catatan->update($request->only([
@@ -156,7 +162,8 @@ class CatatanMingguanController extends Controller
             'motorik_halus', 'catatan_motorik_halus',
             'kognitif', 'catatan_kognitif',
             'bahasa', 'catatan_bahasa',
-            'sosial_emosional', 'catatan_sosial_emosional'
+            'sosial_emosional', 'catatan_sosial_emosional',
+            'seni', 'catatan_seni'
         ]));
 
         return redirect()->route('guru.catatan.list', $catatan->siswa_id)

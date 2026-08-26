@@ -72,7 +72,8 @@
             'rekap_motorik_halus' => ['Motorik Halus', '#F59E0B', 'Keterampilan tangan: menulis, menggambar, menggunting, meronce.'],
             'rekap_kognitif' => ['Kognitif', '#10B981', 'Pemecahan masalah, mengenal bentuk, angka, logika sederhana.'],
             'rekap_bahasa' => ['Bahasa', '#3B82F6', 'Kosakata, berbicara, mendengarkan cerita, memahami instruksi.'],
-            'rekap_sosial_emosional' => ['Sosial Emosional', '#EC4899', 'Kemandirian, berbagi, empati, mengendalikan emosi, kerja sama.']
+            'rekap_sosial_emosional' => ['Sosial Emosional', '#EC4899', 'Kemandirian, berbagi, empati, mengendalikan emosi, kerja sama.'],
+            'rekap_seni' => ['Seni', '#8B5CF6', 'Kemampuan mengekspresikan diri melalui seni, kreativitas, karya rupa, dan bernyanyi.']
         ];
     @endphp
 

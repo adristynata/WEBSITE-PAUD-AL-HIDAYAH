@@ -54,6 +54,13 @@ class IndikatorPenilaianSeeder extends Seeder
             ['aspek' => 'sosial_emosional', 'nilai' => 'BSH', 'urutan' => 1, 'teks' => 'Mampu berbagi, bekerja sama dalam kelompok, dan mulai mengendalikan emosi secara mandiri.'],
             ['aspek' => 'sosial_emosional', 'nilai' => 'BSH', 'urutan' => 2, 'teks' => 'Menunjukkan empati kepada teman, mau membantu teman yang kesulitan.'],
             ['aspek' => 'sosial_emosional', 'nilai' => 'BSB', 'urutan' => 1, 'teks' => 'Sangat mandiri dan penuh empati, sering menjadi pemimpin kelompok yang positif bagi teman.'],
+
+            // ── Seni ──
+            ['aspek' => 'seni', 'nilai' => 'BB',  'urutan' => 1, 'teks' => 'Belum tertarik mengikuti kegiatan seni (menggambar, mewarnai, bernyanyi), perlu motivasi dan bimbingan penuh.'],
+            ['aspek' => 'seni', 'nilai' => 'MB',  'urutan' => 1, 'teks' => 'Mulai mau mengikuti nyanyian anak atau mewarnai gambar dengan dorongan dan arahan guru.'],
+            ['aspek' => 'seni', 'nilai' => 'BSH', 'urutan' => 1, 'teks' => 'Mampu mengekspresikan diri melalui seni rupa (mewarnai, kolase, melipat) dan bernyanyi dengan percaya diri.'],
+            ['aspek' => 'seni', 'nilai' => 'BSH', 'urutan' => 2, 'teks' => 'Kreatif memadukan warna dan menghasilkan karya seni sederhana secara mandiri serta menghargai karyanya.'],
+            ['aspek' => 'seni', 'nilai' => 'BSB', 'urutan' => 1, 'teks' => 'Sangat kreatif dan memiliki apresiasi seni tinggi, antusias memimpin bernyanyi dan menciptakan karya orisinal.'],
         ];
 
         foreach ($data as $item) {
