@@ -30,9 +30,10 @@
         .aspect-title { width: 25%; font-weight: bold; color: #1f2937; }
         .aspect-rekap { width: 70%; text-align: justify; color: #374151; }
 
-        .signature-table { width: 100%; border-collapse: collapse; margin-top: 30px; page-break-inside: avoid; }
-        .signature-col { width: 50%; text-align: center; font-size: 11px; }
-        .signature-space { height: 64px; }
+        .signature-table { width: 100%; border-collapse: collapse; margin-top: 20px; page-break-inside: avoid; }
+        .signature-col { width: 50%; text-align: center; font-size: 11px; vertical-align: top; }
+        .signature-space { height: 75px; margin: 4px 0; text-align: center; }
+        .signature-img { height: 70px; max-height: 70px; width: auto; max-width: 180px; display: inline-block; vertical-align: middle; }
     </style>
 </head>
 <body>
@@ -124,19 +125,37 @@
     </table>
 
     <!-- Signature Block -->
+    @php
+        $ttdKepsekFile = ($profil && $profil->ttd_kepsek && file_exists(public_path('images/' . $profil->ttd_kepsek))) 
+            ? public_path('images/' . $profil->ttd_kepsek) 
+            : null;
+
+        $guruUser = $laporan->siswa->kelas->guru ?? null;
+        $ttdGuruFile = ($guruUser && $guruUser->ttd && file_exists(public_path('images/' . $guruUser->ttd))) 
+            ? public_path('images/' . $guruUser->ttd) 
+            : null;
+    @endphp
     <table class="signature-table">
         <tr>
             <td class="signature-col">
                 <p>Mengetahui,</p>
                 <strong style="display:block; margin-top:2px;">Kepala Sekolah KB Al-Hidayah</strong>
-                <div class="signature-space"></div>
-                <strong>Sri Wahyuni, S.Pd.</strong>
+                <div class="signature-space">
+                    @if($ttdKepsekFile)
+                        <img src="{{ $ttdKepsekFile }}" class="signature-img" alt="TTD Kepala Sekolah">
+                    @endif
+                </div>
+                <strong style="text-decoration:underline;">{{ $profil->sambutan_nama ?? 'Sri Wahyuni, S.Pd.' }}</strong>
             </td>
             <td class="signature-col">
-                <p>Jombang, {{ date('d') }} {{ $months[date('n')] }} {{ date('Y') }}</p>
+                <p>Jepara, {{ date('d') }} {{ $months[date('n')] }} {{ date('Y') }}</p>
                 <strong style="display:block; margin-top:2px;">Wali Kelas / Guru Pengampu</strong>
-                <div class="signature-space"></div>
-                <strong>{{ $laporan->siswa->kelas->guru->name }}</strong>
+                <div class="signature-space">
+                    @if($ttdGuruFile)
+                        <img src="{{ $ttdGuruFile }}" class="signature-img" alt="TTD Guru">
+                    @endif
+                </div>
+                <strong style="text-decoration:underline;">{{ $guruUser->name ?? 'Guru Pengampu' }}</strong>
             </td>
         </tr>
     </table>

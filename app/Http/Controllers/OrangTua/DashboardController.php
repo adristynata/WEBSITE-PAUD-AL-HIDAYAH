@@ -5,6 +5,7 @@ namespace App\Http\Controllers\OrangTua;
 use App\Http\Controllers\Controller;
 use App\Models\Notifikasi;
 use App\Models\LaporanBulanan;
+use App\Models\ProfilSekolah;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -79,8 +80,10 @@ class DashboardController extends Controller
         ];
         $namaBulan = $months[$laporan->bulan] ?? $laporan->bulan;
 
+        $profil = ProfilSekolah::query()->first();
+
         // Render view ke PDF
-        $pdf = Pdf::loadView('ortu.laporan.pdf', compact('laporan'));
+        $pdf = Pdf::loadView('ortu.laporan.pdf', compact('laporan', 'profil'));
 
         // Nama file dinamis
         $filename = 'Laporan_Perkembangan_' . str_replace(' ', '_', $laporan->siswa->nama) . '_' . $namaBulan . '_' . $laporan->tahun . '.pdf';

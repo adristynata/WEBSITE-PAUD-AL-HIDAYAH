@@ -64,7 +64,9 @@
         ════════════════════════════════ */
         .sidebar {
             width: var(--sidebar-w);
-            min-height: 100vh;
+            height: 100vh;
+            height: 100dvh;
+            max-height: 100vh;
             background: var(--sidebar-bg);
             display: flex;
             flex-direction: column;
@@ -72,6 +74,7 @@
             top: 0; left: 0;
             z-index: 200;
             transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+            overflow: hidden;
         }
 
         /* Brand */
@@ -81,6 +84,7 @@
             gap: 12px;
             padding: 20px 18px;
             border-bottom: 1px solid rgba(255,255,255,0.08);
+            flex-shrink: 0;
         }
         .brand-logo {
             width: 36px; height: 36px;
@@ -112,6 +116,7 @@
             padding: 16px 18px;
             border-bottom: 1px solid rgba(255,255,255,0.07);
             margin-bottom: 6px;
+            flex-shrink: 0;
         }
         .su-avatar-img {
             width: 38px; height: 38px;
@@ -146,7 +151,21 @@
         }
 
         /* Nav */
-        .sidebar-nav { flex: 1; padding: 4px 0; overflow-y: auto; }
+        .sidebar-nav {
+            flex: 1;
+            padding: 4px 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.2) transparent;
+        }
+        .sidebar-nav::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar-nav::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+        }
 
         /* Section header — support both old (.sidebar-section) and new (.nav-section) class */
         .nav-section, .sidebar-section {
@@ -205,6 +224,7 @@
         .sidebar-footer {
             padding: 12px 10px 20px;
             border-top: 1px solid rgba(255,255,255,0.07);
+            flex-shrink: 0;
         }
         .logout-btn {
             display: flex;

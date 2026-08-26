@@ -410,41 +410,162 @@
     background: var(--purple);
   }
 
-  /* programs */
-  .programs{padding:80px 0 100px;}
-  .programs-inner{
-    background:var(--cream-soft);border:1px solid var(--line);
-    border-radius:28px;padding:56px 44px;
+  /* ── PROGRAM PEMBELAJARAN 1 TAHUN ── */
+  .programs { padding: 90px 0 100px; }
+  .programs-inner {
+    background: var(--cream-soft);
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    padding: 56px 44px;
   }
-  .programs-head{text-align:center;margin-bottom:40px;}
-  .programs-head h2{font-size:30px;color:var(--navy);margin-top:10px;}
-  .eyebrow-green{color:#5FA05F;}
-  .program-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
-  .program-card{
-    border-radius:18px;padding:26px 22px;min-height:230px;
-    display:flex;flex-direction:column;
+  .programs-head { text-align: center; margin-bottom: 36px; }
+  .programs-head .eyebrow { color: #5FA05F; margin-bottom: 6px; }
+  .programs-head h2 { font-size: 32px; color: var(--navy); margin-top: 6px; font-weight: 800; font-family: 'Baloo 2', sans-serif; }
+  .programs-head p { font-size: 15px; color: #64748B; max-width: 720px; margin: 10px auto 0; line-height: 1.65; }
+  
+  /* Program Tabs */
+  .program-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
   }
-  .program-card .p-icon{
-    width:46px;height:46px;border-radius:12px;background:#fff;
-    display:flex;align-items:center;justify-content:center;margin-bottom:18px;
-    font-weight:800;font-size:14px;
+  .p-tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 24px;
+    border-radius: 30px;
+    background: #fff;
+    border: 1.5px solid var(--line);
+    color: #475569;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.25s ease;
   }
-  .program-card .p-eyebrow{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;}
-  .program-card h4{font-size:18px;color:var(--navy);margin-bottom:10px;font-family:'Baloo 2',sans-serif;}
-  .program-card p{font-size:13px;color:#63636c;line-height:1.55;flex-grow:1;}
-  .program-card .p-link{font-size:12.5px;font-weight:800;margin-top:14px;display:inline-flex;align-items:center;gap:6px;}
-  .p-1{background:#E7F2E9;}
-  .p-1 .p-eyebrow{color:#4D8F5A;}
-  .p-1 .p-link{color:#4D8F5A;}
-  .p-2{background:#FDF1DC;}
-  .p-2 .p-eyebrow{color:#C98A17;}
-  .p-2 .p-link{color:#C98A17;}
-  .p-3{background:#E7EDF9;}
-  .p-3 .p-eyebrow{color:#5470B8;}
-  .p-3 .p-link{color:#5470B8;}
-  .p-4{background:#FBE8E8;}
-  .p-4 .p-eyebrow{color:#C6626E;}
-  .p-4 .p-link{color:#C6626E;}
+  .p-tab-btn:hover {
+    border-color: var(--green);
+    color: var(--navy);
+    transform: translateY(-2px);
+  }
+  .p-tab-btn.active {
+    background: #143818;
+    border-color: #143818;
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(20, 56, 24, 0.2);
+  }
+  .p-tab-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .p-tab-btn.active svg {
+    stroke: var(--gold);
+  }
+
+  .program-tab-content {
+    display: none;
+    animation: fadeInProg .3s ease;
+  }
+  .program-tab-content.active {
+    display: block;
+  }
+  @keyframes fadeInProg {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Grid Layout for Program Themes */
+  .program-semester-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+  .program-box {
+    background: #fff;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    padding: 28px 24px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .program-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(27, 43, 75, 0.07);
+  }
+  .pbox-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .pbox-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .pbox-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: #fff;
+    fill: none;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .pbox-badge {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .pbox-header h4 {
+    font-size: 18px;
+    color: var(--navy);
+    font-family: 'Baloo 2', sans-serif;
+    line-height: 1.25;
+  }
+  .pbox-body {
+    font-size: 13.5px;
+    color: #555;
+    line-height: 1.65;
+  }
+  .pbox-highlights {
+    margin-top: 6px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 12.5px;
+  }
+  .pbox-hl-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: #475569;
+    line-height: 1.5;
+  }
+  .pbox-hl-item span.bullet {
+    color: var(--green);
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1;
+  }
 
   /* testimonial + cta */
   .bottom-row{padding:0 0 90px;}
@@ -699,9 +820,11 @@
     .feature-item:nth-child(5) { grid-column: span 1; }
     
     /* Program Grid */
-    .programs { padding: 50px 0; }
-    .programs-inner { padding: 28px 16px; }
-    .program-grid { grid-template-columns: 1fr; gap: 12px; }
+    .programs { padding: 60px 0; }
+    .programs-inner { padding: 32px 20px; }
+    .programs-head h2 { font-size: 26px; }
+    .program-semester-grid { grid-template-columns: 1fr; gap: 16px; }
+    .pbox-header h4 { font-size: 17px; }
 
     /* Tentang Kami (Profil) */
     .profil-card { padding: 24px 20px; }
@@ -1044,56 +1167,305 @@
   </div>
 </section>
 
-{{-- ── PROGRAM ─────────────────────────────────────────────────────────── --}}
+{{-- ── PROGRAM PEMBELAJARAN 1 TAHUN ────────────────────────────────────── --}}
 <section class="programs" id="program">
   <div class="wrap">
     <div class="programs-inner">
       <div class="programs-head">
-        <div class="eyebrow eyebrow-green">PROGRAM KAMI</div>
-        <h2>Program untuk Setiap Tahap Pertumbuhan</h2>
+        <div class="eyebrow">PROGRAM PEMBELAJARAN 1 TAHUN</div>
+        <h2>Kurikulum Tematik &amp; Agenda Belajar 1 Tahun Ajaran</h2>
+        <p>Program pembelajaran terpadu berbasis bermain yang bermakna dan berakhlakul karimah, dirancang terstruktur dalam 2 semester untuk menstimulasi 6 aspek perkembangan anak (Agama &amp; Moral, Fisik Motorik, Kognitif, Bahasa, Sosial Emosional, dan Seni).</p>
       </div>
-      <div class="program-grid">
-        <div class="program-card p-1">
-          <div class="p-icon" style="color:#4D8F5A">ABC</div>
-          <div class="p-eyebrow">KELOMPOK BAYI</div>
-          <h4>6 Minggu &ndash; 18 Bulan</h4>
-          <p>Perawatan penuh kasih dan stimulasi belajar dini di lingkungan yang hangat dan terpercaya.</p>
-          <a href="#program" class="p-link">SELENGKAPNYA →</a>
-        </div>
-        <div class="program-card p-2">
-          <div class="p-icon" style="color:#C98A17">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M6 21V5a2 2 0 012-2h10v18H8a2 2 0 01-2-2z"/><path d="M6 17h12"/>
-            </svg>
+
+      <!-- Tab Switcher -->
+      <div class="program-tabs">
+        <button type="button" class="p-tab-btn active" onclick="switchProgramTab('sem1', this)">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Semester 1 (Ganjil: Juli – Des)
+        </button>
+        <button type="button" class="p-tab-btn" onclick="switchProgramTab('sem2', this)">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Semester 2 (Genap: Jan – Jun)
+        </button>
+        <button type="button" class="p-tab-btn" onclick="switchProgramTab('karakter', this)">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Program Karakter &amp; Pembiasaan
+        </button>
+      </div>
+
+      <!-- ── TAB 1: SEMESTER 1 ── -->
+      <div class="program-tab-content active" id="prog-sem1">
+        <div class="program-semester-grid">
+          
+          <!-- Tema 1 -->
+          <div class="program-box">
+            <div class="pbox-header">
+              <div class="pbox-icon" style="background:#4D8F5A">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <div>
+                <div class="pbox-badge" style="color:#4D8F5A">Bulan 1 &amp; 2 • Juli – Agustus</div>
+                <h4>Tema: Aku &amp; Diriku Sendiri</h4>
+              </div>
+            </div>
+            <div class="pbox-body">
+              Mengenalkan identitas diri, jenis kelamin, panca indra, anggota tubuh, serta menumbuhkan rasa percaya diri dan kemandirian anak di lingkungan sekolah baru.
+            </div>
+            <div class="pbox-highlights">
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Masa Pengenalan Lingkungan Sekolah (MPLS) Ramah Anak</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Praktik Cuci Tangan 6 Langkah &amp; Toilet Training Mandiri</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span><strong>Puncak Tema:</strong> Kreasi Kolase "Wajah &amp; Tubuh Ceria Ciptaan Allah"</span></div>
+            </div>
           </div>
-          <div class="p-eyebrow">KELOMPOK BERMAIN</div>
-          <h4>18 Bulan &ndash; 3 Tahun</h4>
-          <p>Menjelajahi dunia melalui bermain, penemuan, dan imajinasi yang penuh warna.</p>
-          <a href="#program" class="p-link">SELENGKAPNYA →</a>
-        </div>
-        <div class="program-card p-3">
-          <div class="p-icon" style="color:#5470B8">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/>
-            </svg>
+
+          <!-- Tema 2 -->
+          <div class="program-box">
+            <div class="pbox-header">
+              <div class="pbox-icon" style="background:#C98A17">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </div>
+              <div>
+                <div class="pbox-badge" style="color:#C98A17">Bulan 3 • September</div>
+                <h4>Tema: Keluargaku &amp; Lingkunganku</h4>
+              </div>
+            </div>
+            <div class="pbox-body">
+              Mengenal peran anggota keluarga (ayah, ibu, kakak, adik, kakek, nenek), adab berbakti kepada orang tua, serta mengenal fungsi ruangan di rumah dan lingkungan sekolah.
+            </div>
+            <div class="pbox-highlights">
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Bercerita Silsilah Keluarga &amp; Doa Untuk Kedua Orang Tua</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Bermain Peran (Role Play): "Rumahku Surgaku &amp; Gotong Royong"</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span><strong>Puncak Tema:</strong> Hari Apresiasi &amp; Kasih Sayang Ayah Bunda (Parenting Day)</span></div>
+            </div>
           </div>
-          <div class="p-eyebrow">TK A</div>
-          <h4>4 &ndash; 5 Tahun</h4>
-          <p>Membangun keterampilan, rasa percaya diri, dan kecintaan belajar melalui aktivitas menyenangkan.</p>
-          <a href="#program" class="p-link">SELENGKAPNYA →</a>
-        </div>
-        <div class="program-card p-4">
-          <div class="p-icon" style="color:#C6626E">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M4 7V5a2 2 0 012-2h4l2 2h6a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V7z"/>
-            </svg>
+
+          <!-- Tema 3 -->
+          <div class="program-box">
+            <div class="pbox-header">
+              <div class="pbox-icon" style="background:#5470B8">
+                <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+              </div>
+              <div>
+                <div class="pbox-badge" style="color:#5470B8">Bulan 4 • Oktober</div>
+                <h4>Tema: Kebutuhanku (Makanan &amp; Pakaian)</h4>
+              </div>
+            </div>
+            <div class="pbox-body">
+              Mengenalkan makanan dan minuman halal, sehat bergizi seimbang (4 Sehat 5 Sempurna), adab makan/minum sesuai sunnah Nabi, serta fungsi pakaian menutup aurat.
+            </div>
+            <div class="pbox-highlights">
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span><em>Cooking Class Cilik:</em> Membuat Salad Buah / Jus Sehat Bersama</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Edukasi Kebersihan Gigi &amp; Mulut Bersama Tenaga Kesehatan</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span><strong>Puncak Tema:</strong> Lomba Makan Sayur Ceria &amp; Kerapian Busana Islami</span></div>
+            </div>
           </div>
-          <div class="p-eyebrow">TK B</div>
-          <h4>5 &ndash; 6 Tahun</h4>
-          <p>Mempersiapkan anak menuju sekolah dasar dengan keterampilan akademik dan sosial yang matang.</p>
-          <a href="#program" class="p-link">SELENGKAPNYA →</a>
+
+          <!-- Tema 4 -->
+          <div class="program-box">
+            <div class="pbox-header">
+              <div class="pbox-icon" style="background:#C6626E">
+                <svg viewBox="0 0 24 24"><path d="M12 2a9 9 0 0 1 9 9c0 4.97-4.03 9-9 9s-9-4.03-9-9a9 9 0 0 1 9-9z"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <div>
+                <div class="pbox-badge" style="color:#C6626E">Bulan 5 &amp; 6 • November – Desember</div>
+                <h4>Tema: Binatang &amp; Tanaman Ciptaan Allah</h4>
+              </div>
+            </div>
+            <div class="pbox-body">
+              Mengeksplorasi keanekaragaman flora dan fauna, membedakan habitat hewan darat, air, dan udara, serta belajar menyayangi dan merawat ciptaan Allah SWT.
+            </div>
+            <div class="pbox-highlights">
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Praktik Menanam Biji &amp; Menyiram Tanaman Hias Sekolah</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Menirukan Gerak &amp; Suara Hewan Serta Pengenalan Huruf Awal</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span><strong>Puncak Tema:</strong> Kunjungan Edukatif (Mini Zoo) &amp; Pembagian Rapor Semester 1</span></div>
+            </div>
+          </div>
+
         </div>
       </div>
+
+      <!-- ── TAB 2: SEMESTER 2 ── -->
+      <div class="program-tab-content" id="prog-sem2">
+        <div class="program-semester-grid">
+          
+          <!-- Tema 5 -->
+          <div class="program-box">
+            <div class="pbox-header">
+              <div class="pbox-icon" style="background:#4338CA">
+                <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              </div>
+              <div>
+                <div class="pbox-badge" style="color:#4338CA">Bulan 7 &amp; 8 • Januari – Februari</div>
+                <h4>Tema: Kendaraan &amp; Rekreasi (Transportasi)</h4>
+              </div>
+            </div>
+            <div class="pbox-body">
+              Mengenal berbagai macam alat transportasi darat, laut, dan udara, pengemudi kendaraan, rambu-rambu lalu lintas dasar, serta etika keselamatan dalam berkendara.
+            </div>
+            <div class="pbox-highlights">
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Simulasi Tertib Lalu Lintas &amp; Program "Polisi Sahabat Anak"</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Kreasi Membuat Miniatur Mobil &amp; Perahu dari Bahan Daur Ulang</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span><strong>Puncak Tema:</strong> <em>Outing Class</em> Edukasi Transportasi &amp; Keliling Kota</span></div>
+            </div>
+          </div>
+
+          <!-- Tema 6 -->
+          <div class="program-box">
+            <div class="pbox-header">
+              <div class="pbox-icon" style="background:#D97706">
+                <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              </div>
+              <div>
+                <div class="pbox-badge" style="color:#D97706">Bulan 9 • Maret</div>
+                <h4>Tema: Pekerjaan &amp; Profesi Mulia</h4>
+              </div>
+            </div>
+            <div class="pbox-body">
+              Menumbuhkan rasa hormat terhadap berbagai jenis profesi yang bermanfaat (guru, dokter, polisi, pemadam kebakaran, petani, koki) serta memupuk cita-cita anak sejak dini.
+            </div>
+            <div class="pbox-highlights">
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span><em>Career Day / Kostum Profesi Cilik:</em> Bercerita Cita-Citaku</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Simulasi Pemeriksaan Kesehatan &amp; Petugas Pemadam Cilik</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span><strong>Puncak Tema:</strong> Kunjungan Lapangan ke Pos Pemadam Kebakaran / Balai Desa</span></div>
+            </div>
+          </div>
+
+          <!-- Tema 7 -->
+          <div class="program-box">
+            <div class="pbox-header">
+              <div class="pbox-icon" style="background:#059669">
+                <svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+              </div>
+              <div>
+                <div class="pbox-badge" style="color:#059669">Bulan 10 • April</div>
+                <h4>Tema: Negaraku, Budaya &amp; Ramadhan Ceria</h4>
+              </div>
+            </div>
+            <div class="pbox-body">
+              Mengenalkan lambang negara Garuda Pancasila, bendera Merah Putih, lagu kebangsaan, keragaman budaya nusantara, serta menyemarakkan amalan di bulan suci Ramadhan.
+            </div>
+            <div class="pbox-highlights">
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Pesantren Kilat Cilik: Latihan Puasa &amp; Berbagi Takjil Ramadhan</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Peringatan Hari Kartini: Parade Baju Adat Nusantara</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span><strong>Puncak Tema:</strong> Gebyar Ramadhan &amp; Santunan Cilik Ramah Berbagi</span></div>
+            </div>
+          </div>
+
+          <!-- Tema 8 -->
+          <div class="program-box">
+            <div class="pbox-header">
+              <div class="pbox-icon" style="background:#7C3AED">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              </div>
+              <div>
+                <div class="pbox-badge" style="color:#7C3AED">Bulan 11 &amp; 12 • Mei – Juni</div>
+                <h4>Tema: Alam Semesta &amp; Gebyar Kelulusan</h4>
+              </div>
+            </div>
+            <div class="pbox-body">
+              Mempelajari benda-benda langit (matahari, bulan, bintang, bumi), fenomena alam (siang/malam, hujan, pelangi), serta mempersiapkan pelepasan siswa menuju jenjang Sekolah Dasar.
+            </div>
+            <div class="pbox-highlights">
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Eksperimen Sains Sederhana: "Terjadinya Hujan &amp; Warna Pelangi"</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Latihan Kesiapan Masuk SD: Kemandirian, Calistung Dasar &amp; Emosional</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span><strong>Puncak Tema:</strong> Panggung Kreasi Seni, Wisuda &amp; Pembagian Laporan Akhir Tahun</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── TAB 3: PROGRAM PEMBIASAAN KARAKTER (ONGOING) ── -->
+      <div class="program-tab-content" id="prog-karakter">
+        <div class="program-semester-grid">
+          
+          <!-- Karakter 1 -->
+          <div class="program-box">
+            <div class="pbox-header">
+              <div class="pbox-icon" style="background:#0D6B3E">
+                <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              </div>
+              <div>
+                <div class="pbox-badge" style="color:#0D6B3E">Program Harian • Rutin</div>
+                <h4>Tahfidz &amp; Tahsin Al-Qur'an Cilik</h4>
+              </div>
+            </div>
+            <div class="pbox-body">
+              Membiasakan anak akrab dengan Al-Qur'an sejak dini dengan metode talaqqi yang ceria, pengucapan makharijul huruf yang tepat, dan menghafal surat-surat pendek Juz 'Amma.
+            </div>
+            <div class="pbox-highlights">
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Target Hafalan: Surat An-Nas sampai At-Takatsur / An-Naba bertahap</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Hafalan Doa Sehari-hari (Doa Makan, Tidur, Masuk Masjid, Belajar)</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Mengenal Hadits Adab: Senyum, Menuntut Ilmu, Menghormati Teman</span></div>
+            </div>
+          </div>
+
+          <!-- Karakter 2 -->
+          <div class="program-box">
+            <div class="pbox-header">
+              <div class="pbox-icon" style="background:#0284C7">
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              </div>
+              <div>
+                <div class="pbox-badge" style="color:#0284C7">Program Pagi • Harian</div>
+                <h4>Sholat Dhuha Ceria &amp; Bimbingan Ibadah</h4>
+              </div>
+            </div>
+            <div class="pbox-body">
+              Pendidikan ibadah aplikatif yang membimbing anak melakukan wudhu mandiri secara berurutan dan melaksanakan sholat dhuha berjamaah setiap pagi dengan khusyuk dan gembira.
+            </div>
+            <div class="pbox-highlights">
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Praktik Tata Cara Wudhu yang Tertib &amp; Doa Setelah Wudhu</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Latihan Bacaan &amp; Gerakan Sholat Berjamaah</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Infaq Subuh / Kotak Amal Cilik untuk Melatih Empati Sosial</span></div>
+            </div>
+          </div>
+
+          <!-- Karakter 3 -->
+          <div class="program-box">
+            <div class="pbox-header">
+              <div class="pbox-icon" style="background:#E11D48">
+                <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5V3A2.5 2.5 0 0 1 6.5 .5H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
+              </div>
+              <div>
+                <div class="pbox-badge" style="color:#E11D48">Kesiapan Literasi • Akademik</div>
+                <h4>Fun Calistung &amp; Eksplorasi Kognitif</h4>
+              </div>
+            </div>
+            <div class="pbox-body">
+              Pembelajaran membaca, menulis, dan berhitung dasar tanpa paksaan melalui metode bermain kartu huruf, flashcard, pasir kinetik, balok geometri, dan logika matematika awal.
+            </div>
+            <div class="pbox-highlights">
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Fonik Huruf Abjad &amp; Pengenalan Kata Bermakna</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Konsep Bilangan 1-20, Pola Warna, Bentuk, &amp; Perbandingan Ukuran</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Sudut Baca &amp; Mendengarkan Dongeng Edukatif (Storytelling)</span></div>
+            </div>
+          </div>
+
+          <!-- Karakter 4 -->
+          <div class="program-box">
+            <div class="pbox-header">
+              <div class="pbox-icon" style="background:#7E22CE">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+              </div>
+              <div>
+                <div class="pbox-badge" style="color:#7E22CE">Motorik &amp; Kreativitas • Mingguan</div>
+                <h4>Senam Sehat, Motorik &amp; Seni Rupa</h4>
+              </div>
+            </div>
+            <div class="pbox-body">
+              Menyeimbangkan keterampilan motorik kasar melalui senam irama anak ceria setiap Jumat, melatih motorik halus lewat kolase, melukis, melipat origami, dan menyanyi lagu anak.
+            </div>
+            <div class="pbox-highlights">
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Senam Irama Ceria &amp; Permainan Tradisional Edukatif</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Mewarnai, Menggunting, Meronce &amp; Finger Painting</span></div>
+              <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Pembagian Makanan Sehat Tambahan (PMT) Bergizi</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1310,6 +1682,18 @@
       }
     });
   });
+
+  // Program Tabs Switcher
+  function switchProgramTab(tabName, btn) {
+    document.querySelectorAll('.p-tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.program-tab-content').forEach(c => c.classList.remove('active'));
+    
+    btn.classList.add('active');
+    const target = document.getElementById('prog-' + tabName);
+    if (target) {
+      target.classList.add('active');
+    }
+  }
 </script>
 </body>
 </html>

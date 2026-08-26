@@ -205,6 +205,28 @@
         }
         .input-box input::placeholder { color: #b0b8c1; }
 
+        .btn-toggle-pwd {
+            background: none;
+            border: none;
+            padding: 4px 6px;
+            cursor: pointer;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color .2s;
+        }
+        .btn-toggle-pwd:hover { color: #1e293b; }
+        .btn-toggle-pwd svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
         .invalid-feedback {
             color: #ef4444;
             font-size: .78rem;
@@ -355,6 +377,10 @@
                             <div class="input-box">
                                 <span class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
                                 <input type="password" id="password" name="password" placeholder="••••••••" required>
+                                <button type="button" class="btn-toggle-pwd" onclick="togglePasswordVisibility('password', this)" title="Tampilkan/Sembunyikan Password">
+                                    <svg class="eye-open" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                    <svg class="eye-closed" viewBox="0 0 24 24" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                                </button>
                             </div>
                         </div>
                         <button type="submit" class="btn-submit">Masuk Dashboard Staf</button>
@@ -395,6 +421,10 @@
                             <div class="input-box {{ $errors->has('pin') ? 'is-invalid' : '' }}">
                                 <span class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
                                 <input type="password" id="pin" name="pin" placeholder="Masukkan 6-digit PIN" maxlength="6" inputmode="numeric" pattern="[0-9]*">
+                                <button type="button" class="btn-toggle-pwd" onclick="togglePasswordVisibility('pin', this)" title="Tampilkan/Sembunyikan PIN">
+                                    <svg class="eye-open" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                    <svg class="eye-closed" viewBox="0 0 24 24" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                                </button>
                             </div>
                             @error('pin')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
@@ -411,6 +441,22 @@
 </div>
 
 <script>
+function togglePasswordVisibility(inputId, btn) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+    const eyeOpen = btn.querySelector('.eye-open');
+    const eyeClosed = btn.querySelector('.eye-closed');
+    if (input.type === 'password') {
+        input.type = 'text';
+        if (eyeOpen) eyeOpen.style.display = 'none';
+        if (eyeClosed) eyeClosed.style.display = 'block';
+    } else {
+        input.type = 'password';
+        if (eyeOpen) eyeOpen.style.display = 'block';
+        if (eyeClosed) eyeClosed.style.display = 'none';
+    }
+}
+
 function switchTab(tab) {
     document.getElementById('tab-staff').classList.toggle('active', tab === 'staff');
     document.getElementById('tab-ortu').classList.toggle('active', tab === 'ortu');

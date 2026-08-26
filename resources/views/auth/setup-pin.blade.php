@@ -111,15 +111,29 @@
             @csrf
             <div class="form-group">
                 <label for="pin">PIN Baru (6-Digit Angka)</label>
-                <input type="password" id="pin" name="pin"
-                       class="form-control @error('pin') is-invalid @enderror"
-                       placeholder="••••••" maxlength="6" inputmode="numeric" pattern="[0-9]*" required autofocus>
+                <div style="position: relative; display: flex; align-items: center;">
+                    <input type="password" id="pin" name="pin"
+                           class="form-control @error('pin') is-invalid @enderror"
+                           placeholder="••••••" maxlength="6" inputmode="numeric" pattern="[0-9]*" required autofocus
+                           style="padding-right: 44px;">
+                    <button type="button" class="btn-toggle-pwd" onclick="togglePasswordVisibility('pin', this)" style="position: absolute; right: 12px; background: none; border: none; cursor: pointer; color: #94A3B8; display: flex; align-items: center; padding: 4px;" title="Tampilkan/Sembunyikan PIN">
+                        <svg class="eye-open" viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        <svg class="eye-closed" viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                    </button>
+                </div>
             </div>
             <div class="form-group">
                 <label for="pin_confirmation">Konfirmasi PIN Baru</label>
-                <input type="password" id="pin_confirmation" name="pin_confirmation"
-                       class="form-control"
-                       placeholder="••••••" maxlength="6" inputmode="numeric" pattern="[0-9]*" required>
+                <div style="position: relative; display: flex; align-items: center;">
+                    <input type="password" id="pin_confirmation" name="pin_confirmation"
+                           class="form-control"
+                           placeholder="••••••" maxlength="6" inputmode="numeric" pattern="[0-9]*" required
+                           style="padding-right: 44px;">
+                    <button type="button" class="btn-toggle-pwd" onclick="togglePasswordVisibility('pin_confirmation', this)" style="position: absolute; right: 12px; background: none; border: none; cursor: pointer; color: #94A3B8; display: flex; align-items: center; padding: 4px;" title="Tampilkan/Sembunyikan PIN">
+                        <svg class="eye-open" viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        <svg class="eye-closed" viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                    </button>
+                </div>
             </div>
             <button type="submit" class="btn-submit">💾 Simpan PIN &amp; Masuk Ke Dashboard →</button>
         </form>
@@ -127,5 +141,23 @@
         <a href="{{ route('login') }}" class="back-link">Batal dan kembali ke Login</a>
     </div>
 </div>
+
+<script>
+function togglePasswordVisibility(inputId, btn) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+    const eyeOpen = btn.querySelector('.eye-open');
+    const eyeClosed = btn.querySelector('.eye-closed');
+    if (input.type === 'password') {
+        input.type = 'text';
+        if (eyeOpen) eyeOpen.style.display = 'none';
+        if (eyeClosed) eyeClosed.style.display = 'block';
+    } else {
+        input.type = 'password';
+        if (eyeOpen) eyeOpen.style.display = 'block';
+        if (eyeClosed) eyeClosed.style.display = 'none';
+    }
+}
+</script>
 </body>
 </html>

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('indikator_penilaians', function (Blueprint $table) {
             $table->id();
-            $table->enum('aspek', [
+            $table->enum('aspek', [ 
                 'agama_moral',
                 'motorik_kasar',
                 'motorik_halus',

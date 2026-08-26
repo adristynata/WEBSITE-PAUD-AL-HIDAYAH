@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\GaleriController;
 use App\Http\Controllers\Admin\IndikatorController;
 use App\Http\Controllers\Guru\DashboardController as GuruDashboard;
 use App\Http\Controllers\Guru\CatatanMingguanController;
+use App\Http\Controllers\Guru\ProfilController as GuruProfil;
 use App\Http\Controllers\OrangTua\DashboardController as OrtuDashboard;
 use App\Http\Controllers\OrangTua\TautkanController;
 use Illuminate\Support\Facades\Route;
@@ -84,6 +85,10 @@ Route::prefix('guru')->name('guru.')->middleware(['auth', 'role:guru'])->group(f
     Route::post('/catatan/simpan', [CatatanMingguanController::class, 'store'])->name('catatan.store');
     Route::get('/catatan/{id}/edit', [CatatanMingguanController::class, 'edit'])->name('catatan.edit');
     Route::put('/catatan/{id}/update', [CatatanMingguanController::class, 'update'])->name('catatan.update');
+
+    // Profil & TTD Guru
+    Route::get('/profil', [GuruProfil::class, 'edit'])->name('profil.edit');
+    Route::put('/profil', [GuruProfil::class, 'update'])->name('profil.update');
 });
 
 // ─── Orang Tua ─────────────────────────────────────────────────────────────────

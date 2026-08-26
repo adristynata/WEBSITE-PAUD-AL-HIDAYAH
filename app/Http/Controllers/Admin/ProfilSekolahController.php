@@ -39,6 +39,8 @@ class ProfilSekolahController extends Controller
             'sambutan_jabatan' => 'required|string|max:255',
             'sambutan_teks' => 'required|string',
             'sambutan_foto' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'ttd_kepsek' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'ttd_kepsek_base64' => 'nullable|string',
         ]);
 
         $profil->sambutan_judul = $request->sambutan_judul;
@@ -61,8 +63,43 @@ class ProfilSekolahController extends Controller
             $profil->sambutan_foto = $filename;
         }
 
+        // Simpan TTD dari Upload File jika ada
+        if ($request->hasFile('ttd_kepsek')) {
+            if ($profil->ttd_kepsek) {
+                $oldTtd = public_path('images/' . $profil->ttd_kepsek);
+                if (File::exists($oldTtd)) {
+                    File::delete($oldTtd);
+                }
+            }
+
+            $image = $request->file('ttd_kepsek');
+            $filename = 'ttd_kepsek_' . time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $filename);
+            \App\Helpers\ImageHelper::trimSignature(public_path('images/' . $filename));
+            $profil->ttd_kepsek = $filename;
+        } 
+        // Jika tidak upload file tapi menggambar di kanvas
+        elseif ($request->filled('ttd_kepsek_base64')) {
+            if ($profil->ttd_kepsek) {
+                $oldTtd = public_path('images/' . $profil->ttd_kepsek);
+                if (File::exists($oldTtd)) {
+                    File::delete($oldTtd);
+                }
+            }
+
+            $image_parts = explode(";base64,", $request->ttd_kepsek_base64);
+            if (count($image_parts) === 2) {
+                $image_base64 = base64_decode($image_parts[1]);
+                $filename = 'ttd_kepsek_' . time() . '.png';
+                $file_path = public_path('images/' . $filename);
+                file_put_contents($file_path, $image_base64);
+                \App\Helpers\ImageHelper::trimSignature($file_path);
+                $profil->ttd_kepsek = $filename;
+            }
+        }
+
         $profil->save();
 
-        return redirect()->route('admin.profil.edit')->with('success', 'Sambutan Kepala Sekolah berhasil diperbarui.');
+        return redirect()->route('admin.profil.edit')->with('success', 'Profil Sekolah dan Tanda Tangan Kepala Sekolah berhasil diperbarui.');
     }
 }

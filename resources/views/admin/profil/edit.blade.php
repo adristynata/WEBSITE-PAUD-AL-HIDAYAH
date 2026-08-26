@@ -50,25 +50,134 @@
                 @error('sambutan_teks')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
 
-            <div class="form-group">
-                <label for="sambutan_foto">Foto Kepala Sekolah</label>
-                @if($profil->sambutan_foto)
-                    <div style="margin-bottom:12px;">
-                        <img src="{{ asset('images/' . $profil->sambutan_foto) }}" 
-                             alt="Foto Kepala Sekolah" 
-                             style="width:120px; height:120px; border-radius:16px; object-fit:cover; border:3px solid #E2E8F0; box-shadow:0 4px 10px rgba(0,0,0,0.05);">
-                        <small style="display:block; color:#94A3B8; margin-top:4px;">Foto Kepala Sekolah saat ini</small>
+            <div class="form-grid-2">
+                <div class="form-group">
+                    <label for="sambutan_foto">Foto Kepala Sekolah</label>
+                    @if($profil->sambutan_foto)
+                        <div style="margin-bottom:12px;">
+                            <img src="{{ asset('images/' . $profil->sambutan_foto) }}" 
+                                 alt="Foto Kepala Sekolah" 
+                                 style="width:120px; height:120px; border-radius:16px; object-fit:cover; border:3px solid #E2E8F0; box-shadow:0 4px 10px rgba(0,0,0,0.05);">
+                            <small style="display:block; color:#94A3B8; margin-top:4px;">Foto Kepala Sekolah saat ini</small>
+                        </div>
+                    @endif
+                    <input type="file" id="sambutan_foto" name="sambutan_foto" class="form-control" accept="image/jpg,image/jpeg,image/png,image/webp">
+                    <small style="color:#94A3B8; font-size:0.78rem;">Kosongkan jika tidak ingin mengubah foto (Maks. 2 MB)</small>
+                    @error('sambutan_foto')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+
+                <div class="form-group">
+                    <label>Tanda Tangan Digital Kepala Sekolah (untuk PDF)</label>
+                    @if($profil->ttd_kepsek)
+                        <div style="margin-bottom:12px;">
+                            <img src="{{ asset('images/' . $profil->ttd_kepsek) }}" 
+                                 alt="TTD Kepala Sekolah" 
+                                 style="max-width:160px; max-height:80px; object-fit:contain; background:#fff; padding:6px; border-radius:8px; border:2px dashed #CBD5E1; box-shadow:0 2px 6px rgba(0,0,0,0.04);">
+                            <small style="display:block; color:#94A3B8; margin-top:4px;">Tanda tangan saat ini</small>
+                        </div>
+                    @endif
+
+                    <!-- Pilihan Mode TTD -->
+                    <div style="display:flex; gap:8px; margin-bottom:12px;">
+                        <button type="button" id="btn-tab-upload" style="background:#4F46E5; color:#fff; border:none; border-radius:6px; font-size:0.8rem; font-weight:600; padding:7px 14px; cursor:pointer;" onclick="switchTtdMode('upload')">
+                            📁 Upload Foto/PNG (Remove BG)
+                        </button>
+                        <button type="button" id="btn-tab-draw" style="background:#F1F5F9; color:#475569; border:1px solid #E2E8F0; border-radius:6px; font-size:0.8rem; font-weight:600; padding:7px 14px; cursor:pointer;" onclick="switchTtdMode('draw')">
+                            ✍️ Gambar di Layar
+                        </button>
                     </div>
-                @endif
-                <input type="file" id="sambutan_foto" name="sambutan_foto" class="form-control" accept="image/jpg,image/jpeg,image/png,image/webp">
-                <small style="color:#94A3B8; font-size:0.78rem;">Kosongkan jika tidak ingin mengubah foto Kepala Sekolah (Maksimal 2 MB)</small>
-                @error('sambutan_foto')<div class="invalid-feedback">{{ $message }}</div>@enderror
+
+                    <!-- Mode 1: Upload File Gambar PNG Transparan -->
+                    <div id="section-ttd-upload" style="display:block; padding:12px; background:#F8FAFC; border-radius:8px; border:1px solid #E2E8F0;">
+                        <label for="ttd_kepsek" style="font-size:0.82rem; font-weight:600; color:#334155; margin-bottom:6px; display:block;">Pilih file gambar TTD:</label>
+                        <input type="file" id="ttd_kepsek" name="ttd_kepsek" class="form-control" accept="image/png,image/jpeg,image/jpg,image/webp">
+                        <small style="color:#64748B; font-size:0.78rem; display:block; margin-top:6px;">
+                            💡 <strong>Rekomendasi:</strong> Unggah file gambar format <strong>.PNG transparan</strong> (yang sudah di-<em>remove background</em>) agar hasil cetak PDF bersih tanpa kotak putih/abu-abu. (Maks. 2 MB)
+                        </small>
+                    </div>
+
+                    <!-- Mode 2: Signature Pad Canvas -->
+                    <div id="section-ttd-draw" style="display:none; padding:12px; background:#F8FAFC; border-radius:8px; border:1px solid #E2E8F0;">
+                        <div style="border: 2px dashed #CBD5E1; border-radius: 8px; background: #fff; padding: 10px; width: fit-content;">
+                            <canvas id="signature-pad" class="signature-pad" width="400" height="180" style="border: 1px solid #E2E8F0; border-radius: 4px; touch-action: none; cursor: crosshair; background:#fff;"></canvas>
+                            <div style="margin-top: 8px; display: flex; justify-content: space-between; align-items: center;">
+                                <small style="color:#94A3B8;">Buat tanda tangan di atas kotak putih</small>
+                                <button type="button" id="clear-signature" style="padding: 4px 8px; font-size: 0.8rem; background: #FEE2E2; color: #EF4444; border: 1px solid #FCA5A5; border-radius: 4px; cursor: pointer;">Hapus Coretan</button>
+                            </div>
+                        </div>
+                        <small style="color:#64748B; font-size:0.78rem; display:block; margin-top:6px;">Goresan tangan otomatis disimpan dengan latar transparan.</small>
+                    </div>
+
+                    <input type="hidden" id="ttd_kepsek_base64" name="ttd_kepsek_base64">
+                    @error('ttd_kepsek')<div class="invalid-feedback" style="display:block;">{{ $message }}</div>@enderror
+                    @error('ttd_kepsek_base64')<div class="invalid-feedback" style="display:block;">{{ $message }}</div>@enderror
+                </div>
             </div>
 
             <div style="margin-top:24px; padding-top:16px; border-top:1px solid #E2E8F0;">
-                <button type="submit" class="btn btn-primary" style="font-weight:700;">💾 Perbarui Profil & Sambutan</button>
+                <button type="submit" class="btn btn-primary" style="font-weight:700;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                    Perbarui Profil & Tanda Tangan
+                </button>
             </div>
         </form>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+<script>
+    var currentTtdMode = 'upload';
+    var signaturePad = null;
+
+    function switchTtdMode(mode) {
+        currentTtdMode = mode;
+        var btnUpload = document.getElementById('btn-tab-upload');
+        var btnDraw = document.getElementById('btn-tab-draw');
+        var secUpload = document.getElementById('section-ttd-upload');
+        var secDraw = document.getElementById('section-ttd-draw');
+
+        if (mode === 'upload') {
+            btnUpload.style.background = '#4F46E5';
+            btnUpload.style.color = '#fff';
+            btnUpload.style.border = 'none';
+
+            btnDraw.style.background = '#F1F5F9';
+            btnDraw.style.color = '#475569';
+            btnDraw.style.border = '1px solid #E2E8F0';
+
+            secUpload.style.display = 'block';
+            secDraw.style.display = 'none';
+        } else {
+            btnDraw.style.background = '#4F46E5';
+            btnDraw.style.color = '#fff';
+            btnDraw.style.border = 'none';
+
+            btnUpload.style.background = '#F1F5F9';
+            btnUpload.style.color = '#475569';
+            btnUpload.style.border = '1px solid #E2E8F0';
+
+            secDraw.style.display = 'block';
+            secUpload.style.display = 'none';
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var canvas = document.getElementById('signature-pad');
+        signaturePad = new SignaturePad(canvas, {
+            backgroundColor: 'rgba(255, 255, 255, 0)',
+            penColor: 'rgb(0, 0, 0)'
+        });
+
+        document.getElementById('clear-signature').addEventListener('click', function () {
+            signaturePad.clear();
+        });
+
+        document.querySelector('form').addEventListener('submit', function(e) {
+            if (currentTtdMode === 'draw' && !signaturePad.isEmpty()) {
+                document.getElementById('ttd_kepsek_base64').value = signaturePad.toDataURL('image/png');
+                document.getElementById('ttd_kepsek').value = ''; // Reset file upload jika menggambar
+            }
+        });
+    });
+</script>
 @endsection

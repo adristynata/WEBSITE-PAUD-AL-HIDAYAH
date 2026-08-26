@@ -111,9 +111,19 @@ class AuthController extends Controller
 
             // Buat akun orang tua jika belum ada
             if (!$ortu) {
+                $firstWord = strtolower(explode(' ', trim($siswa->nama))[0]);
+                $cleanName = preg_replace('/[^a-z0-9]/', '', $firstWord);
+                $baseEmail = 'ortu.' . $cleanName . '@gmail.com';
+                $email = $baseEmail;
+                $counter = 1;
+                while (User::where('email', $email)->exists()) {
+                    $email = 'ortu.' . $cleanName . $counter . '@gmail.com';
+                    $counter++;
+                }
+
                 $ortu = User::create([
                     'name'     => 'Orang Tua ' . $siswa->nama,
-                    'email'    => 'ortu.' . $siswa->nis . '@paud-alhidayah.sch.id',
+                    'email'    => $email,
                     'password' => bcrypt($siswa->nis . $dbTanggalLahirStr),
                     'role'     => 'orang_tua',
                 ]);
