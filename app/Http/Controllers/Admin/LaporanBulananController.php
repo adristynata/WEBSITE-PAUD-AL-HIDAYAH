@@ -20,14 +20,16 @@ class LaporanBulananController extends Controller
         $bulan = (int) $request->input('bulan', date('m'));
         $tahun = (int) $request->input('tahun', date('Y'));
 
-        $siswas = [];
+        $siswas = null;
         if ($kelas_id) {
             $siswas = Siswa::query()->where('kelas_id', $kelas_id)
                 ->where('is_aktif', true)
                 ->with(['laporanBulanans' => function($q) use ($bulan, $tahun) {
                     $q->where('bulan', $bulan)->where('tahun', $tahun);
                 }])
-                ->get();
+                ->orderBy('nama')
+                ->paginate(10)
+                ->withQueryString();
         }
 
         return view('admin.laporan.index', compact('kelases', 'kelas_id', 'bulan', 'tahun', 'siswas'));

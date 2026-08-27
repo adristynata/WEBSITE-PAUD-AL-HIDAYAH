@@ -29,7 +29,7 @@ class SiswaController extends Controller
             $query->where('is_aktif', $request->status === 'aktif');
         }
 
-        $siswas = $query->orderBy('nama')->paginate(15)->withQueryString();
+        $siswas = $query->orderBy('nama')->paginate(10)->withQueryString();
         $kelasList = Kelas::orderBy('nama_kelas')->get();
 
         return view('admin.siswa.index', compact('siswas', 'kelasList'));

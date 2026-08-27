@@ -114,8 +114,6 @@
             </tbody>
         </table>
     </div>
-    <div class="card-body" style="padding-top:12px">
-        {{ $siswas->links() }}
-    </div>
+    {{ $siswas->links() }}
 </div>
 @endsection

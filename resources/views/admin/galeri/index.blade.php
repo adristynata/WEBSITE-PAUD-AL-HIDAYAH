@@ -39,6 +39,7 @@
                     </div>
                 @endforeach
             </div>
+            {{ $photos->links() }}
         @else
             <div style="padding:60px 20px; text-align:center; color:var(--muted);">
                 📸 Belum ada foto kegiatan di galeri. Klik tombol di atas untuk mengunggah foto pertamamu!

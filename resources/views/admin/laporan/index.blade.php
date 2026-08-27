@@ -60,7 +60,7 @@
         <span>📋 Daftar Siswa & Status Laporan Bulanan</span>
     </div>
     <div class="card-body" style="padding:0">
-        @if(count($siswas) > 0)
+        @if($siswas && $siswas->count() > 0)
             <div class="table-wrap">
                 <table>
                     <thead>
@@ -93,11 +93,13 @@
                                 <td style="text-align:center;">
                                     @if($laporan)
                                         <a href="{{ route('admin.laporan.edit', $laporan->id) }}" class="btn btn-secondary btn-sm">
-                                            ✏️ Edit Rekap
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                                            Edit Rekap
                                         </a>
                                     @else
                                         <a href="{{ route('admin.laporan.create', ['siswa_id' => $s->id, 'bulan' => $bulan, 'tahun' => $tahun]) }}" class="btn btn-primary btn-sm">
-                                            ➕ Buat Rekap
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                            Buat Rekap
                                         </a>
                                     @endif
                                 </td>
@@ -106,6 +108,7 @@
                     </tbody>
                 </table>
             </div>
+            {{ $siswas->links() }}
         @else
             <div style="padding:40px; text-align:center; color:var(--muted);">
                 🏫 Silakan pilih kelas dan klik Tampilkan untuk memuat data siswa.

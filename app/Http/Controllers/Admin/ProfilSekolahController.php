@@ -39,6 +39,9 @@ class ProfilSekolahController extends Controller
             'sambutan_jabatan' => 'required|string|max:255',
             'sambutan_teks' => 'required|string',
             'sambutan_foto' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'hero_slide_1' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:4096',
+            'hero_slide_2' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:4096',
+            'hero_slide_3' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:4096',
             'ttd_kepsek' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'ttd_kepsek_base64' => 'nullable|string',
         ]);
@@ -61,6 +64,48 @@ class ProfilSekolahController extends Controller
             $filename = 'kepsek_' . time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $filename);
             $profil->sambutan_foto = $filename;
+        }
+
+        // Upload Banner Hero Slide 1
+        if ($request->hasFile('hero_slide_1')) {
+            if ($profil->hero_slide_1 && !in_array($profil->hero_slide_1, ['hero-slide-1.jpg', 'gedung-sekolah.jpg'])) {
+                $oldPath = public_path('images/' . $profil->hero_slide_1);
+                if (File::exists($oldPath)) {
+                    File::delete($oldPath);
+                }
+            }
+            $image = $request->file('hero_slide_1');
+            $filename = 'hero_slide1_' . time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $filename);
+            $profil->hero_slide_1 = $filename;
+        }
+
+        // Upload Banner Hero Slide 2
+        if ($request->hasFile('hero_slide_2')) {
+            if ($profil->hero_slide_2 && $profil->hero_slide_2 !== 'hero-slide-2.jpg') {
+                $oldPath = public_path('images/' . $profil->hero_slide_2);
+                if (File::exists($oldPath)) {
+                    File::delete($oldPath);
+                }
+            }
+            $image = $request->file('hero_slide_2');
+            $filename = 'hero_slide2_' . time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $filename);
+            $profil->hero_slide_2 = $filename;
+        }
+
+        // Upload Banner Hero Slide 3
+        if ($request->hasFile('hero_slide_3')) {
+            if ($profil->hero_slide_3 && $profil->hero_slide_3 !== 'hero-slide-3.jpg') {
+                $oldPath = public_path('images/' . $profil->hero_slide_3);
+                if (File::exists($oldPath)) {
+                    File::delete($oldPath);
+                }
+            }
+            $image = $request->file('hero_slide_3');
+            $filename = 'hero_slide3_' . time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $filename);
+            $profil->hero_slide_3 = $filename;
         }
 
         // Simpan TTD dari Upload File jika ada
@@ -100,6 +145,6 @@ class ProfilSekolahController extends Controller
 
         $profil->save();
 
-        return redirect()->route('admin.profil.edit')->with('success', 'Profil Sekolah dan Tanda Tangan Kepala Sekolah berhasil diperbarui.');
+        return redirect()->route('admin.profil.edit')->with('success', 'Profil Sekolah, Banner Hero, dan Tanda Tangan Kepala Sekolah berhasil diperbarui.');
     }
 }

@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'PAUD Al-Hidayah')</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}?v={{ time() }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}?v={{ time() }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/logo.png') }}?v={{ time() }}">
     {{-- Fonts: sistem lokal, tidak butuh internet --}}
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -578,18 +581,93 @@
         select.form-control { max-width: 200px; }
 
         /* ════════════════════════════════
-           PAGINATION
+           PAGINATION (MODERN NUMBERS & NAVIGATION)
         ════════════════════════════════ */
-        .pagination { display: flex; gap: 4px; list-style: none; margin-top: 20px; justify-content: center; }
-        .pagination .page-item .page-link {
-            display: flex; align-items: center; justify-content: center;
-            width: 34px; height: 34px; border-radius: 8px;
-            background: var(--card); border: 1px solid var(--border);
-            font-size: 0.85rem; font-weight: 600; color: var(--text); text-decoration: none;
-            transition: all 0.15s;
+        .custom-pagination-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding: 16px 20px;
+            background: #ffffff;
+            border-top: 1px solid #E2E8F0;
+            border-radius: 0 0 14px 14px;
         }
-        .pagination .page-item.active .page-link { background: var(--green-600); color: #fff; border-color: var(--green-600); }
-        .pagination .page-item.disabled .page-link { opacity: 0.4; pointer-events: none; }
+        .pagination-info {
+            font-size: 0.84rem;
+            color: #64748B;
+            font-weight: 500;
+        }
+        .pagination-info span {
+            font-weight: 700;
+            color: #1E293B;
+        }
+        .pagination-list {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+        .pagination-list .page-item {
+            display: inline-flex;
+        }
+        .pagination-list .page-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            min-width: 36px;
+            height: 36px;
+            padding: 0 10px;
+            border-radius: 8px;
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            color: #475569;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.18s ease;
+            user-select: none;
+        }
+        .pagination-list .page-link:hover {
+            background: #F1F5F9;
+            border-color: #CBD5E1;
+            color: #0F172A;
+            transform: translateY(-1px);
+        }
+        .pagination-list .page-item.active .page-link {
+            background: #143818;
+            color: #FFFFFF;
+            border-color: #143818;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(20, 56, 24, 0.25);
+            transform: translateY(-1px);
+        }
+        .pagination-list .page-item.disabled .page-link {
+            opacity: 0.45;
+            background: #F8FAFC;
+            color: #94A3B8;
+            border-color: #E2E8F0;
+            cursor: not-allowed;
+            pointer-events: none;
+            transform: none;
+        }
+        .pagination-list .page-nav-btn {
+            padding: 0 14px;
+            font-size: 0.82rem;
+        }
+        .pagination-list .page-dots {
+            border: none;
+            background: transparent;
+            color: #94A3B8;
+            font-weight: 700;
+            min-width: 24px;
+            cursor: default;
+        }
 
         /* ════════════════════════════════
            OVERLAY + MOBILE

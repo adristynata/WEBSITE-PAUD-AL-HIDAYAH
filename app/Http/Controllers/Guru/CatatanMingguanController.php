@@ -38,7 +38,7 @@ class CatatanMingguanController extends Controller
             ->orderBy('tahun', 'desc')
             ->orderBy('bulan', 'desc')
             ->orderBy('minggu_ke', 'desc')
-            ->get();
+            ->paginate(8);
 
         return view('guru.catatan.list', compact('siswa', 'catatans'));
     }

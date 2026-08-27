@@ -114,10 +114,73 @@
                 </div>
             </div>
 
+            <!-- ── HERO SLIDER BANNER SECTION ── -->
+            <div style="margin-top:32px; padding-top:20px; border-top:2px dashed #CBD5E1;">
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px;">
+                    <div style="width:32px; height:32px; border-radius:8px; background:#10B981; display:flex; align-items:center; justify-content:center; color:#fff;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    </div>
+                    <div>
+                        <h4 style="margin:0; font-size:16px; color:#1E293B; font-weight:700;">Foto Banner Hero Slider (Beranda)</h4>
+                        <small style="color:#64748B;">Kelola foto-foto yang berganti otomatis di bagian atas beranda website (Maks. 4 MB per foto)</small>
+                    </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:18px; margin-bottom:12px;">
+                    <!-- Slide 1 -->
+                    <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px;">
+                        <label style="font-weight:700; font-size:13px; color:#334155; display:block; margin-bottom:8px;">
+                            🌄 Banner Slide 1 (Utama)
+                        </label>
+                        <div style="margin-bottom:10px;">
+                            <img src="{{ asset('images/' . ($profil->hero_slide_1 ?? 'hero-slide-1.jpg')) }}" 
+                                 alt="Slide 1" 
+                                 onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'"
+                                 style="width:100%; height:120px; border-radius:8px; object-fit:cover; border:1px solid #CBD5E1;">
+                        </div>
+                        <input type="file" name="hero_slide_1" class="form-control" accept="image/jpg,image/jpeg,image/png,image/webp" style="font-size:12px;">
+                        <small style="color:#94A3B8; font-size:11px; display:block; margin-top:4px;">Kosongkan jika tidak ingin mengubah</small>
+                        @error('hero_slide_1')<div class="invalid-feedback" style="display:block;">{{ $message }}</div>@enderror
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px;">
+                        <label style="font-weight:700; font-size:13px; color:#334155; display:block; margin-bottom:8px;">
+                            🎨 Banner Slide 2 (Aktivitas/Kelas)
+                        </label>
+                        <div style="margin-bottom:10px;">
+                            <img src="{{ asset('images/' . ($profil->hero_slide_2 ?? 'hero-slide-2.jpg')) }}" 
+                                 alt="Slide 2" 
+                                 onerror="this.src='{{ asset('images/hero-slide-2.jpg') }}'"
+                                 style="width:100%; height:120px; border-radius:8px; object-fit:cover; border:1px solid #CBD5E1;">
+                        </div>
+                        <input type="file" name="hero_slide_2" class="form-control" accept="image/jpg,image/jpeg,image/png,image/webp" style="font-size:12px;">
+                        <small style="color:#94A3B8; font-size:11px; display:block; margin-top:4px;">Kosongkan jika tidak ingin mengubah</small>
+                        @error('hero_slide_2')<div class="invalid-feedback" style="display:block;">{{ $message }}</div>@enderror
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px;">
+                        <label style="font-weight:700; font-size:13px; color:#334155; display:block; margin-bottom:8px;">
+                            🕌 Banner Slide 3 (Gedung/Fasilitas)
+                        </label>
+                        <div style="margin-bottom:10px;">
+                            <img src="{{ asset('images/' . ($profil->hero_slide_3 ?? 'hero-slide-3.jpg')) }}" 
+                                 alt="Slide 3" 
+                                 onerror="this.src='{{ asset('images/hero-slide-3.jpg') }}'"
+                                 style="width:100%; height:120px; border-radius:8px; object-fit:cover; border:1px solid #CBD5E1;">
+                        </div>
+                        <input type="file" name="hero_slide_3" class="form-control" accept="image/jpg,image/jpeg,image/png,image/webp" style="font-size:12px;">
+                        <small style="color:#94A3B8; font-size:11px; display:block; margin-top:4px;">Kosongkan jika tidak ingin mengubah</small>
+                        @error('hero_slide_3')<div class="invalid-feedback" style="display:block;">{{ $message }}</div>@enderror
+                    </div>
+                </div>
+            </div>
+
             <div style="margin-top:24px; padding-top:16px; border-top:1px solid #E2E8F0;">
                 <button type="submit" class="btn btn-primary" style="font-weight:700;">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-                    Perbarui Profil & Tanda Tangan
+                    Simpan Perubahan Profil & Banner
                 </button>
             </div>
         </form>

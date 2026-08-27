@@ -99,5 +99,6 @@
             </tbody>
         </table>
     </div>
+    {{ $catatans->links() }}
 </div>
 @endsection

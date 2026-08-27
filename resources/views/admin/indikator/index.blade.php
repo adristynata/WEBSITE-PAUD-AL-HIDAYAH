@@ -377,7 +377,7 @@
             Daftar Indikator Penilaian
         </div>
         <span style="font-size:0.8rem; color:#64748B; background:#F1F5F9; padding:4px 12px; border-radius:20px; font-weight:600;">
-            Menampilkan: {{ $indikators->count() }} indikator
+            Total: {{ $indikators->total() }} indikator
         </span>
     </div>
     
@@ -453,6 +453,9 @@
                 </tbody>
             </table>
         </div>
+        
+        {{-- Pagination Bar --}}
+        {{ $indikators->links() }}
     </div>
 </div>
 

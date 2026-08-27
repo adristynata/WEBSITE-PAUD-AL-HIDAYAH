@@ -31,7 +31,7 @@ class IndikatorController extends Controller
             $query->whereIn('nilai', $nilaiFilter);
         }
 
-        $indikators = $query->get();
+        $indikators = $query->paginate(10)->withQueryString();
 
         return view('admin.indikator.index', [
             'indikators'   => $indikators,

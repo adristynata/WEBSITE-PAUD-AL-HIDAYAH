@@ -17,17 +17,20 @@ use Illuminate\Support\Facades\Route;
 
 // ─── Halaman Publik ────────────────────────────────────────────────────────────
 Route::get('/', function () {
-    // Auto-copy uploaded login images if they exist in system uploads
-    $src1 = "C:\\Users\\HP\\.gemini\\antigravity\\brain\\03753526-d35b-42fa-b7fe-6ac8a552c3ba\\.user_uploaded\\media_1786408321321.png";
-    $src2 = "C:\\Users\\HP\\.gemini\\antigravity\\brain\\03753526-d35b-42fa-b7fe-6ac8a552c3ba\\.user_uploaded\\media_1786408250473.png";
-    $dest1 = public_path('images/login-classroom.png');
-    $dest2 = public_path('images/login-classroom2.png');
-    
-    if (file_exists($src1)) {
-        @copy($src1, $dest1);
+    // Auto-copy 3 colorful hero slider images
+    $slides = [
+        "C:\\Users\\HP\\.gemini\\antigravity\\brain\\03753526-d35b-42fa-b7fe-6ac8a552c3ba\\paud_hero_al_hidayah_1787814146223.jpg" => public_path('images/hero-slide-1.jpg'),
+        "C:\\Users\\HP\\.gemini\\antigravity\\brain\\03753526-d35b-42fa-b7fe-6ac8a552c3ba\\paud_hero_slide_classroom_1787814651247.jpg" => public_path('images/hero-slide-2.jpg'),
+        "C:\\Users\\HP\\.gemini\\antigravity\\brain\\03753526-d35b-42fa-b7fe-6ac8a552c3ba\\paud_al_hidayah_hero_1787813844600.jpg" => public_path('images/hero-slide-3.jpg'),
+    ];
+    foreach ($slides as $src => $dest) {
+        if (file_exists($src)) {
+            @copy($src, $dest);
+        }
     }
-    if (file_exists($src2)) {
-        @copy($src2, $dest2);
+    // Also copy slide 1 as default gedung-sekolah.jpg
+    if (file_exists("C:\\Users\\HP\\.gemini\\antigravity\\brain\\03753526-d35b-42fa-b7fe-6ac8a552c3ba\\paud_hero_al_hidayah_1787814146223.jpg")) {
+        @copy("C:\\Users\\HP\\.gemini\\antigravity\\brain\\03753526-d35b-42fa-b7fe-6ac8a552c3ba\\paud_hero_al_hidayah_1787814146223.jpg", public_path('images/gedung-sekolah.jpg'));
     }
 
     $profil = \App\Models\ProfilSekolah::query()->first();

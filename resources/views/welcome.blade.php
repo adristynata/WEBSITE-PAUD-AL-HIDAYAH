@@ -4,7 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="PAUD Al-Hidayah — Sekolah usia dini yang menumbuhkan rasa ingin tahu dan kebaikan hati anak dalam lingkungan yang aman, menyenangkan, dan penuh inspirasi.">
-<title>PAUD Al-Hidayah — Awal yang Cerah untuk Masa Depan yang Gemilang</title>
+<title>PAUD Al-Hidayah</title>
+<link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}?v={{ time() }}">
+<link rel="shortcut icon" href="{{ asset('favicon.ico') }}?v={{ time() }}">
+<link rel="apple-touch-icon" href="{{ asset('images/logo.png') }}?v={{ time() }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -43,82 +46,141 @@
 
 
 
-  /* header */
-  header{
-    position:absolute;top:0;left:0;right:0;z-index:100;
-    padding:14px 0;
-    background:transparent;
-    border-bottom:none;
-    box-shadow:none;
+  /* ── HEADER (Clean Modern Sticky White Navbar) ── */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 14px 0;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid #E2E8F0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  header .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;}
-  .logo{display:flex;align-items:center;gap:11px;}
-  .logo-mark{
-    width:42px;height:42px;border-radius:50%;
-    background:transparent;
-    display:flex;align-items:center;justify-content:center;
+  header.scrolled {
+    padding: 10px 0;
+    background: #FFFFFF;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid #CBD5E1;
   }
-  .logo-text{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+  header .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
   }
-  .logo-text .brand{
-    font-size:17px;
-    font-weight:800;
-    color:#fff;
-    line-height:1.2;
-    letter-spacing:0.5px;
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
   }
-  .logo-text .sub{
-    font-size:9.5px;
-    font-weight:700;
-    color:rgba(255,255,255,0.8);
-    line-height:1.2;
-    letter-spacing:0.8px;
-    margin-top:1px;
-    text-transform:uppercase;
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
-  nav{display:flex;gap:30px;}
-  nav a{
-    font-size:15px;font-weight:700;color:#fff;
-    position:relative;padding-bottom:4px;
-    transition:color .15s;
+  .logo-text .brand {
+    font-size: 17px;
+    font-weight: 800;
+    color: #143818;
+    line-height: 1.2;
+    letter-spacing: 0.5px;
   }
-  nav a:hover{color:var(--gold);}
-  nav a::after{
-    content:"";position:absolute;left:0;bottom:0;width:100%;height:3px;
-    background:var(--gold);border-radius:2px;
-    transform:scaleX(0);
-    transform-origin:right;
-    transition:transform .25s ease-out;
+  .logo-text .sub {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #5FA05F;
+    line-height: 1.2;
+    letter-spacing: 0.8px;
+    margin-top: 1px;
+    text-transform: uppercase;
   }
-  nav a:hover::after, nav a.active::after{
-    transform:scaleX(1);
-    transform-origin:left;
+  nav {
+    display: flex;
+    gap: 32px;
+    align-items: center;
   }
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;
-    font-weight:800;font-size:14px;
-    padding:12px 28px;border-radius:30px;
-    cursor:pointer;transition:transform .15s ease, background-color .15s ease;
-    white-space:nowrap;font-family:'Poppins',sans-serif;
-    border:none;
+  .nav-drawer-header,
+  .nav-drawer-footer,
+  .nav-backdrop,
+  .nav-item-icon,
+  .nav-item-arrow {
+    display: none;
   }
-  .btn:hover{transform:translateY(-2px);}
-  .btn-masuk{
-    background:#143818; /* Dark green matching screenshot */
-    color:#fff;
+  .nav-menu-list {
+    display: flex;
+    gap: 32px;
+    align-items: center;
   }
-  .btn-masuk:hover{
-    background:#0a1e0d;
+  nav a.nav-link-item {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #334155;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color .2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+  }
+  nav a.nav-link-item:hover, nav a.nav-link-item.active {
+    color: #143818;
+  }
+  nav a.nav-link-item::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background: #143818;
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform .25s ease-out;
+  }
+  nav a.nav-link-item:hover::after, nav a.nav-link-item.active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 14px;
+    padding: 10px 26px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all .2s ease;
+    white-space: nowrap;
+    font-family: 'Poppins', sans-serif;
+    border: none;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn-masuk {
+    background: #143818;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(20, 56, 24, 0.2);
+  }
+  .btn-masuk:hover {
+    background: #0d2610;
+    box-shadow: 0 6px 16px rgba(20, 56, 24, 0.3);
+    color: #fff;
   }
   
   /* Hamburger Menu Toggle */
-  .header-actions{
-    display:flex;
-    align-items:center;
-    gap:12px;
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
   .menu-toggle {
     display: none;
@@ -135,50 +197,165 @@
   .menu-toggle span {
     width: 100%;
     height: 3px;
-    background-color: #fff;
+    background-color: #143818;
     border-radius: 3px;
     transition: all 0.3s ease;
   }
-  .btn-lihat-selengkapnya{
-    background:#fff;
-    color:#1B2B4B;
-    font-size:13px;
+  .btn-lihat-selengkapnya {
+    background: #fff;
+    color: #1B2B4B;
+    font-size: 13px;
     letter-spacing: 0.5px;
     font-weight: 800;
     padding: 14px 36px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.15);
   }
-  .btn-lihat-selengkapnya:hover{
-    background:#f5efe0;
+  .btn-lihat-selengkapnya:hover {
+    background: #f5efe0;
   }
 
-  /* hero — full-width banner */
-  .hero{position:relative;padding:0;overflow:hidden;}
-  .hero-banner{
-    width:100%;height:680px;object-fit:cover;object-position:center;
-    display:block;
+  /* ── HERO BANNER SLIDER (Auto-Crossfade & Controls) ── */
+  .hero {
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+    margin-top: 72px;
+    height: 680px;
   }
-  .hero-overlay{
-    position:absolute;inset:0;
-    background:rgba(0, 0, 0, 0.45); /* Dark vignette */
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    padding:0 32px;
-    text-align:center;
+  .hero-slider {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
   }
-  .hero-overlay h1{
-    font-size:52px;line-height:1.2;color:#fff;
-    margin-bottom:18px;font-weight:800;
-    text-shadow:0 2px 20px rgba(0,0,0,0.3);
-    text-align:center;
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 6s linear;
+    transform: scale(1.05);
   }
-  .hero-overlay p.lead{
-    font-size:18px;color:rgba(255,255,255,.9);max-width:720px;
-    margin:0 auto 32px;
-    line-height:1.65;
-    text-shadow:0 1px 8px rgba(0,0,0,0.25);
-    text-align:center;
+  .hero-slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
   }
-  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;width:100%;}
+  .hero-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    filter: brightness(1.04) contrast(1.02);
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(20, 56, 24, 0.42) 0%, rgba(20, 56, 24, 0.12) 45%, rgba(14, 38, 17, 0.72) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 32px;
+    text-align: center;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .hero-overlay * {
+    pointer-events: auto;
+  }
+  
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 20px;
+    border-radius: 30px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    letter-spacing: 0.3px;
+  }
+  .hero-overlay h1 {
+    font-size: 52px;
+    line-height: 1.18;
+    color: #fff;
+    margin-bottom: 16px;
+    font-weight: 800;
+    text-shadow: 0 3px 20px rgba(0, 0, 0, 0.45);
+    text-align: center;
+  }
+  .hero-title-highlight {
+    color: #F4B93E;
+    text-shadow: 0 3px 18px rgba(0, 0, 0, 0.5);
+  }
+  .hero-overlay p.lead {
+    font-size: 17.5px;
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 720px;
+    margin: 0 auto 30px;
+    line-height: 1.65;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    text-align: center;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+  .btn-hero-gold {
+    background: #F4B93E;
+    color: #143818;
+    font-weight: 800;
+    font-size: 14px;
+    padding: 13px 30px;
+    border-radius: 30px;
+    box-shadow: 0 6px 20px rgba(244, 185, 62, 0.35);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+    text-decoration: none;
+  }
+  .btn-hero-gold:hover {
+    background: #E8A317;
+    color: #0A1E0D;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(244, 185, 62, 0.45);
+  }
+  .btn-hero-outline {
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 13px 26px;
+    border-radius: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+    text-decoration: none;
+  }
+  .btn-hero-outline:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: #FFFFFF;
+    color: #FFFFFF;
+    transform: translateY(-3px);
+  }
 
   /* sambutan kepala sekolah */
   .sambutan{padding:80px 0;background:var(--cream-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
@@ -216,12 +393,21 @@
     color:#7CB68B;text-transform:uppercase;margin-bottom:20px;
     padding-bottom:16px;border-bottom:2px dashed var(--line);
   }
+  .sambutan-text {
+    font-size:15px;
+    line-height:1.85;
+    color:#4b4b55;
+    text-align: justify;
+    text-justify: inter-word;
+  }
   .sambutan-text p{
     font-size:15px;line-height:1.85;color:#4b4b55;
     margin-bottom:14px;
+    text-align: justify;
+    text-justify: inter-word;
   }
   .sambutan-text p:last-child{margin-bottom:0;}
-  .sambutan-text .wassalam{font-weight:800;color:var(--navy);margin-top:10px;}
+  .sambutan-text .wassalam{font-weight:800;color:var(--navy);margin-top:12px;text-align:left;}
 
   /* features strip */
   .features{position:relative;z-index:3;margin-top:0;padding-top:0;}
@@ -329,9 +515,13 @@
     color: #475569;
     position: relative;
     z-index: 2;
+    text-align: justify;
+    text-justify: inter-word;
   }
   .card-content p {
     margin-bottom: 12px;
+    text-align: justify;
+    text-justify: inter-word;
   }
   .card-content p:last-child {
     margin-bottom: 0;
@@ -346,6 +536,7 @@
   .card-content li {
     position: relative;
     padding-left: 24px;
+    text-align: left;
   }
   .card-content li::before {
     content: "✔";
@@ -702,62 +893,181 @@
     .logo-text .brand { font-size: 18px; }
     .logo-text .sub { font-size: 8px; }
 
+    /* Mobile Drawer Backdrop */
+    .nav-backdrop {
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 1050;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .nav-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Mobile Drawer Nav Container */
     nav {
       position: fixed;
       top: 0;
-      right: -100%;
-      width: 280px;
+      right: 0;
+      width: 320px;
+      max-width: 86vw;
       height: 100vh;
-      background: #143818;
+      background: #FFFFFF;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-      padding: 80px 32px;
-      box-shadow: -5px 0 25px rgba(0,0,0,0.15);
-      transition: right 0.3s ease;
-      z-index: 105;
+      align-items: stretch;
+      justify-content: space-between;
+      gap: 0;
+      padding: 0;
+      box-shadow: -10px 0 35px rgba(0, 0, 0, 0.18);
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1060;
+      border-top-left-radius: 24px;
+      border-bottom-left-radius: 24px;
+      overflow-y: auto;
     }
     nav.active {
-      right: 0;
+      transform: translateX(0);
     }
-    nav a {
-      font-size: 17px;
-      color: #fff !important;
-      width: 100%;
-      text-align: center;
-      padding: 10px 0;
+
+    /* Drawer Header */
+    .nav-drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px;
+      border-bottom: 1px solid #EEF2F6;
+      background: #FAFDFB;
+      border-top-left-radius: 24px;
     }
-    nav a::after {
-      content: "";
-      position: absolute;
-      width: 40px;
-      left: calc(50% - 20px);
-      bottom: 4px;
-      background: var(--gold);
-      height: 3px;
-      border-radius: 2px;
-      transform: scaleX(0);
-      transform-origin: center;
-      transition: transform 0.25s ease-out;
+    .drawer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    nav a:hover::after, nav a.active::after {
-      transform: scaleX(1);
-    }
-    .btn-masuk-mobile {
-      display: inline-flex;
+    .nav-drawer-close {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #F1F5F9;
+      display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--gold);
-      color: #143818 !important;
+      border: none;
+      cursor: pointer;
+      color: #64748B;
+      transition: all 0.2s ease;
+    }
+    .nav-drawer-close:hover {
+      background: #EF4444;
+      color: #FFFFFF;
+      transform: rotate(90deg);
+    }
+
+    /* Menu List */
+    .nav-menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 18px 16px;
+      flex: 1;
+    }
+    nav a.nav-link-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #334155;
+      text-align: left;
+      transition: all 0.2s ease;
+      background: transparent;
+      width: 100%;
+      border: 1px solid transparent;
+      box-sizing: border-box;
+    }
+    nav a.nav-link-item::after { display: none !important; }
+    nav a.nav-link-item:hover, nav a.nav-link-item.active {
+      background: #EBF5EE;
+      color: #143818;
+      border-color: #D1E7D6;
+    }
+    .nav-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-item-icon {
+      display: flex;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #F4F9F4;
+      color: #143818;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+    .nav-item-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+    nav a.nav-link-item:hover .nav-item-icon, nav a.nav-link-item.active .nav-item-icon {
+      background: #143818;
+      color: #F4B93E;
+    }
+    .nav-item-arrow {
+      display: block;
+      font-size: 18px;
+      color: #94A3B8;
+      font-weight: 400;
+      transition: transform 0.2s ease;
+    }
+    nav a.nav-link-item:hover .nav-item-arrow, nav a.nav-link-item.active .nav-item-arrow {
+      color: #143818;
+      transform: translateX(3px);
+    }
+
+    /* Drawer Footer */
+    .nav-drawer-footer {
+      display: flex;
+      padding: 16px 18px 24px;
+      border-top: 1px solid #EEF2F6;
+      background: #FAFDFB;
+      flex-direction: column;
+      gap: 10px;
+      border-bottom-left-radius: 24px;
+    }
+    .btn-masuk-drawer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #143818;
+      color: #FFFFFF !important;
       font-weight: 800;
       font-size: 14px;
-      padding: 12px 24px;
+      padding: 12px 18px;
       border-radius: 30px;
-      margin-top: 16px;
+      box-shadow: 0 4px 14px rgba(20, 56, 24, 0.25);
+      transition: all 0.2s ease;
       width: 100%;
-      text-shadow: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-decoration: none;
+      box-sizing: border-box;
+    }
+    .btn-masuk-drawer:hover {
+      background: #0d2610;
+      transform: translateY(-2px);
     }
 
     .menu-toggle {
@@ -775,8 +1085,9 @@
     }
     
     /* Hero Section */
+    .hero { margin-top: 60px; }
     .hero-banner { height: 500px; }
-    .hero-overlay { padding-top: 80px; }
+    .hero-overlay { padding-top: 20px; }
     .hero-overlay h1 { font-size: 32px; line-height: 1.25; text-align: center; }
     .hero-overlay p.lead { font-size: 14px; margin: 0 auto 20px; max-width: 100%; text-align: center; }
     .btn-lihat-selengkapnya { padding: 12px 28px; }
@@ -791,11 +1102,48 @@
     .sambutan-grid { grid-template-columns: 1fr; text-align: center; gap: 28px; }
     .sambutan-photo { max-width: 180px; margin: 0 auto; aspect-ratio: 3/4; }
     .ks-title { justify-content: center; margin-bottom: 12px; padding-bottom: 10px; }
+    .sambutan-text p {
+      font-size: 14px;
+      line-height: 1.7;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+    .sambutan-text .wassalam {
+      text-align: left;
+    }
 
     /* Tentang Kami (Profil) */
-    .profil-section { padding: 60px 0 50px; }
-    .profil-card { padding: 28px 24px; }
-    .profil-head h2 { font-size: 28px; }
+    .profil-section { padding: 50px 0 40px; }
+    .profil-head { margin-bottom: 28px; }
+    .profil-head h2 { font-size: 26px; }
+    .profil-cards { gap: 16px; padding: 0 12px; }
+    .profil-card {
+      padding: 22px 20px;
+      border-radius: 16px;
+      gap: 12px;
+    }
+    .card-header-row { gap: 12px; }
+    .card-icon { width: 40px; height: 40px; }
+    .card-icon svg { width: 20px; height: 20px; }
+    .card-header-row h3 { font-size: 19px; }
+    .card-content {
+      font-size: 14px;
+      line-height: 1.7;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+    .card-content p {
+      margin-bottom: 10px;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+    .card-content ul { margin-top: 8px; gap: 6px; }
+    .card-content li {
+      padding-left: 20px;
+      font-size: 13.5px;
+      line-height: 1.55;
+      text-align: left;
+    }
 
     /* Portal Orang Tua */
     .portal-ortu { padding: 50px 0; }
@@ -811,6 +1159,7 @@
     header { padding: 10px 0; }
     
     /* Hero text sizing */
+    .hero { margin-top: 54px; }
     .hero-banner { height: 440px; }
     .hero-overlay h1 { font-size: 24px; text-align: center; }
     .hero-overlay p.lead { font-size: 13px; line-height: 1.6; margin: 0 auto 20px; text-align: center; }
@@ -819,16 +1168,56 @@
     .features-card { grid-template-columns: 1fr; gap: 12px; }
     .feature-item:nth-child(5) { grid-column: span 1; }
     
+    /* Sambutan Kepala Sekolah */
+    .sambutan-text p {
+      font-size: 13.5px;
+      line-height: 1.65;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
     /* Program Grid */
-    .programs { padding: 60px 0; }
-    .programs-inner { padding: 32px 20px; }
-    .programs-head h2 { font-size: 26px; }
-    .program-semester-grid { grid-template-columns: 1fr; gap: 16px; }
-    .pbox-header h4 { font-size: 17px; }
+    .programs { padding: 50px 0; }
+    .programs-inner { padding: 28px 16px; }
+    .programs-head h2 { font-size: 24px; }
+    .program-semester-grid { grid-template-columns: 1fr; gap: 14px; }
+    .pbox-header h4 { font-size: 16.5px; }
+    .pbox-body {
+      font-size: 13px;
+      line-height: 1.6;
+      text-align: justify;
+      text-justify: inter-word;
+    }
 
     /* Tentang Kami (Profil) */
-    .profil-card { padding: 24px 20px; }
-    .card-header-row h3 { font-size: 18px; }
+    .profil-section { padding: 40px 0 30px; }
+    .profil-cards { gap: 14px; padding: 0 8px; }
+    .profil-card {
+      padding: 20px 18px;
+      border-radius: 14px;
+      gap: 10px;
+    }
+    .card-header-row { gap: 10px; }
+    .card-icon { width: 36px; height: 36px; }
+    .card-icon svg { width: 18px; height: 18px; }
+    .card-header-row h3 { font-size: 17.5px; }
+    .card-content {
+      font-size: 13.5px;
+      line-height: 1.65;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+    .card-content p {
+      margin-bottom: 8px;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+    .card-content li {
+      padding-left: 18px;
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: left;
+    }
     .card-watermark { display: none; }
 
     /* Testimonial & Contact */
@@ -1154,18 +1543,92 @@
       </div>
     </a>
 
-    <nav>
-      <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Beranda</a>
-      <a href="#tentang">Tentang</a>
-      <a href="#galeri">Galeri</a>
-      <a href="#kontak">Kontak</a>
-      <a href="#program">Program</a>
-      <a href="{{ route('login') }}" class="btn-masuk-mobile">Masuk Portal</a>
+    <!-- Backdrop Dimmer for Mobile Drawer -->
+    <div class="nav-backdrop" id="navBackdrop" onclick="closeMobileNav()"></div>
+
+    <nav id="mobileNav">
+      <!-- Mobile Drawer Header -->
+      <div class="nav-drawer-header">
+        <div class="drawer-brand">
+          <img src="{{ asset('images/logo.png') }}" alt="Logo PAUD" style="height:34px;width:auto;">
+          <div>
+            <div style="font-size:15px;font-weight:800;color:var(--navy);line-height:1.2;">PAUD AL HIDAYAH</div>
+            <div style="font-size:9.5px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.5px;">Menu Navigasi</div>
+          </div>
+        </div>
+        <button type="button" class="nav-drawer-close" onclick="closeMobileNav()" aria-label="Tutup Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <!-- Navigation Links with Icons -->
+      <div class="nav-menu-list">
+        <a href="{{ route('home') }}" class="nav-link-item {{ request()->routeIs('home') ? 'active' : '' }}">
+          <div class="nav-item-left">
+            <div class="nav-item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <span>Beranda</span>
+          </div>
+          <span class="nav-item-arrow">›</span>
+        </a>
+
+        <a href="#tentang" class="nav-link-item">
+          <div class="nav-item-left">
+            <div class="nav-item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5V3A2.5 2.5 0 0 1 6.5 .5H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
+            </div>
+            <span>Tentang Kami</span>
+          </div>
+          <span class="nav-item-arrow">›</span>
+        </a>
+
+        <a href="#program" class="nav-link-item">
+          <div class="nav-item-left">
+            <div class="nav-item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <span>Program Belajar</span>
+          </div>
+          <span class="nav-item-arrow">›</span>
+        </a>
+
+        <a href="#galeri" class="nav-link-item">
+          <div class="nav-item-left">
+            <div class="nav-item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+            <span>Galeri Kegiatan</span>
+          </div>
+          <span class="nav-item-arrow">›</span>
+        </a>
+
+        <a href="#kontak" class="nav-link-item">
+          <div class="nav-item-left">
+            <div class="nav-item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <span>Kontak &amp; Lokasi</span>
+          </div>
+          <span class="nav-item-arrow">›</span>
+        </a>
+      </div>
+
+      <!-- Mobile Drawer Footer -->
+      <div class="nav-drawer-footer">
+        <a href="{{ route('login') }}" class="btn-masuk-drawer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width:16px;height:16px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span>Masuk Portal Orang Tua</span>
+        </a>
+        <div style="font-size:11px;color:#94A3B8;text-align:center;">
+          KB-PAUD Al-Hidayah • Bangsri Jepara
+        </div>
+      </div>
     </nav>
 
     <div class="header-actions">
       <a href="{{ route('login') }}" class="btn btn-masuk">Masuk</a>
-      <button class="menu-toggle" id="menuToggle" aria-label="Buka Menu">
+      <button class="menu-toggle" id="menuToggle" aria-label="Buka Menu" onclick="toggleMobileNav()">
         <span></span>
         <span></span>
         <span></span>
@@ -1174,18 +1637,37 @@
   </div>
 </header>
 
-{{-- ── HERO ─────────────────────────────────────────────────────────────── --}}
+{{-- ── HERO SLIDER ─────────────────────────────────────────────────────── --}}
 <section class="hero" id="beranda">
-  <img
-    class="hero-banner"
-    src="{{ asset('images/gedung-sekolah.jpg') }}"
-    alt="Gedung PAUD Al-Hidayah">
+  <div class="hero-slider">
+    <!-- Slide 1: Outdoor Playground & Building -->
+    <div class="hero-slide active">
+      <img src="{{ asset('images/' . ($profil->hero_slide_1 ?? 'hero-slide-1.jpg')) }}" 
+           alt="Gedung & Taman Bermain PAUD Al Hidayah"
+           onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'">
+    </div>
+    <!-- Slide 2: Classroom Learning & Arts -->
+    <div class="hero-slide">
+      <img src="{{ asset('images/' . ($profil->hero_slide_2 ?? 'hero-slide-2.jpg')) }}" 
+           alt="Aktivitas Belajar Ceria Kelas PAUD Al Hidayah"
+           onerror="this.src='{{ asset('images/hero-slide-2.jpg') }}'">
+    </div>
+    <!-- Slide 3: Islamic School Building -->
+    <div class="hero-slide">
+      <img src="{{ asset('images/' . ($profil->hero_slide_3 ?? 'hero-slide-3.jpg')) }}" 
+           alt="Gedung Islami PAUD Al Hidayah"
+           onerror="this.src='{{ asset('images/hero-slide-3.jpg') }}'">
+    </div>
+  </div>
 
   <div class="hero-overlay">
-    <h1>Selamat Datang di<br>PAUD Al Hidayah</h1>
-    <p class="lead">Membentuk generasi cerdas, mandiri, dan berakhlakul karimah melalui pendidikan usia dini yang menyenangkan dan terarah.</p>
+    <h1>Selamat Datang di<br><span class="hero-title-highlight">PAUD Al Hidayah</span></h1>
+    <p class="lead">Membentuk generasi cerdas, mandiri, dan berakhlakul karimah melalui lingkungan belajar yang ceria, aman, dan penuh kasih sayang.</p>
     <div class="hero-ctas">
-      <a href="#tentang" class="btn btn-lihat-selengkapnya">LIHAT SELENGKAPNYA</a>
+      <a href="#tentang" class="btn btn-hero-gold">
+        <span>Lihat Selengkapnya</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:16px;height:16px;"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -1259,11 +1741,16 @@
         
         <div class="sambutan-text">
           @if($profil && $profil->sambutan_teks)
-            {!! nl2br(e($profil->sambutan_teks)) !!}
+            @foreach(explode("\n", str_replace("\r", "", $profil->sambutan_teks)) as $paragraph)
+              @if(trim($paragraph) != '')
+                <p class="{{ str_contains(strtolower($paragraph), 'wassalamu') ? 'wassalam' : '' }}">{{ $paragraph }}</p>
+              @endif
+            @endforeach
           @else
             <p>Assalamu'alaikum Warahmatullahi Wabarakatuh,</p>
-            <p>Selamat datang di keluarga besar PAUD Al Hidayah. Kami percaya bahwa setiap anak adalah bintang yang memiliki cahaya masing-masing. Di sini, kami hadir untuk menjaga cahaya tersebut tetap bersinar melalui kasih sayang dan bimbingan yang tepat.</p>
-            <p>Terima kasih atas kepercayaan yang Anda berikan kepada kami untuk mendampingi masa-masing emas (golden age) buah hati Anda. Mari bersama-sama kita tuntun langkah awal mereka menuju masa depan yang gemilang.</p>
+            <p>Puji syukur senantiasa kita panjatkan ke hadirat Allah SWT yang telah melimpahkan rahmat, taufik, serta hidayah-Nya kepada kita semua. Shalawat beserta salam semoga selalu tercurahkan kepada junjungan kita Nabi Muhammad SAW, keluarga, para sahabat, dan pengikutnya hingga akhir zaman.</p>
+            <p>Selamat datang di website resmi KB-PAUD Al-Hidayah Wedelan, Kecamatan Bangsri, Kabupaten Jepara. Website ini kami hadirkan sebagai sarana informasi, komunikasi, serta transparansi perkembangan belajar anak didik kepada orang tua siswa dan masyarakat luas.</p>
+            <p>Kami percaya bahwa setiap anak terlahir dengan anugerah potensi emasnya masing-masing. Bersama tenaga pendidik yang berdedikasi dan penuh kasih sayang, kami berkomitmen mendampingi tumbuh kembang buah hati Anda menjadi generasi yang cerdas, mandiri, dan berakhlakul karimah.</p>
             <p class="wassalam">Wassalamu'alaikum Warahmatullahi Wabarakatuh,</p>
           @endif
         </div>
@@ -1278,7 +1765,6 @@
     <div class="profil-head">
       <div class="eyebrow">TENTANG KAMI</div>
       <h2>Profil PAUD Al-Hidayah</h2>
-      <h2></h2> 
     </div>
     
     <div class="profil-cards">
@@ -1294,10 +1780,10 @@
         </div>
         <div class="card-content">
           <p>
-            <strong>PAUD Al-Hidayah</strong> merupakan lembaga pendidikan anak usia dini yang berbasis Islami di Desa Wedelan, Kecamatan Bangsri, Kabupaten Jepara. Kami berkomitmen untuk menyelenggarakan pendidikan anak usia dini yang berlandaskan nilai-nilai keagamaan, kemandirian, serta kreativitas.
+            <strong>PAUD Al-Hidayah</strong> merupakan lembaga pendidikan anak usia dini berbasis Islami di Desa Wedelan, Kecamatan Bangsri, Kabupaten Jepara. Kami berkomitmen menyelenggarakan pendidikan berkualitas yang berlandaskan nilai-nilai keagamaan, kemandirian, dan kreativitas.
           </p>
           <p>
-            Melalui pendekatan belajar sambil bermain, kami mempersiapkan anak-anak untuk tumbuh dan berkembang secara holistik (fisik-motorik, kognitif, bahasa, sosial-emosional, serta nilai agama dan moral) guna menyongsong masa depan yang cerah, cerdas, dan berkarakter mulia sejak dini.
+            Melalui pendekatan belajar sambil bermain, kami membimbing anak-anak untuk tumbuh dan berkembang secara holistik (agama &amp; moral, fisik-motorik, kognitif, bahasa, sosial-emosional, dan seni) guna menyongsong masa depan yang cerdas dan berkarakter mulia.
           </p>
         </div>
         <div class="card-watermark">
@@ -1319,11 +1805,11 @@
           <h3>Visi</h3>
         </div>
         <div class="card-content">
-          <p style="font-size: 17px; font-weight: 700; color: var(--navy); font-family: 'Baloo 2', sans-serif; line-height: 1.5; margin-bottom: 8px;">
-            "Membentuk anak yang cerdas,baik dan terampil,berakhlak mulia,sholih/sholihah sehingga terwujud anak yang kreatif dan mandiri."
+          <p style="font-size: 16px; font-weight: 700; color: var(--navy); font-family: 'Baloo 2', sans-serif; line-height: 1.5; margin-bottom: 8px;">
+            "Membentuk anak yang cerdas, baik, terampil, berakhlak mulia, sholih/sholihah, kreatif, dan mandiri."
           </p>
           <p>
-            Visi ini menjadi arah dasar kami dalam membimbing tumbuh kembang buah hati Anda agar menjadi pribadi unggul yang cerdas intelektualnya, mantap kemandiriannya, serta mulia akhlaknya.
+            Visi ini menjadi arah dasar kami dalam membimbing tumbuh kembang buah hati Anda agar menjadi pribadi unggul yang cerdas intelektualnya, santun perilakunya, dan kokoh kemandiriannya.
           </p>
         </div>
         <div class="card-watermark">
@@ -1349,9 +1835,9 @@
         <div class="card-content">
           <p>Untuk mewujudkan visi sekolah, PAUD Al-Hidayah menetapkan misi-misi berikut:</p>
           <ul>
-            <li>Melaksanakan pembelajaran aktif,kreatif,efektif,dan inovatif.</li>
-            <li>Mendidik anak secara optimal sesuai kemampuan anak.</li>
-            <li>Menyiapkan anak didik ke jenjang pendidikan dasar dengan ketercapaian Kompetensi Dasar sesuai tahap perkembangan anak.</li>
+            <li>Melaksanakan pembelajaran aktif, kreatif, efektif, dan inovatif.</li>
+            <li>Mendidik dan menstimulasi anak secara optimal sesuai tahap perkembangan.</li>
+            <li>Menyiapkan anak didik menuju jenjang pendidikan dasar dengan ketercapaian kompetensi dasar yang matang.</li>
           </ul>
         </div>
         <div class="card-watermark">
@@ -1376,9 +1862,9 @@
         <div class="card-content">
           <p>Tujuan pendidikan PAUD Al-Hidayah dirancang untuk mendukung perkembangan holistik anak:</p>
           <ul>
-            <li>Memberikan layanan pendidikan yang berkualitas agar anak tumbuh  dan berkembang secara optimal.</li>
-            <li>Memberikan pembinaan yang seimbang dan berkesinambungan sebagai upaya dalam meningkatkan mutu pendidikan.</li>
-            <li>Memenuhi standar kualifikasi pendidikan sebagai upaya dalam meningkatkan profesionalitas pendidikan.</li>
+            <li>Memberikan layanan pendidikan yang berkualitas agar anak tumbuh dan berkembang secara optimal.</li>
+            <li>Memberikan pembinaan karakter dan keimanan yang seimbang serta berkesinambungan.</li>
+            <li>Memenuhi standar mutu pendidikan demi meningkatkan profesionalitas dan dedikasi pendidik.</li>
           </ul>
         </div>
         <div class="card-watermark">
@@ -1929,19 +2415,36 @@
 
 <script>
   const menuToggle = document.getElementById('menuToggle');
-  const navMenu = document.querySelector('nav');
+  const navMenu = document.getElementById('mobileNav') || document.querySelector('nav');
+  const navBackdrop = document.getElementById('navBackdrop');
 
-  menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('active');
-    navMenu.classList.toggle('active');
-  });
+  function toggleMobileNav() {
+    if (navMenu.classList.contains('active')) {
+      closeMobileNav();
+    } else {
+      openMobileNav();
+    }
+  }
+
+  function openMobileNav() {
+    if (menuToggle) menuToggle.classList.add('active');
+    if (navMenu) navMenu.classList.add('active');
+    if (navBackdrop) navBackdrop.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMobileNav() {
+    if (menuToggle) menuToggle.classList.remove('active');
+    if (navMenu) navMenu.classList.remove('active');
+    if (navBackdrop) navBackdrop.classList.remove('active');
+    document.body.style.overflow = '';
+  }
 
   // Close menu when a link is clicked
   const navLinks = document.querySelectorAll('nav a');
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
-      menuToggle.classList.remove('active');
-      navMenu.classList.remove('active');
+      closeMobileNav();
     });
   });
 
@@ -1972,6 +2475,16 @@
         item.classList.add('active');
       }
     });
+
+    // Sticky Header Scroll Transition
+    const mainHeader = document.querySelector('header');
+    if (mainHeader) {
+      if (scrollY > 30) {
+        mainHeader.classList.add('scrolled');
+      } else {
+        mainHeader.classList.remove('scrolled');
+      }
+    }
   });
 
   // Program Tabs Switcher
@@ -2047,6 +2560,32 @@
       if (galleryData.length <= 1) return;
       currentGalleryIndex = (currentGalleryIndex - 1 + galleryData.length) % galleryData.length;
       updateLightboxContent();
+  }
+
+  // ── HERO BANNER AUTO SLIDER CONTROLLER ──
+  let heroSlideIndex = 0;
+  const heroSlides = document.querySelectorAll('.hero-slide');
+  let heroSlideTimer = null;
+
+  function showHeroSlide(index) {
+    if (!heroSlides || heroSlides.length === 0) return;
+    if (index >= heroSlides.length) heroSlideIndex = 0;
+    else if (index < 0) heroSlideIndex = heroSlides.length - 1;
+    else heroSlideIndex = index;
+
+    heroSlides.forEach((slide, idx) => {
+      slide.classList.toggle('active', idx === heroSlideIndex);
+    });
+  }
+
+  function startHeroTimer() {
+    heroSlideTimer = setInterval(() => {
+      showHeroSlide(heroSlideIndex + 1);
+    }, 5000); // 5 detik per slide berganti otomatis
+  }
+
+  if (heroSlides.length > 1) {
+    startHeroTimer();
   }
 
   // Keyboard navigation for Lightbox
