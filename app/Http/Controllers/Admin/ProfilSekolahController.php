@@ -33,23 +33,46 @@ class ProfilSekolahController extends Controller
             $profil = new ProfilSekolah();
         }
 
+        $messages = [
+            'hero_slide_1.uploaded' => 'Ukuran file Foto Slide 1 terlalu besar atau gagal diunggah (Maks. 10 MB).',
+            'hero_slide_2.uploaded' => 'Ukuran file Foto Slide 2 terlalu besar atau gagal diunggah (Maks. 10 MB).',
+            'hero_slide_3.uploaded' => 'Ukuran file Foto Slide 3 terlalu besar atau gagal diunggah (Maks. 10 MB).',
+            'hero_slide_4.uploaded' => 'Ukuran file Foto Slide 4 terlalu besar atau gagal diunggah (Maks. 10 MB).',
+            'hero_slide_5.uploaded' => 'Ukuran file Foto Slide 5 terlalu besar atau gagal diunggah (Maks. 10 MB).',
+            'sambutan_foto.uploaded' => 'Ukuran file Foto Kepala Sekolah terlalu besar (Maks. 10 MB).',
+            'ttd_kepsek.uploaded' => 'Ukuran file Tanda Tangan terlalu besar (Maks. 5 MB).',
+            'max' => 'Ukuran file :attribute terlalu besar (Maks. :max KB).',
+            'image' => 'File :attribute harus berupa gambar yang valid (JPG, JPEG, PNG, WebP).',
+            'mimes' => 'Format file :attribute harus berformat JPG, JPEG, PNG, atau WebP.',
+        ];
+
         $request->validate([
             'sambutan_judul' => 'required|string|max:255',
             'sambutan_nama' => 'required|string|max:255',
             'sambutan_jabatan' => 'required|string|max:255',
             'sambutan_teks' => 'required|string',
-            'sambutan_foto' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
-            'hero_slide_1' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:4096',
-            'hero_slide_2' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:4096',
-            'hero_slide_3' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:4096',
-            'ttd_kepsek' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'sambutan_foto' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:10240',
+            'alamat_lengkap' => 'nullable|string',
+            'no_telepon' => 'nullable|string|max:50',
+            'email_sekolah' => 'nullable|string|max:100',
+            'maps_embed' => 'nullable|string',
+            'hero_slide_1' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:10240',
+            'hero_slide_2' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:10240',
+            'hero_slide_3' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:10240',
+            'hero_slide_4' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:10240',
+            'hero_slide_5' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:10240',
+            'ttd_kepsek' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'ttd_kepsek_base64' => 'nullable|string',
-        ]);
+        ], $messages);
 
         $profil->sambutan_judul = $request->sambutan_judul;
         $profil->sambutan_nama = $request->sambutan_nama;
         $profil->sambutan_jabatan = $request->sambutan_jabatan;
         $profil->sambutan_teks = $request->sambutan_teks;
+        $profil->alamat_lengkap = $request->alamat_lengkap;
+        $profil->no_telepon = $request->no_telepon;
+        $profil->email_sekolah = $request->email_sekolah;
+        $profil->maps_embed = $request->maps_embed;
 
         if ($request->hasFile('sambutan_foto')) {
             // Delete old photo if exists and is not the default seeder file
@@ -106,6 +129,34 @@ class ProfilSekolahController extends Controller
             $filename = 'hero_slide3_' . time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $filename);
             $profil->hero_slide_3 = $filename;
+        }
+
+        // Upload Banner Hero Slide 4
+        if ($request->hasFile('hero_slide_4')) {
+            if ($profil->hero_slide_4 && $profil->hero_slide_4 !== 'hero-slide-4.jpg') {
+                $oldPath = public_path('images/' . $profil->hero_slide_4);
+                if (File::exists($oldPath)) {
+                    File::delete($oldPath);
+                }
+            }
+            $image = $request->file('hero_slide_4');
+            $filename = 'hero_slide4_' . time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $filename);
+            $profil->hero_slide_4 = $filename;
+        }
+
+        // Upload Banner Hero Slide 5
+        if ($request->hasFile('hero_slide_5')) {
+            if ($profil->hero_slide_5 && $profil->hero_slide_5 !== 'hero-slide-5.jpg') {
+                $oldPath = public_path('images/' . $profil->hero_slide_5);
+                if (File::exists($oldPath)) {
+                    File::delete($oldPath);
+                }
+            }
+            $image = $request->file('hero_slide_5');
+            $filename = 'hero_slide5_' . time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $filename);
+            $profil->hero_slide_5 = $filename;
         }
 
         // Simpan TTD dari Upload File jika ada

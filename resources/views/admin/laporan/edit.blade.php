@@ -18,7 +18,7 @@
     <div class="card-body" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
         <div>
             <h2 style="font-size:1.2rem; font-weight:800; color:var(--secondary); margin-bottom:4px;">{{ $siswa->nama }}</h2>
-            <span style="font-size:0.8rem; color:var(--muted); font-weight:600;">NIS: <code>{{ $siswa->nis }}</code> | Kelas: {{ $siswa->kelas->nama_kelas }}</span>
+            <span style="font-size:0.8rem; color:var(--muted); font-weight:600;">NIS: <code>{{ $siswa->nis }}</code> | Kelas: {{ $siswa->kelas->nama_kelas }} ({{ $siswa->kelas->tahun_ajaran }})</span>
         </div>
         @php
             $months = [

@@ -26,7 +26,7 @@
                 <option value="">Semua Kelas</option>
                 @foreach($kelasList as $k)
                     <option value="{{ $k->id }}" {{ request('kelas_id') == $k->id ? 'selected' : '' }}>
-                        {{ $k->nama_kelas }}
+                        {{ $k->nama_kelas }} ({{ $k->tahun_ajaran }})
                     </option>
                 @endforeach
             </select>
@@ -73,7 +73,7 @@
                     <td><strong>{{ $s->nama }}</strong></td>
                     <td>
                         @if($s->kelas)
-                            <span class="badge badge-purple">{{ $s->kelas->nama_kelas }}</span>
+                            <span class="badge badge-purple">{{ $s->kelas->nama_kelas }} ({{ $s->kelas->tahun_ajaran }})</span>
                         @else
                             <span style="color:#94A3B8">—</span>
                         @endif

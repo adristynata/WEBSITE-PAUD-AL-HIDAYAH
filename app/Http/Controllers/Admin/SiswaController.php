@@ -30,14 +30,14 @@ class SiswaController extends Controller
         }
 
         $siswas = $query->orderBy('nama')->paginate(10)->withQueryString();
-        $kelasList = Kelas::orderBy('nama_kelas')->get();
+        $kelasList = Kelas::orderBy('tahun_ajaran', 'desc')->orderBy('nama_kelas')->get();
 
         return view('admin.siswa.index', compact('siswas', 'kelasList'));
     }
 
     public function create()
     {
-        $kelasList  = Kelas::orderBy('nama_kelas')->get();
+        $kelasList  = Kelas::orderBy('tahun_ajaran', 'desc')->orderBy('nama_kelas')->get();
         $nisPreview = $this->generateNis(); // preview NIS yang akan dibuat
         return view('admin.siswa.create', compact('kelasList', 'nisPreview'));
     }
@@ -65,7 +65,7 @@ class SiswaController extends Controller
 
     public function edit(Siswa $siswa)
     {
-        $kelasList = Kelas::orderBy('nama_kelas')->get();
+        $kelasList = Kelas::orderBy('tahun_ajaran', 'desc')->orderBy('nama_kelas')->get();
         return view('admin.siswa.edit', compact('siswa', 'kelasList'));
     }
 

@@ -126,19 +126,20 @@
                     </div>
                 </div>
 
-                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:18px; margin-bottom:12px;">
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-bottom:12px;">
                     <!-- Slide 1 -->
                     <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px;">
                         <label style="font-weight:700; font-size:13px; color:#334155; display:block; margin-bottom:8px;">
                             🌄 Banner Slide 1 (Utama)
                         </label>
                         <div style="margin-bottom:10px;">
-                            <img src="{{ asset('images/' . ($profil->hero_slide_1 ?? 'hero-slide-1.jpg')) }}" 
+                            <img id="preview_hero_slide_1" 
+                                 src="{{ asset('images/' . ($profil->hero_slide_1 ?? 'hero-slide-1.jpg')) }}" 
                                  alt="Slide 1" 
                                  onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'"
                                  style="width:100%; height:120px; border-radius:8px; object-fit:cover; border:1px solid #CBD5E1;">
                         </div>
-                        <input type="file" name="hero_slide_1" class="form-control" accept="image/jpg,image/jpeg,image/png,image/webp" style="font-size:12px;">
+                        <input type="file" id="hero_slide_1" name="hero_slide_1" class="form-control" accept="image/jpg,image/jpeg,image/png,image/webp" style="font-size:12px;" onchange="previewImage(this, 'preview_hero_slide_1')">
                         <small style="color:#94A3B8; font-size:11px; display:block; margin-top:4px;">Kosongkan jika tidak ingin mengubah</small>
                         @error('hero_slide_1')<div class="invalid-feedback" style="display:block;">{{ $message }}</div>@enderror
                     </div>
@@ -149,12 +150,13 @@
                             🎨 Banner Slide 2 (Aktivitas/Kelas)
                         </label>
                         <div style="margin-bottom:10px;">
-                            <img src="{{ asset('images/' . ($profil->hero_slide_2 ?? 'hero-slide-2.jpg')) }}" 
+                            <img id="preview_hero_slide_2" 
+                                 src="{{ asset('images/' . ($profil->hero_slide_2 ?? 'hero-slide-2.jpg')) }}" 
                                  alt="Slide 2" 
                                  onerror="this.src='{{ asset('images/hero-slide-2.jpg') }}'"
                                  style="width:100%; height:120px; border-radius:8px; object-fit:cover; border:1px solid #CBD5E1;">
                         </div>
-                        <input type="file" name="hero_slide_2" class="form-control" accept="image/jpg,image/jpeg,image/png,image/webp" style="font-size:12px;">
+                        <input type="file" id="hero_slide_2" name="hero_slide_2" class="form-control" accept="image/jpg,image/jpeg,image/png,image/webp" style="font-size:12px;" onchange="previewImage(this, 'preview_hero_slide_2')">
                         <small style="color:#94A3B8; font-size:11px; display:block; margin-top:4px;">Kosongkan jika tidak ingin mengubah</small>
                         @error('hero_slide_2')<div class="invalid-feedback" style="display:block;">{{ $message }}</div>@enderror
                     </div>
@@ -165,22 +167,100 @@
                             🕌 Banner Slide 3 (Gedung/Fasilitas)
                         </label>
                         <div style="margin-bottom:10px;">
-                            <img src="{{ asset('images/' . ($profil->hero_slide_3 ?? 'hero-slide-3.jpg')) }}" 
+                            <img id="preview_hero_slide_3" 
+                                 src="{{ asset('images/' . ($profil->hero_slide_3 ?? 'hero-slide-3.jpg')) }}" 
                                  alt="Slide 3" 
                                  onerror="this.src='{{ asset('images/hero-slide-3.jpg') }}'"
                                  style="width:100%; height:120px; border-radius:8px; object-fit:cover; border:1px solid #CBD5E1;">
                         </div>
-                        <input type="file" name="hero_slide_3" class="form-control" accept="image/jpg,image/jpeg,image/png,image/webp" style="font-size:12px;">
+                        <input type="file" id="hero_slide_3" name="hero_slide_3" class="form-control" accept="image/jpg,image/jpeg,image/png,image/webp" style="font-size:12px;" onchange="previewImage(this, 'preview_hero_slide_3')">
                         <small style="color:#94A3B8; font-size:11px; display:block; margin-top:4px;">Kosongkan jika tidak ingin mengubah</small>
                         @error('hero_slide_3')<div class="invalid-feedback" style="display:block;">{{ $message }}</div>@enderror
                     </div>
+
+                    <!-- Slide 4 -->
+                    <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px;">
+                        <label style="font-weight:700; font-size:13px; color:#334155; display:block; margin-bottom:8px;">
+                            🌟 Banner Slide 4 (Kreativitas)
+                        </label>
+                        <div style="margin-bottom:10px;">
+                            <img id="preview_hero_slide_4" 
+                                 src="{{ asset('images/' . ($profil->hero_slide_4 ?? 'hero-slide-4.jpg')) }}" 
+                                 alt="Slide 4" 
+                                 onerror="this.src='{{ asset('images/hero-paud-ceria.jpg') }}'"
+                                 style="width:100%; height:120px; border-radius:8px; object-fit:cover; border:1px solid #CBD5E1;">
+                        </div>
+                        <input type="file" id="hero_slide_4" name="hero_slide_4" class="form-control" accept="image/jpg,image/jpeg,image/png,image/webp" style="font-size:12px;" onchange="previewImage(this, 'preview_hero_slide_4')">
+                        <small style="color:#94A3B8; font-size:11px; display:block; margin-top:4px;">Kosongkan jika tidak ingin mengubah</small>
+                        @error('hero_slide_4')<div class="invalid-feedback" style="display:block;">{{ $message }}</div>@enderror
+                    </div>
+
+                    <!-- Slide 5 -->
+                    <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px;">
+                        <label style="font-weight:700; font-size:13px; color:#334155; display:block; margin-bottom:8px;">
+                            🎈 Banner Slide 5 (Kebersamaan)
+                        </label>
+                        <div style="margin-bottom:10px;">
+                            <img id="preview_hero_slide_5" 
+                                 src="{{ asset('images/' . ($profil->hero_slide_5 ?? 'hero-slide-5.jpg')) }}" 
+                                 alt="Slide 5" 
+                                 onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'"
+                                 style="width:100%; height:120px; border-radius:8px; object-fit:cover; border:1px solid #CBD5E1;">
+                        </div>
+                        <input type="file" id="hero_slide_5" name="hero_slide_5" class="form-control" accept="image/jpg,image/jpeg,image/png,image/webp" style="font-size:12px;" onchange="previewImage(this, 'preview_hero_slide_5')">
+                        <small style="color:#94A3B8; font-size:11px; display:block; margin-top:4px;">Kosongkan jika tidak ingin mengubah</small>
+                        @error('hero_slide_5')<div class="invalid-feedback" style="display:block;">{{ $message }}</div>@enderror
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bagian 3: Informasi Kontak & Google Maps -->
+            <div style="margin-top:28px; padding-top:20px; border-top:1px solid #E2E8F0;">
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+                    <div style="width:32px; height:32px; border-radius:8px; background:#3B82F6; display:flex; align-items:center; justify-content:center; color:#fff;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <div>
+                        <h4 style="margin:0; font-size:16px; color:#1E293B; font-weight:700;">Informasi Kontak &amp; Titik Lokasi Google Maps</h4>
+                        <small style="color:#64748B;">Atur alamat, kontak WhatsApp/Telepon, serta peta lokasi sekolah di beranda</small>
+                    </div>
+                </div>
+
+                <div class="row" style="display:flex; flex-wrap:wrap; gap:16px; margin-bottom:16px;">
+                    <div style="flex:1; min-width:280px;">
+                        <div class="form-group" style="margin-bottom:16px;">
+                            <label class="form-label" style="font-weight:600; color:#334155;">📍 Alamat Lengkap Sekolah</label>
+                            <textarea name="alamat_lengkap" class="form-control" rows="2" placeholder="Contoh: Desa Wedelan RT 01 / RW 09, Kec. Bangsri, Kab. Jepara, Jawa Tengah 59453">{{ old('alamat_lengkap', $profil->alamat_lengkap ?? 'Desa Wedelan RT 01 / RW 09, Kec. Bangsri, Kab. Jepara, Jawa Tengah 59453') }}</textarea>
+                        </div>
+                    </div>
+                    <div style="flex:1; min-width:240px;">
+                        <div class="form-group" style="margin-bottom:12px;">
+                            <label class="form-label" style="font-weight:600; color:#334155;">📞 Nomor Telepon / WhatsApp</label>
+                            <input type="text" name="no_telepon" class="form-control" value="{{ old('no_telepon', $profil->no_telepon ?? '0812-2922-2804') }}" placeholder="Contoh: 0812-2922-2804">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" style="font-weight:600; color:#334155;">✉️ Email Sekolah</label>
+                            <input type="email" name="email_sekolah" class="form-control" value="{{ old('email_sekolah', $profil->email_sekolah ?? 'fatimatuzzahraalhidayah@gmail.com') }}" placeholder="Contoh: fatimatuzzahraalhidayah@gmail.com">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:16px;">
+                    <label class="form-label" style="font-weight:700; color:#1E293B; display:flex; align-items:center; justify-content:space-between;">
+                        <span>🗺️ Titik Lokasi / Link Embed Google Maps</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=-6.5163,110.7823" target="_blank" style="font-size:12px; color:#3B82F6; text-decoration:none; font-weight:600;">Lihat di Google Maps &nearr;</a>
+                    </label>
+                    <input type="text" name="maps_embed" class="form-control" value="{{ old('maps_embed', $profil->maps_embed ?? '') }}" placeholder="Kosongkan untuk menggunakan titik koordinat resmi (-6.5163, 110.7823) atau tempel link embed/iframe Google Maps baru">
+                    <small style="color:#64748B; font-size:12px; display:block; margin-top:6px;">
+                        Secara default sistem menggunakan koordinat resmi Kemendikbud: <strong>Lintang: -6.5163, Bujur: 110.7823</strong> (Desa Wedelan RT 01 RW 09). Jika Anda memiliki link bagikan iframe dari Google Maps, Anda dapat menempelkannya di sini.
+                    </small>
                 </div>
             </div>
 
             <div style="margin-top:24px; padding-top:16px; border-top:1px solid #E2E8F0;">
                 <button type="submit" class="btn btn-primary" style="font-weight:700;">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-                    Simpan Perubahan Profil & Banner
+                    Simpan Perubahan Profil, Banner &amp; Lokasi
                 </button>
             </div>
         </form>
@@ -191,6 +271,20 @@
 <script>
     var currentTtdMode = 'upload';
     var signaturePad = null;
+
+    // Pratinjau langsung saat memilih file gambar
+    function previewImage(input, previewId) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var previewImg = document.getElementById(previewId);
+                if (previewImg) {
+                    previewImg.src = e.target.result;
+                }
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
     function switchTtdMode(mode) {
         currentTtdMode = mode;
@@ -224,21 +318,96 @@
         }
     }
 
+    // Helper kompresi gambar otomatis jika ukuran file kamera HP terlalu besar (> 2MB)
+    async function compressImageFile(file, maxWidth = 1920, quality = 0.85) {
+        if (file.size < 1.5 * 1024 * 1024) return file; // Jika < 1.5 MB tidak perlu kompres
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.src = URL.createObjectURL(file);
+            img.onload = () => {
+                let width = img.width;
+                let height = img.height;
+                if (width > maxWidth) {
+                    height = Math.round((height * maxWidth) / width);
+                    width = maxWidth;
+                }
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                canvas.toBlob((blob) => {
+                    if (blob) {
+                        const newFile = new File([blob], file.name.replace(/\.[^/.]+$/, ".jpg"), {
+                            type: 'image/jpeg',
+                            lastModified: Date.now()
+                        });
+                        resolve(newFile);
+                    } else {
+                        resolve(file);
+                    }
+                }, 'image/jpeg', quality);
+            };
+            img.onerror = () => resolve(file);
+        });
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
         var canvas = document.getElementById('signature-pad');
-        signaturePad = new SignaturePad(canvas, {
-            backgroundColor: 'rgba(255, 255, 255, 0)',
-            penColor: 'rgb(0, 0, 0)'
-        });
+        if (canvas) {
+            signaturePad = new SignaturePad(canvas, {
+                backgroundColor: 'rgba(255, 255, 255, 0)',
+                penColor: 'rgb(0, 0, 0)'
+            });
 
-        document.getElementById('clear-signature').addEventListener('click', function () {
-            signaturePad.clear();
-        });
+            document.getElementById('clear-signature').addEventListener('click', function () {
+                signaturePad.clear();
+            });
+        }
 
-        document.querySelector('form').addEventListener('submit', function(e) {
-            if (currentTtdMode === 'draw' && !signaturePad.isEmpty()) {
+        const form = document.querySelector('form');
+        let isSubmitting = false;
+
+        form.addEventListener('submit', async function(e) {
+            if (isSubmitting) return;
+
+            if (currentTtdMode === 'draw' && signaturePad && !signaturePad.isEmpty()) {
                 document.getElementById('ttd_kepsek_base64').value = signaturePad.toDataURL('image/png');
-                document.getElementById('ttd_kepsek').value = ''; // Reset file upload jika menggambar
+                document.getElementById('ttd_kepsek').value = '';
+            }
+
+            // Kompres foto-foto slide secara otomatis jika ukuran file besar
+            const fileInputs = form.querySelectorAll('input[type="file"]:not(#ttd_kepsek)');
+            let hasLargeFiles = false;
+            for (const input of fileInputs) {
+                if (input.files && input.files[0] && input.files[0].size > 2 * 1024 * 1024) {
+                    hasLargeFiles = true;
+                    break;
+                }
+            }
+
+            if (hasLargeFiles) {
+                e.preventDefault();
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const origBtnText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '⏳ Mengoptimalkan & Menyimpan Foto...';
+
+                try {
+                    for (const input of fileInputs) {
+                        if (input.files && input.files[0] && input.files[0].size > 1.5 * 1024 * 1024) {
+                            const compressed = await compressImageFile(input.files[0]);
+                            const dataTransfer = new DataTransfer();
+                            dataTransfer.items.add(compressed);
+                            input.files = dataTransfer.files;
+                        }
+                    }
+                } catch (err) {
+                    console.error("Compression error:", err);
+                }
+
+                isSubmitting = true;
+                form.submit();
             }
         });
     });

@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('title', 'Daftar Siswa — PAUD Al-Hidayah')
-@section('page-title', 'Kelola Catatan: ' . $kelas->nama_kelas)
+@section('page-title', 'Kelola Catatan: ' . $kelas->nama_kelas . ' (' . $kelas->tahun_ajaran . ')')
 
 @section('sidebar-menu')
     @include('guru.partials.sidebar-menu')
@@ -16,7 +16,7 @@
 <div class="card" style="margin-bottom:20px">
     <div class="card-body">
         <h2 style="font-size:1.2rem;font-weight:800;margin-bottom:4px">
-            Siswa Kelas {{ $kelas->nama_kelas }} 👧👦
+            Siswa Kelas {{ $kelas->nama_kelas }} ({{ $kelas->tahun_ajaran }}) 👧👦
         </h2>
         <p style="color:#64748B;font-size:0.9rem">Pilih siswa di bawah ini untuk melihat riwayat penilaian atau menginput evaluasi mingguan baru.</p>
     </div>

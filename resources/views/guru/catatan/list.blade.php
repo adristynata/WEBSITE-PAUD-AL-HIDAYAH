@@ -30,7 +30,7 @@
             <h2 style="font-size:1.15rem;font-weight:800;color:var(--secondary);margin-bottom:4px;">{{ $siswa->nama }}</h2>
             <div style="display:flex; gap:8px; flex-wrap:wrap; font-size:0.75rem;">
                 <span class="badge badge-purple">NIS: {{ $siswa->nis }}</span>
-                <span class="badge badge-orange">Kelas: {{ $siswa->kelas->nama_kelas }}</span>
+                <span class="badge badge-orange">Kelas: {{ $siswa->kelas->nama_kelas }} ({{ $siswa->kelas->tahun_ajaran }})</span>
                 <span class="badge badge-blue">Wali Kelas: {{ $siswa->kelas->guru->name }}</span>
             </div>
         </div>

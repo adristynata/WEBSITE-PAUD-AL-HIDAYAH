@@ -25,7 +25,7 @@
         @endif
         <div>
             <h2 style="font-size:1.1rem;font-weight:800;color:var(--secondary);margin-bottom:2px;">{{ $siswa->nama }}</h2>
-            <p style="font-size:0.75rem;color:var(--muted);">NIS: {{ $siswa->nis }} | Kelas: {{ $siswa->kelas->nama_kelas }}</p>
+            <p style="font-size:0.75rem;color:var(--muted);">NIS: {{ $siswa->nis }} | Kelas: {{ $siswa->kelas->nama_kelas }} ({{ $siswa->kelas->tahun_ajaran }})</p>
         </div>
     </div>
 </div>

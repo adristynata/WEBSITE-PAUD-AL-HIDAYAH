@@ -34,9 +34,21 @@ Route::get('/', function () {
     }
 
     $profil = \App\Models\ProfilSekolah::query()->first();
-    $galeris = \App\Models\Galeri::query()->orderBy('created_at', 'desc')->get();
+    $galeris = \App\Models\Galeri::query()->orderBy('created_at', 'desc')->take(6)->get();
     return view('welcome', compact('profil', 'galeris'));
 })->name('home');
+
+Route::get('/prestasi', function () {
+    $profil = \App\Models\ProfilSekolah::query()->first();
+    $prestasis = \App\Models\Prestasi::query()->orderBy('tahun', 'desc')->orderBy('created_at', 'desc')->get();
+    return view('prestasi', compact('profil', 'prestasis'));
+})->name('prestasi');
+
+Route::get('/galeri', function () {
+    $profil = \App\Models\ProfilSekolah::query()->first();
+    $galeris = \App\Models\Galeri::query()->orderBy('created_at', 'desc')->paginate(9);
+    return view('galeri', compact('profil', 'galeris'));
+})->name('galeri.publik');
 
 // ─── Auth ──────────────────────────────────────────────────────────────────────
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -71,6 +83,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 
     // Galeri
     Route::resource('galeri', GaleriController::class)->only(['index', 'create', 'store', 'destroy']);
+
+    // Prestasi
+    Route::resource('prestasi', \App\Http\Controllers\Admin\PrestasiController::class);
 
     // Indikator Penilaian
     Route::resource('indikator', IndikatorController::class)->except(['show']);

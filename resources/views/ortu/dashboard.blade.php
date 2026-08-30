@@ -65,7 +65,7 @@ $months = [1=>'Januari',2=>'Februari',3=>'Maret',4=>'April',5=>'Mei',6=>'Juni',7
             <div class="child-chips">
                 <span class="badge badge-purple">NIS: {{ $s->nis }}</span>
                 @if($s->kelas)
-                    <span class="badge badge-blue">{{ $s->kelas->nama_kelas }}</span>
+                    <span class="badge badge-blue">{{ $s->kelas->nama_kelas }} ({{ $s->kelas->tahun_ajaran }})</span>
                     <span class="badge badge-gray">Wali: {{ $s->kelas->guru->name }}</span>
                 @endif
                 <span class="badge {{ $s->is_aktif ? 'badge-green' : 'badge-red' }}">{{ $s->is_aktif ? 'Aktif' : 'Nonaktif' }}</span>

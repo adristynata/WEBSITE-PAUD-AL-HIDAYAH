@@ -41,17 +41,52 @@ class AppServiceProvider extends ServiceProvider
                     @file_put_contents($flagFile, 'done');
                 }
             }
+
+            // Siapkan default fallback slide 4 & 5 jika belum ada
+            $srcSlide4 = 'C:/Users/HP/.gemini/antigravity/brain/03753526-d35b-42fa-b7fe-6ac8a552c3ba/paud_hero_slide_classroom_1787814651247.jpg';
+            $srcSlide5 = 'C:/Users/HP/.gemini/antigravity/brain/03753526-d35b-42fa-b7fe-6ac8a552c3ba/paud_hero_al_hidayah_1787814146223.jpg';
+            if (file_exists($srcSlide4) && !file_exists(public_path('images/hero-slide-4.jpg'))) {
+                @copy($srcSlide4, public_path('images/hero-slide-4.jpg'));
+            }
+            if (file_exists($srcSlide5) && !file_exists(public_path('images/hero-slide-5.jpg'))) {
+                @copy($srcSlide5, public_path('images/hero-slide-5.jpg'));
+            }
         } catch (\Throwable $e) {
             // Ignore if copy fails
         }
 
         try {
             if (\Illuminate\Support\Facades\Schema::hasTable('profil_sekolahs')) {
+                $columnsToAdd = [];
                 if (!\Illuminate\Support\Facades\Schema::hasColumn('profil_sekolahs', 'hero_slide_1')) {
-                    \Illuminate\Support\Facades\Schema::table('profil_sekolahs', function ($table) {
-                        $table->string('hero_slide_1')->nullable();
-                        $table->string('hero_slide_2')->nullable();
-                        $table->string('hero_slide_3')->nullable();
+                    $columnsToAdd[] = 'hero_slide_1';
+                    $columnsToAdd[] = 'hero_slide_2';
+                    $columnsToAdd[] = 'hero_slide_3';
+                }
+                if (!\Illuminate\Support\Facades\Schema::hasColumn('profil_sekolahs', 'hero_slide_4')) {
+                    $columnsToAdd[] = 'hero_slide_4';
+                }
+                if (!\Illuminate\Support\Facades\Schema::hasColumn('profil_sekolahs', 'hero_slide_5')) {
+                    $columnsToAdd[] = 'hero_slide_5';
+                }
+                if (!\Illuminate\Support\Facades\Schema::hasColumn('profil_sekolahs', 'maps_embed')) {
+                    $columnsToAdd[] = 'maps_embed';
+                }
+                if (!\Illuminate\Support\Facades\Schema::hasColumn('profil_sekolahs', 'alamat_lengkap')) {
+                    $columnsToAdd[] = 'alamat_lengkap';
+                }
+                if (!\Illuminate\Support\Facades\Schema::hasColumn('profil_sekolahs', 'no_telepon')) {
+                    $columnsToAdd[] = 'no_telepon';
+                }
+                if (!\Illuminate\Support\Facades\Schema::hasColumn('profil_sekolahs', 'email_sekolah')) {
+                    $columnsToAdd[] = 'email_sekolah';
+                }
+
+                if (!empty($columnsToAdd)) {
+                    \Illuminate\Support\Facades\Schema::table('profil_sekolahs', function ($table) use ($columnsToAdd) {
+                        foreach ($columnsToAdd as $col) {
+                            $table->text($col)->nullable();
+                        }
                     });
                 }
             }
