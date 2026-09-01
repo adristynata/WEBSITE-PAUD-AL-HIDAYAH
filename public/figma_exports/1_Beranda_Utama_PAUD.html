@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="PAUD Al-Hidayah — Sekolah usia dini yang menumbuhkan rasa ingin tahu dan kebaikan hati anak dalam lingkungan yang aman, menyenangkan, dan penuh inspirasi.">
 <title>PAUD Al-Hidayah</title>
-<link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}?v={{ time() }}">
-<link rel="shortcut icon" href="{{ asset('favicon.ico') }}?v={{ time() }}">
-<link rel="apple-touch-icon" href="{{ asset('images/logo.png') }}?v={{ time() }}">
+<link rel="icon" type="image/png" href="http://localhost:8000/images/logo.png?v=1788237894">
+<link rel="shortcut icon" href="http://localhost:8000/favicon.ico?v=1788237894">
+<link rel="apple-touch-icon" href="http://localhost:8000/images/logo.png?v=1788237894">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -1751,11 +1751,11 @@
 
 
 
-{{-- ── HEADER ──────────────────────────────────────────────────────────── --}}
+
 <header>
   <div class="wrap">
-    <a href="{{ route('home') }}" class="logo">
-      <img src="{{ asset('images/logo.png') }}" alt="Logo KB Al Hidayah" style="height:44px;width:auto;display:block;">
+    <a href="http://localhost:8000" class="logo">
+      <img src="http://localhost:8000/images/logo.png" alt="Logo KB Al Hidayah" style="height:44px;width:auto;display:block;">
       <div class="logo-text">
         <div class="brand">PAUD AL HIDAYAH</div>
         <div class="sub">SEKOLAH USIA DINI</div>
@@ -1769,7 +1769,7 @@
       <!-- Mobile Drawer Header -->
       <div class="nav-drawer-header">
         <div class="drawer-brand">
-          <img src="{{ asset('images/logo.png') }}" alt="Logo PAUD" style="height:34px;width:auto;">
+          <img src="http://localhost:8000/images/logo.png" alt="Logo PAUD" style="height:34px;width:auto;">
           <div>
             <div style="font-size:15px;font-weight:800;color:var(--navy);line-height:1.2;">PAUD AL HIDAYAH</div>
             <div style="font-size:9.5px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.5px;">Menu Navigasi</div>
@@ -1782,7 +1782,7 @@
 
       <!-- Navigation Links with Icons -->
       <div class="nav-menu-list">
-        <a href="{{ route('home') }}" class="nav-link-item {{ request()->routeIs('home') ? 'active' : '' }}">
+        <a href="http://localhost:8000" class="nav-link-item ">
           <div class="nav-item-left">
             <div class="nav-item-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -1812,7 +1812,7 @@
           <span class="nav-item-arrow">›</span>
         </a>
 
-        <a href="{{ route('prestasi') }}" class="nav-link-item {{ request()->routeIs('prestasi') ? 'active' : '' }}">
+        <a href="http://localhost:8000/prestasi" class="nav-link-item ">
           <div class="nav-item-left">
             <div class="nav-item-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H7v3h10v-3h-2c-.55 0-1-.45-1-1v-2.34"/><path d="M18 4H6v7a6 6 0 0 0 12 0V4z"/></svg>
@@ -1845,7 +1845,7 @@
 
       <!-- Mobile Drawer Footer -->
       <div class="nav-drawer-footer">
-        <a href="{{ route('login') }}" class="btn-masuk-drawer">
+        <a href="http://localhost:8000/login" class="btn-masuk-drawer">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width:16px;height:16px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           <span>Masuk Portal Orang Tua</span>
         </a>
@@ -1856,7 +1856,7 @@
     </nav>
 
     <div class="header-actions">
-      <a href="{{ route('login') }}" class="btn btn-masuk">Masuk</a>
+      <a href="http://localhost:8000/login" class="btn btn-masuk">Masuk</a>
       <button class="menu-toggle" id="menuToggle" aria-label="Buka Menu" onclick="toggleMobileNav()">
         <span></span>
         <span></span>
@@ -1866,38 +1866,38 @@
   </div>
 </header>
 
-{{-- ── HERO SLIDER ─────────────────────────────────────────────────────── --}}
+
 <section class="hero" id="beranda">
   <div class="hero-slider">
     <!-- Slide 1: Outdoor Playground & Building -->
     <div class="hero-slide active">
-      <img src="{{ asset('images/' . ($profil->hero_slide_1 ?? 'hero-slide-1.jpg')) }}" 
+      <img src="http://localhost:8000/images/hero-slide-1.jpg" 
            alt="Gedung & Taman Bermain PAUD Al Hidayah"
-           onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'">
+           onerror="this.src='http://localhost:8000/images/gedung-sekolah.jpg'">
     </div>
     <!-- Slide 2: Classroom Learning & Arts -->
     <div class="hero-slide">
-      <img src="{{ asset('images/' . ($profil->hero_slide_2 ?? 'hero-slide-2.jpg')) }}" 
+      <img src="http://localhost:8000/images/hero_slide2_1787816107.jpeg" 
            alt="Aktivitas Belajar Ceria Kelas PAUD Al Hidayah"
-           onerror="this.src='{{ asset('images/hero-slide-2.jpg') }}'">
+           onerror="this.src='http://localhost:8000/images/hero-slide-2.jpg'">
     </div>
     <!-- Slide 3: Islamic School Building -->
     <div class="hero-slide">
-      <img src="{{ asset('images/' . ($profil->hero_slide_3 ?? 'hero-slide-3.jpg')) }}" 
+      <img src="http://localhost:8000/images/hero_slide3_1787884671.jpeg" 
            alt="Gedung Islami PAUD Al Hidayah"
-           onerror="this.src='{{ asset('images/hero-slide-3.jpg') }}'">
+           onerror="this.src='http://localhost:8000/images/hero-slide-3.jpg'">
     </div>
     <!-- Slide 4: Creativity & Early Learning -->
     <div class="hero-slide">
-      <img src="{{ asset('images/' . ($profil->hero_slide_4 ?? 'hero-slide-4.jpg')) }}" 
+      <img src="http://localhost:8000/images/hero_slide4_1787882554.jpeg" 
            alt="Kreativitas dan Keceriaan Belajar PAUD Al Hidayah"
-           onerror="this.src='{{ asset('images/hero-paud-ceria.jpg') }}'">
+           onerror="this.src='http://localhost:8000/images/hero-paud-ceria.jpg'">
     </div>
     <!-- Slide 5: Friendship & Holistic Growth -->
     <div class="hero-slide">
-      <img src="{{ asset('images/' . ($profil->hero_slide_5 ?? 'hero-slide-5.jpg')) }}" 
+      <img src="http://localhost:8000/images/hero_slide5_1787884671.jpg" 
            alt="Kebersamaan & Tumbuh Kembang PAUD Al Hidayah"
-           onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'">
+           onerror="this.src='http://localhost:8000/images/gedung-sekolah.jpg'">
     </div>
   </div>
 
@@ -1913,7 +1913,7 @@
   </div>
 </section>
 
-{{-- ── FEATURE STRIP ────────────────────────────────────────────────────── --}}
+
 <section class="features">
   <div class="features-card">
       <div class="feature-item">
@@ -1964,43 +1964,32 @@
     </div>
 </section>
 
-{{-- ── SAMBUTAN KEPALA SEKOLAH ─────────────────────────────────────────── --}}
+
 <section class="sambutan" id="sambutan">
   <div class="wrap">
     <div class="sambutan-grid">
       <img
         class="sambutan-photo"
-        src="{{ ($profil && $profil->sambutan_foto) ? asset('images/' . $profil->sambutan_foto) : asset('images/foto kepsek1.jpg') }}"
+        src="http://localhost:8000/images/kepsek_1786114195.jpg"
         alt="Kepala Sekolah PAUD Al-Hidayah"
         onerror="this.src='https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=600'">
       
       <div class="sambutan-content">
         <div class="eyebrow">Sambutan Kepala Sekolah</div>
-        <h2>{{ $profil ? $profil->sambutan_judul : 'Mewujudkan Generasi Berakhlak Mulia & Kreatif' }}</h2>
-        <div class="ks-name">{{ $profil ? $profil->sambutan_nama : 'Sri Wahyuni, S.Pd.' }}</div>
-        <div class="ks-title">{{ $profil ? $profil->sambutan_jabatan : 'Kepala Sekolah PAUD Al-Hidayah' }}</div>
+        <h2>Mewujudkan Generasi Berakhlak Mulia &amp; Kreatif</h2>
+        <div class="ks-name">Sri Wahyuni, S.Pd.</div>
+        <div class="ks-title">Kepala Sekolah PAUD Al-Hidayah</div>
         
         <div class="sambutan-text">
-          @if($profil && $profil->sambutan_teks)
-            @foreach(explode("\n", str_replace("\r", "", $profil->sambutan_teks)) as $paragraph)
-              @if(trim($paragraph) != '')
-                <p class="{{ str_contains(strtolower($paragraph), 'wassalamu') ? 'wassalam' : '' }}">{{ $paragraph }}</p>
-              @endif
-            @endforeach
-          @else
-            <p>Assalamu'alaikum Warahmatullahi Wabarakatuh,</p>
-            <p>Puji syukur senantiasa kita panjatkan ke hadirat Allah SWT yang telah melimpahkan rahmat, taufik, serta hidayah-Nya kepada kita semua. Shalawat beserta salam semoga selalu tercurahkan kepada junjungan kita Nabi Muhammad SAW, keluarga, para sahabat, dan pengikutnya hingga akhir zaman.</p>
-            <p>Selamat datang di website resmi KB-PAUD Al-Hidayah Wedelan, Kecamatan Bangsri, Kabupaten Jepara. Website ini kami hadirkan sebagai sarana informasi, komunikasi, serta transparansi perkembangan belajar anak didik kepada orang tua siswa dan masyarakat luas.</p>
-            <p>Kami percaya bahwa setiap anak terlahir dengan anugerah potensi emasnya masing-masing. Bersama tenaga pendidik yang berdedikasi dan penuh kasih sayang, kami berkomitmen mendampingi tumbuh kembang buah hati Anda menjadi generasi yang cerdas, mandiri, dan berakhlakul karimah.</p>
-            <p class="wassalam">Wassalamu'alaikum Warahmatullahi Wabarakatuh,</p>
-          @endif
-        </div>
+                                                    <p class="">Selamat datang di keluarga besar PAUD Al Hidayah. Kami percaya bahwa setiap anak adalah bintang yang memiliki cahaya masing-masing. Di sini, kami hadir untuk menjaga cahaya tersebut tetap bersinar melalui kasih sayang dan bimbingan yang tepat.</p>
+                                                                                  <p class="">Terima kasih atas kepercayaan yang Anda berikan kepada kami untuk mendampingi masa-masa emas (golden age) buah hati Anda. Mari bersama-sama kita tuntun langkah awal mereka menuju masa depan yang gemilang.</p>
+                                            </div>
       </div>
     </div>
   </div>
 </section>
 
-{{-- ── TENTANG KAMI / PROFIL SEKOLAH ────────────────────────────────────── --}}
+
 <section class="profil-section" id="tentang">
   <div class="wrap">
     <div class="profil-inner">
@@ -2106,7 +2095,7 @@
   </div>
 </section>
 
-{{-- ── PROGRAM PEMBELAJARAN 1 TAHUN (BROSUR & FLYER SPLIT LAYOUT SEPERTI CONTOH GAMBAR) ── --}}
+
 <section class="programs" id="program">
   <div class="wrap">
     
@@ -2172,13 +2161,13 @@
           </div>
           <div class="flyer-polaroid-stack">
             <div class="flyer-polaroid-item">
-              <img src="{{ asset('images/hero-slide-2.jpg') }}" alt="Renang / Aktivitas Ceria" onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'">
+              <img src="http://localhost:8000/images/hero-slide-2.jpg" alt="Renang / Aktivitas Ceria" onerror="this.src='http://localhost:8000/images/gedung-sekolah.jpg'">
             </div>
             <div class="flyer-polaroid-item">
-              <img src="{{ asset('images/hero-slide-3.jpg') }}" alt="Belajar Bermain" onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'">
+              <img src="http://localhost:8000/images/hero-slide-3.jpg" alt="Belajar Bermain" onerror="this.src='http://localhost:8000/images/gedung-sekolah.jpg'">
             </div>
             <div class="flyer-polaroid-item">
-              <img src="{{ asset('images/hero-paud-ceria.jpg') }}" alt="Kreativitas Seni" onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'">
+              <img src="http://localhost:8000/images/hero-paud-ceria.jpg" alt="Kreativitas Seni" onerror="this.src='http://localhost:8000/images/gedung-sekolah.jpg'">
             </div>
           </div>
         </div>
@@ -2319,13 +2308,13 @@
         <div style="margin-top:18px;padding-top:14px;border-top:1px dashed #F59E0B;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
           <div>
             <div style="font-size:12px;font-weight:800;color:#B45309;">Informasi Pendaftaran / WhatsApp:</div>
-            <div style="font-size:14px;font-weight:900;color:#78350F;">📞 {{ $profil && $profil->no_telepon ? $profil->no_telepon : '0812-3456-7890' }}</div>
+            <div style="font-size:14px;font-weight:900;color:#78350F;">📞 0812-2922-2804</div>
           </div>
           <div style="display:flex;gap:8px;">
             <button type="button" onclick="window.print()" class="btn btn-secondary" style="font-size:12px;padding:8px 14px;font-weight:700;">
               🖨️ Cetak Brosur
             </button>
-            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $profil->no_telepon ?? '081234567890') }}?text=Halo%20Admin%20KB-PAUD%20Al-Hidayah,%20saya%20ingin%20bertanya%20informasi%20pendaftaran%20siswa%20baru" target="_blank" class="btn btn-primary" style="font-size:12px;padding:8px 14px;font-weight:700;background:#25D366;border-color:#25D366;">
+            <a href="https://wa.me/081229222804?text=Halo%20Admin%20KB-PAUD%20Al-Hidayah,%20saya%20ingin%20bertanya%20informasi%20pendaftaran%20siswa%20baru" target="_blank" class="btn btn-primary" style="font-size:12px;padding:8px 14px;font-weight:700;background:#25D366;border-color:#25D366;">
               📲 Hubungi WA
             </a>
           </div>
@@ -2338,7 +2327,7 @@
   </div>
 </section>
 
-{{-- ── GALERI KEGIATAN SEKOLAH ─────────────────────────────────────────── --}}
+
 <section class="gallery-sec" id="galeri">
   <div class="wrap">
     <div class="gallery-head">
@@ -2347,30 +2336,89 @@
       <p style="color:#64748B; font-size:14px; max-width:600px; margin:8px auto 0;">Klik pada salah satu foto untuk melihat dokumentasi kegiatan secara layar penuh (fullscreen) beserta cerita lengkapnya.</p>
     </div>
     <div class="gallery-grid">
-      @forelse($galeris as $index => $galeri)
-        <div class="gallery-card" onclick="openLightbox({{ $index }})" title="Klik untuk lihat foto dan detail">
+              <div class="gallery-card" onclick="openLightbox(0)" title="Klik untuk lihat foto dan detail">
           <div class="gallery-img-wrapper">
-            <img src="{{ asset($galeri->foto) }}" alt="{{ $galeri->judul }}" loading="lazy">
+            <img src="http://localhost:8000/images/galeri/galeri_1788101646_6a94440e98072.jpeg" alt="menyusun balok" loading="lazy">
             <div class="gallery-overlay-badge">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
               <span>Lihat Detail</span>
             </div>
           </div>
           <div class="gallery-info">
-            <h4>{{ $galeri->judul }}</h4>
-            <p>{{ $galeri->deskripsi }}</p>
+            <h4>menyusun balok</h4>
+            <p>Anak anak menyusun balok untuk melatih motorik kasar</p>
           </div>
         </div>
-      @empty
-        <div class="gallery-empty">
-          <p>Belum ada dokumentasi kegiatan saat ini. Kunjungi kembali nanti untuk melihat galeri foto kegiatan belajar siswa kami.</p>
+              <div class="gallery-card" onclick="openLightbox(1)" title="Klik untuk lihat foto dan detail">
+          <div class="gallery-img-wrapper">
+            <img src="http://localhost:8000/images/galeri/galeri_1788101542_6a9443a6c7ec8.jpeg" alt="Mendengarkan Cerita" loading="lazy">
+            <div class="gallery-overlay-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span>Lihat Detail</span>
+            </div>
+          </div>
+          <div class="gallery-info">
+            <h4>Mendengarkan Cerita</h4>
+            <p>mendengarkan cerita  fiksi</p>
+          </div>
         </div>
-      @endforelse
-    </div>
+              <div class="gallery-card" onclick="openLightbox(2)" title="Klik untuk lihat foto dan detail">
+          <div class="gallery-img-wrapper">
+            <img src="http://localhost:8000/images/galeri/galeri_1788101377_6a9443018afcf.jpeg" alt="Kegiatan Outbound Berenang" loading="lazy">
+            <div class="gallery-overlay-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span>Lihat Detail</span>
+            </div>
+          </div>
+          <div class="gallery-info">
+            <h4>Kegiatan Outbound Berenang</h4>
+            <p>Rekreasi Berenang Bersama</p>
+          </div>
+        </div>
+              <div class="gallery-card" onclick="openLightbox(3)" title="Klik untuk lihat foto dan detail">
+          <div class="gallery-img-wrapper">
+            <img src="http://localhost:8000/images/galeri/galeri_1788101232_6a944270e07a1.jpeg" alt="Kegiatan Praktik Sholat" loading="lazy">
+            <div class="gallery-overlay-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span>Lihat Detail</span>
+            </div>
+          </div>
+          <div class="gallery-info">
+            <h4>Kegiatan Praktik Sholat</h4>
+            <p>Anak anak belajar tata cara sholat</p>
+          </div>
+        </div>
+              <div class="gallery-card" onclick="openLightbox(4)" title="Klik untuk lihat foto dan detail">
+          <div class="gallery-img-wrapper">
+            <img src="http://localhost:8000/images/galeri/galeri_1786330849_6a793ee12b24b.jpeg" alt="foto anak" loading="lazy">
+            <div class="gallery-overlay-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span>Lihat Detail</span>
+            </div>
+          </div>
+          <div class="gallery-info">
+            <h4>foto anak</h4>
+            <p>kegiatan anak</p>
+          </div>
+        </div>
+              <div class="gallery-card" onclick="openLightbox(5)" title="Klik untuk lihat foto dan detail">
+          <div class="gallery-img-wrapper">
+            <img src="http://localhost:8000/images/galeri/galeri_1786330798_6a793eae8836a.jpeg" alt="menulis nama" loading="lazy">
+            <div class="gallery-overlay-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span>Lihat Detail</span>
+            </div>
+          </div>
+          <div class="gallery-info">
+            <h4>menulis nama</h4>
+            <p>apaaja</p>
+          </div>
+        </div>
+          </div>
 
     <!-- Tombol Lihat Selengkapnya -->
     <div style="text-align: center; margin-top: 44px;">
-      <a href="{{ route('galeri.publik') }}" class="btn-lihat-semua-galeri">
+      <a href="http://localhost:8000/galeri" class="btn-lihat-semua-galeri">
         <span>Lihat Selengkapnya</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
@@ -2378,12 +2426,12 @@
   </div>
 </section>
 
-{{-- ── FULLSCREEN GALLERY LIGHTBOX MODAL ── --}}
+
 <div class="lightbox-modal" id="galleryLightbox" onclick="handleLightboxBackdrop(event)">
-  {{-- Topbar --}}
+  
   <div class="lightbox-topbar">
     <div class="lightbox-counter" id="lightboxCounter">
-      Foto 1 dari {{ count($galeris) }}
+      Foto 1 dari 6
     </div>
     <div class="lightbox-actions">
       <a href="#" id="lightboxDownloadBtn" download class="lightbox-btn" title="Unduh Foto HD">
@@ -2396,21 +2444,19 @@
     </div>
   </div>
 
-  {{-- Body with Image and Detail Panel --}}
+  
   <div class="lightbox-body" onclick="event.stopPropagation()">
-    {{-- Prev Button --}}
-    @if(count($galeris) > 1)
-      <button type="button" class="lightbox-nav-btn lightbox-prev" onclick="prevLightbox()" title="Foto Sebelumnya (Panah Kiri)">
+    
+          <button type="button" class="lightbox-nav-btn lightbox-prev" onclick="prevLightbox()" title="Foto Sebelumnya (Panah Kiri)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:24px;height:24px;"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
-    @endif
-
-    {{-- Main Image Area --}}
+    
+    
     <div class="lightbox-image-container">
       <img id="lightboxImg" src="" alt="Dokumentasi Kegiatan">
     </div>
 
-    {{-- Detail Panel --}}
+    
     <div class="lightbox-detail-panel">
       <div class="lightbox-date-badge" id="lightboxDateBadge">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -2429,18 +2475,16 @@
       </div>
     </div>
 
-    {{-- Next Button --}}
-    @if(count($galeris) > 1)
-      <button type="button" class="lightbox-nav-btn lightbox-next" onclick="nextLightbox()" title="Foto Selanjutnya (Panah Kanan)">
+    
+          <button type="button" class="lightbox-nav-btn lightbox-next" onclick="nextLightbox()" title="Foto Selanjutnya (Panah Kanan)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:24px;height:24px;"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
-    @endif
-  </div>
+      </div>
 
   <div style="height:10px;"></div>
 </div>
 
-{{-- ── PORTAL ORANG TUA ────────────────────────────────────────────────── --}}
+
 <section class="portal-ortu" id="portal-ortu">
   <div class="wrap">
     <div class="portal-header">
@@ -2478,7 +2522,7 @@
       </div>
     </div>
     <div class="portal-footer">
-      <a href="{{ route('login') }}" class="btn btn-masuk" style="font-size:15px;padding:14px 34px;display:inline-flex;align-items:center;gap:10px;">
+      <a href="http://localhost:8000/login" class="btn btn-masuk" style="font-size:15px;padding:14px 34px;display:inline-flex;align-items:center;gap:10px;">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width:18px;height:18px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         <span>Masuk untuk Lihat Laporan Anak &rarr;</span>
       </a>
@@ -2487,11 +2531,11 @@
   </div>
 </section>
 
-{{-- ── TESTIMONIAL + CTA + MAPS ─────────────────────────────────────────── --}}
+
 <section class="bottom-row" id="kontak">
   <div class="wrap">
     <div class="bottom-grid">
-      {{-- Testimonial Card --}}
+      
       <div class="testi-card">
         <div class="quote-mark">&ldquo;</div>
         <p>PAUD Al-Hidayah adalah keputusan terbaik untuk keluarga kami. Para guru benar-benar peduli, dan anak kami selalu menantikan sekolah setiap hari.</p>
@@ -2506,43 +2550,30 @@
         </div>
       </div>
 
-      {{-- Contact Card --}}
+      
       <div class="cta-card">
         <h3>Hubungi Kami</h3>
         <p>Kami dengan senang hati menyambut Anda dan buah hati untuk bergabung bersama keluarga besar PAUD Al-Hidayah.</p>
         <div style="display:flex;flex-direction:column;gap:12px;margin-top:10px">
           <div style="display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:#c7cde0">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:#F4B93E;flex-shrink:0;margin-top:3px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>{{ $profil->alamat_lengkap ?? 'Desa Wedelan RT 01 / RW 09, Kec. Bangsri, Kab. Jepara, Jawa Tengah 59453' }}</span>
+            <span>Desa Wedelan RT 01 / RW 09, Kec. Bangsri, Kab. Jepara, Jawa Tengah 59453</span>
           </div>
           <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#c7cde0">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:#F4B93E;flex-shrink:0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span>{{ $profil->no_telepon ?? '0812-2922-2804' }}</span>
+            <span>0812-2922-2804</span>
           </div>
           <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#c7cde0">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:#F4B93E;flex-shrink:0;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <span>{{ $profil->email_sekolah ?? 'fatimatuzzahraalhidayah@gmail.com' }}</span>
+            <span>fatimatuzzahraalhidayah@gmail.com</span>
           </div>
         </div>
-        <a href="{{ route('login') }}" class="btn btn-gold" style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width:16px;height:16px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Portal Laporan Anak &rarr;</span></a>
+        <a href="http://localhost:8000/login" class="btn btn-gold" style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width:16px;height:16px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Portal Laporan Anak &rarr;</span></a>
       </div>
 
-      {{-- Google Maps Card --}}
+      
       <div class="map-card">
-        @if(!empty($profil->maps_embed) && str_contains($profil->maps_embed, 'src='))
-          {!! $profil->maps_embed !!}
-        @elseif(!empty($profil->maps_embed))
-          <iframe
-            src="{{ $profil->maps_embed }}"
-            width="100%"
-            height="100%"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        @else
-          <iframe
+                  <iframe
             src="https://maps.google.com/maps?q=-6.5163,110.7823+(KB-PAUD+Al-Hidayah+Wedelan)&t=&z=17&ie=UTF8&iwloc=&output=embed"
             width="100%"
             height="100%"
@@ -2551,24 +2582,23 @@
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade">
           </iframe>
-        @endif
-      </div>
+              </div>
     </div>
   </div>
 </section>
 
-{{-- ── FOOTER ──────────────────────────────────────────────────────────── --}}
+
 <footer>
   <div class="wrap">
     <div class="foot-top">
       <div class="logo">
-        <img src="{{ asset('images/logo.png') }}" alt="Logo KB-PAUD Al Hidayah" style="height:42px;width:auto;display:block;">
+        <img src="http://localhost:8000/images/logo.png" alt="Logo KB-PAUD Al Hidayah" style="height:42px;width:auto;display:block;">
         <div class="logo-text">
           <div class="brand" style="font-size:16px;font-weight:800;line-height:1.2;color:var(--navy);">KB-PAUD AL HIDAYAH</div>
           <div class="sub" style="font-size:9.5px;font-weight:700;color:#8b8672;line-height:1.2;letter-spacing:0.5px;text-transform:uppercase;">SEKOLAH USIA DINI</div>
         </div>
       </div>
-      <div class="foot-copy">&copy; {{ date('Y') }} KB-PAUD Al-Hidayah. Hak cipta dilindungi.</div>
+      <div class="foot-copy">&copy; 2026 KB-PAUD Al-Hidayah. Hak cipta dilindungi.</div>
     </div>
     <div class="foot-strip">
       <div class="foot-item">
@@ -2698,17 +2728,7 @@
   }
 
   // ── GALLERY FULLSCREEN LIGHTBOX CONTROLLER ──
-  @php
-    $galleryList = $galeris->map(function($g) {
-        return [
-            'judul' => $g->judul,
-            'deskripsi' => $g->deskripsi,
-            'foto' => asset($g->foto),
-            'tanggal' => $g->created_at ? $g->created_at->translatedFormat('d F Y') : 'Dokumentasi Sekolah'
-        ];
-    });
-  @endphp
-  const galleryData = @json($galleryList);
+    const galleryData = [{"judul":"menyusun balok","deskripsi":"Anak anak menyusun balok untuk melatih motorik kasar","foto":"http:\/\/localhost:8000\/images\/galeri\/galeri_1788101646_6a94440e98072.jpeg","tanggal":"30 Agustus 2026"},{"judul":"Mendengarkan Cerita","deskripsi":"mendengarkan cerita  fiksi","foto":"http:\/\/localhost:8000\/images\/galeri\/galeri_1788101542_6a9443a6c7ec8.jpeg","tanggal":"30 Agustus 2026"},{"judul":"Kegiatan Outbound Berenang","deskripsi":"Rekreasi Berenang Bersama","foto":"http:\/\/localhost:8000\/images\/galeri\/galeri_1788101377_6a9443018afcf.jpeg","tanggal":"30 Agustus 2026"},{"judul":"Kegiatan Praktik Sholat","deskripsi":"Anak anak belajar tata cara sholat","foto":"http:\/\/localhost:8000\/images\/galeri\/galeri_1788101232_6a944270e07a1.jpeg","tanggal":"30 Agustus 2026"},{"judul":"foto anak","deskripsi":"kegiatan anak","foto":"http:\/\/localhost:8000\/images\/galeri\/galeri_1786330849_6a793ee12b24b.jpeg","tanggal":"10 Agustus 2026"},{"judul":"menulis nama","deskripsi":"apaaja","foto":"http:\/\/localhost:8000\/images\/galeri\/galeri_1786330798_6a793eae8836a.jpeg","tanggal":"10 Agustus 2026"}];
 
   let currentGalleryIndex = 0;
 

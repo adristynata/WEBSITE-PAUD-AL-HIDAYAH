@@ -717,8 +717,9 @@
   <section class="hero-prestasi">
     <div class="hero-prestasi-cloud"></div>
     <div class="wrap">
-      <div class="badge-hero-trophy">
-         KEJUARAAN &amp; APRESIASI ANANDA
+      <div class="badge-hero-trophy" style="display:inline-flex;align-items:center;gap:6px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;color:#FBBF24;"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H7v3h10v-3h-2c-.55 0-1-.45-1-1v-2.34"/><path d="M18 4H6v7a6 6 0 0 0 12 0V4z"/></svg>
+        <span>KEJUARAAN &amp; APRESIASI ANANDA</span>
       </div>
       <h1>Prestasi &amp; Penjurian Terbaik KB-PAUD Al-Hidayah</h1>
       <p>Deretan trofi kejuaraan, sertifikat penghargaan, dan prestasi membanggakan yang diraih oleh siswa-siswi serta sekolah dalam mengasah kreativitas, keberanian, dan akhlak Sejak Dini.</p>
@@ -752,10 +753,22 @@
       <!-- FILTER TABS -->
       <div class="filter-tabs">
         <button class="filter-btn active" onclick="filterPrestasi('all', this)">Semua Prestasi</button>
-        <button class="filter-btn" onclick="filterPrestasi('seni', this)">🎨 Seni &amp; Kreativitas</button>
-        <button class="filter-btn" onclick="filterPrestasi('agama', this)">📖 Tahfidz &amp; Agama</button>
-        <button class="filter-btn" onclick="filterPrestasi('olahraga', this)">🏃 Olahraga &amp; Motorik</button>
-        <button class="filter-btn" onclick="filterPrestasi('sekolah', this)">🏫 Penghargaan Sekolah</button>
+        <button class="filter-btn" onclick="filterPrestasi('seni', this)" style="display:inline-flex;align-items:center;gap:6px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20c1.5 0 2.5-1 2.5-2.5 0-.7-.3-1.3-.7-1.7-.4-.4-.7-1-.7-1.8 0-1.4 1.1-2.5 2.5-2.5H18a4 4 0 0 0 4-4c0-4.4-4.5-8-10-8z"/></svg>
+          <span>Seni &amp; Kreativitas</span>
+        </button>
+        <button class="filter-btn" onclick="filterPrestasi('agama', this)" style="display:inline-flex;align-items:center;gap:6px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5V3A2.5 2.5 0 0 1 6.5 .5H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
+          <span>Tahfidz &amp; Agama</span>
+        </button>
+        <button class="filter-btn" onclick="filterPrestasi('olahraga', this)" style="display:inline-flex;align-items:center;gap:6px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><circle cx="12" cy="5" r="3"/><path d="M12 8v8M8 12l4-2 4 2M9 20l3-4 3 4"/></svg>
+          <span>Olahraga &amp; Motorik</span>
+        </button>
+        <button class="filter-btn" onclick="filterPrestasi('sekolah', this)" style="display:inline-flex;align-items:center;gap:6px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Penghargaan Sekolah</span>
+        </button>
       </div>
 
       <!-- PRESTASI CARDS GRID (DINAMIS DARI DATABASE) -->
@@ -772,18 +785,28 @@
             </div>
             <div class="prestasi-content">
               <div>
-                <div class="prestasi-category">
-                  @if($item->kategori == 'seni') 🎨 Seni &amp; Kreativitas
-                  @elseif($item->kategori == 'agama') 📖 Tahfidz &amp; Agama
-                  @elseif($item->kategori == 'olahraga') 🏃 Olahraga &amp; Motorik
-                  @else 🏫 Penghargaan Sekolah
+                <div class="prestasi-category" style="display:inline-flex;align-items:center;gap:5px;">
+                  @if($item->kategori == 'seni')
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20c1.5 0 2.5-1 2.5-2.5 0-.7-.3-1.3-.7-1.7-.4-.4-.7-1-.7-1.8 0-1.4 1.1-2.5 2.5-2.5H18a4 4 0 0 0 4-4c0-4.4-4.5-8-10-8z"/></svg>
+                    <span>Seni &amp; Kreativitas</span>
+                  @elseif($item->kategori == 'agama')
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5V3A2.5 2.5 0 0 1 6.5 .5H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
+                    <span>Tahfidz &amp; Agama</span>
+                  @elseif($item->kategori == 'olahraga')
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;"><circle cx="12" cy="5" r="3"/><path d="M12 8v8M8 12l4-2 4 2M9 20l3-4 3 4"/></svg>
+                    <span>Olahraga &amp; Motorik</span>
+                  @else
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    <span>Penghargaan Sekolah</span>
                   @endif
                 </div>
                 <h3 class="prestasi-title">{{ $item->judul }}</h3>
                 <p class="prestasi-desc">{{ $item->deskripsi }}</p>
               </div>
               <div class="prestasi-winner">
-                <div class="winner-avatar">🏆</div>
+                <div class="winner-avatar">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;color:#D97706;"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H7v3h10v-3h-2c-.55 0-1-.45-1-1v-2.34"/><path d="M18 4H6v7a6 6 0 0 0 12 0V4z"/></svg>
+                </div>
                 <div class="winner-info">
                   <span class="winner-name">{{ $item->pemenang }}</span>
                   <span class="winner-event">Tahun {{ $item->tahun }}</span>
@@ -793,7 +816,7 @@
           </div>
         @empty
           <div style="grid-column: span 3; text-align:center; padding: 60px 0; color:#64748B;">
-            <div style="font-size:48px;margin-bottom:12px;">🏆</div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:48px;height:48px;color:#D97706;margin-bottom:12px;"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H7v3h10v-3h-2c-.55 0-1-.45-1-1v-2.34"/><path d="M18 4H6v7a6 6 0 0 0 12 0V4z"/></svg>
             <div style="font-size:18px;font-weight:800;color:var(--navy);">Belum Ada Data Prestasi</div>
             <div style="font-size:14px;">Data prestasi belum ditambahkan. Silakan tambahkan melalui Panel Admin.</div>
           </div>

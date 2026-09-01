@@ -683,8 +683,9 @@
   <section class="hero-galeri">
     <div class="hero-galeri-bg"></div>
     <div class="wrap">
-      <div class="badge-hero-galeri">
-        🖼️ DOKUMENTASI KEGIATAN SEKOLAH
+      <div class="badge-hero-galeri" style="display:inline-flex;align-items:center;gap:6px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;color:#FEE2E2;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span>DOKUMENTASI KEGIATAN SEKOLAH</span>
       </div>
       <h1>Galeri Momen Ceria KB-PAUD Al-Hidayah</h1>
       <p>Kumpulan foto dokumentasi aktivitas belajar, bermain, outbond, cooking class, pentas seni, dan hari apresiasi siswa-siswi PAUD Al-Hidayah.</p>
@@ -700,7 +701,10 @@
         @forelse($galeris as $g)
           <div class="galeri-card" onclick="openModal('{{ asset($g->foto) }}', '{{ addslashes($g->judul) }}', '{{ addslashes($g->deskripsi ?? 'Dokumentasi kegiatan siswa PAUD Al-Hidayah.') }}', '{{ $g->created_at->format('d M Y') }}')">
             <div class="galeri-img-wrapper">
-              <span class="galeri-date-badge">📅 {{ $g->created_at->format('d M Y') }}</span>
+              <span class="galeri-date-badge" style="display:inline-flex;align-items:center;gap:4px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;color:#FFF;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <span>{{ $g->created_at->format('d M Y') }}</span>
+              </span>
               <img src="{{ asset($g->foto) }}" alt="{{ $g->judul }}" onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'">
               <div class="galeri-zoom-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:28px;height:28px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
@@ -713,7 +717,7 @@
           </div>
         @empty
           <div style="grid-column: span 3; text-align:center; padding: 60px 0; color:#64748B;">
-            <div style="font-size:48px;margin-bottom:12px;">🖼️</div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:48px;height:48px;color:#143818;margin-bottom:12px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
             <div style="font-size:18px;font-weight:800;color:var(--navy);">Belum Ada Foto Galeri</div>
             <div style="font-size:14px;">Foto dokumentasi kegiatan belum diunggah.</div>
           </div>

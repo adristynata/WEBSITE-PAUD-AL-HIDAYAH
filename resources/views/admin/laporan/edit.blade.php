@@ -61,14 +61,20 @@
     @foreach($aspeks as $key => $info)
         <div class="card" style="margin-bottom:24px; border-left:5px solid {{ $info[3] }};">
             <div class="card-header" style="background:#FCFDFD;">
-                <strong style="color:var(--secondary); font-size:1.05rem;">🎯 Aspek {{ $info[0] }}</strong>
+                <strong style="color:var(--secondary); font-size:1.05rem; display:inline-flex; align-items:center; gap:6px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="{{ $info[3] }}" stroke-width="2.2" style="width:16px;height:16px;"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                    <span>Aspek {{ $info[0] }}</span>
+                </strong>
             </div>
             <div class="card-body" style="padding:20px;">
                 <!-- Split Grid: Left is reference weeks from teacher, Right is Admin compile text area -->
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
                     <!-- Left side: Teacher logs for weeks 1-4 -->
                     <div style="background:#F8FAFC; padding:16px; border-radius:12px; border:1px solid var(--border); overflow-y:auto; max-height:220px;">
-                        <h4 style="font-size:0.82rem; font-weight:800; color:var(--muted); margin-bottom:12px; text-transform:uppercase;">📝 Catatan Guru (Mingguan)</h4>
+                        <h4 style="font-size:0.82rem; font-weight:800; color:var(--muted); margin-bottom:12px; text-transform:uppercase; display:inline-flex; align-items:center; gap:6px;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                            <span>Catatan Guru (Mingguan)</span>
+                        </h4>
                         
                         <div style="display:flex; flex-direction:column; gap:12px;">
                             @for($w = 1; $w <= 4; $w++)
@@ -96,7 +102,10 @@
 
                     <!-- Right side: Admin compile text area -->
                     <div class="form-group" style="margin:0;">
-                        <label for="rekap_{{ $key }}" style="font-weight:700; color:var(--secondary); font-size:0.82rem; display:block; margin-bottom:8px; text-transform:uppercase;">📊 Rangkuman Bulanan Admin</label>
+                        <label for="rekap_{{ $key }}" style="font-weight:700; color:var(--secondary); font-size:0.82rem; margin-bottom:8px; text-transform:uppercase; display:inline-flex; align-items:center; gap:6px;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                            <span>Rangkuman Bulanan Admin</span>
+                        </label>
                         <textarea id="rekap_{{ $key }}" name="rekap_{{ $key }}" class="form-control" style="width:100%; height:220px; font-size:0.85rem; line-height:1.5; resize:none;" placeholder="Tuliskan rangkuman capaian aspek {{ $info[0] }} murid untuk bulan ini berdasarkan catatan guru..." required>{{ old('rekap_'.$key, $laporan->{$info[4]}) }}</textarea>
                     </div>
                 </div>
@@ -110,12 +119,15 @@
             <div style="display:flex; align-items:center; gap:12px;">
                 <label for="status" style="font-weight:700; font-size:0.85rem; color:var(--secondary);">Status Publikasi:</label>
                 <select id="status" name="status" class="form-control" style="min-width:140px; max-width:none;">
-                    <option value="draft" {{ old('status', $laporan->status) === 'draft' ? 'selected' : '' }}>📁 Simpan Draft</option>
-                    <option value="published" {{ old('status', $laporan->status) === 'published' ? 'selected' : '' }}>🚀 Terbitkan (Publish)</option>
+                    <option value="draft" {{ old('status', $laporan->status) === 'draft' ? 'selected' : '' }}>Simpan Draft</option>
+                    <option value="published" {{ old('status', $laporan->status) === 'published' ? 'selected' : '' }}>Terbitkan (Publish)</option>
                 </select>
             </div>
             <div style="display:flex; gap:12px;">
-                <button type="submit" class="btn btn-primary" style="font-weight:700;">💾 Perbarui Rekap Bulanan</button>
+                <button type="submit" class="btn btn-primary" style="font-weight:700;display:inline-flex;align-items:center;gap:6px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" style="width:15px;height:15px;color:#FFFFFF;flex-shrink:0;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                    <span>Perbarui Rekap Bulanan</span>
+                </button>
                 <a href="{{ route('admin.laporan.index', ['kelas_id' => $siswa->kelas_id, 'bulan' => $bulan, 'tahun' => $tahun]) }}" class="btn btn-secondary">Batal</a>
             </div>
         </div>

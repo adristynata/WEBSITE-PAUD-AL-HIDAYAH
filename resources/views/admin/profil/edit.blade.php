@@ -9,7 +9,10 @@
 @section('content')
 <div class="card" style="max-width:800px;">
     <div class="card-header">
-        <span>🏫 Edit Profil & Sambutan Kepala Sekolah</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Edit Profil &amp; Sambutan Kepala Sekolah</span>
+        </span>
     </div>
     <div class="card-body">
         <form method="POST" action="{{ route('admin.profil.update') }}" enctype="multipart/form-data">
@@ -79,11 +82,13 @@
 
                     <!-- Pilihan Mode TTD -->
                     <div style="display:flex; gap:8px; margin-bottom:12px;">
-                        <button type="button" id="btn-tab-upload" style="background:#4F46E5; color:#fff; border:none; border-radius:6px; font-size:0.8rem; font-weight:600; padding:7px 14px; cursor:pointer;" onclick="switchTtdMode('upload')">
-                            📁 Upload Foto/PNG (Remove BG)
+                        <button type="button" id="btn-tab-upload" style="background:#4F46E5; color:#fff; border:none; border-radius:6px; font-size:0.8rem; font-weight:600; padding:7px 14px; cursor:pointer; display:inline-flex; align-items:center; gap:6px;" onclick="switchTtdMode('upload')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                            <span>Upload Foto/PNG (Remove BG)</span>
                         </button>
-                        <button type="button" id="btn-tab-draw" style="background:#F1F5F9; color:#475569; border:1px solid #E2E8F0; border-radius:6px; font-size:0.8rem; font-weight:600; padding:7px 14px; cursor:pointer;" onclick="switchTtdMode('draw')">
-                            ✍️ Gambar di Layar
+                        <button type="button" id="btn-tab-draw" style="background:#F1F5F9; color:#475569; border:1px solid #E2E8F0; border-radius:6px; font-size:0.8rem; font-weight:600; padding:7px 14px; cursor:pointer; display:inline-flex; align-items:center; gap:6px;" onclick="switchTtdMode('draw')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                            <span>Gambar di Layar</span>
                         </button>
                     </div>
 
@@ -91,8 +96,9 @@
                     <div id="section-ttd-upload" style="display:block; padding:12px; background:#F8FAFC; border-radius:8px; border:1px solid #E2E8F0;">
                         <label for="ttd_kepsek" style="font-size:0.82rem; font-weight:600; color:#334155; margin-bottom:6px; display:block;">Pilih file gambar TTD:</label>
                         <input type="file" id="ttd_kepsek" name="ttd_kepsek" class="form-control" accept="image/png,image/jpeg,image/jpg,image/webp">
-                        <small style="color:#64748B; font-size:0.78rem; display:block; margin-top:6px;">
-                            💡 <strong>Rekomendasi:</strong> Unggah file gambar format <strong>.PNG transparan</strong> (yang sudah di-<em>remove background</em>) agar hasil cetak PDF bersih tanpa kotak putih/abu-abu. (Maks. 2 MB)
+                        <small style="color:#64748B; font-size:0.78rem; display:flex; align-items:flex-start; gap:6px; margin-top:6px;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;color:#F59E0B;flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            <span><strong>Rekomendasi:</strong> Unggah file gambar format <strong>.PNG transparan</strong> (yang sudah di-<em>remove background</em>) agar hasil cetak PDF bersih tanpa kotak putih/abu-abu. (Maks. 2 MB)</span>
                         </small>
                     </div>
 
@@ -129,8 +135,9 @@
                 <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-bottom:12px;">
                     <!-- Slide 1 -->
                     <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px;">
-                        <label style="font-weight:700; font-size:13px; color:#334155; display:block; margin-bottom:8px;">
-                            🌄 Banner Slide 1 (Utama)
+                        <label style="font-weight:700; font-size:13px; color:#334155; display:inline-flex; align-items:center; gap:6px; margin-bottom:8px;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:#10B981;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                            <span>Banner Slide 1 (Utama)</span>
                         </label>
                         <div style="margin-bottom:10px;">
                             <img id="preview_hero_slide_1" 
@@ -146,8 +153,9 @@
 
                     <!-- Slide 2 -->
                     <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px;">
-                        <label style="font-weight:700; font-size:13px; color:#334155; display:block; margin-bottom:8px;">
-                            🎨 Banner Slide 2 (Aktivitas/Kelas)
+                        <label style="font-weight:700; font-size:13px; color:#334155; display:inline-flex; align-items:center; gap:6px; margin-bottom:8px;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:#F59E0B;"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20c1.5 0 2.5-1 2.5-2.5 0-.7-.3-1.3-.7-1.7-.4-.4-.7-1-.7-1.8 0-1.4 1.1-2.5 2.5-2.5H18a4 4 0 0 0 4-4c0-4.4-4.5-8-10-8z"/></svg>
+                            <span>Banner Slide 2 (Aktivitas/Kelas)</span>
                         </label>
                         <div style="margin-bottom:10px;">
                             <img id="preview_hero_slide_2" 
@@ -163,8 +171,9 @@
 
                     <!-- Slide 3 -->
                     <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px;">
-                        <label style="font-weight:700; font-size:13px; color:#334155; display:block; margin-bottom:8px;">
-                            🕌 Banner Slide 3 (Gedung/Fasilitas)
+                        <label style="font-weight:700; font-size:13px; color:#334155; display:inline-flex; align-items:center; gap:6px; margin-bottom:8px;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:#3B82F6;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                            <span>Banner Slide 3 (Gedung/Fasilitas)</span>
                         </label>
                         <div style="margin-bottom:10px;">
                             <img id="preview_hero_slide_3" 
@@ -180,8 +189,9 @@
 
                     <!-- Slide 4 -->
                     <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px;">
-                        <label style="font-weight:700; font-size:13px; color:#334155; display:block; margin-bottom:8px;">
-                            🌟 Banner Slide 4 (Kreativitas)
+                        <label style="font-weight:700; font-size:13px; color:#334155; display:inline-flex; align-items:center; gap:6px; margin-bottom:8px;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:#8B5CF6;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <span>Banner Slide 4 (Kreativitas)</span>
                         </label>
                         <div style="margin-bottom:10px;">
                             <img id="preview_hero_slide_4" 
@@ -197,8 +207,9 @@
 
                     <!-- Slide 5 -->
                     <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px;">
-                        <label style="font-weight:700; font-size:13px; color:#334155; display:block; margin-bottom:8px;">
-                            🎈 Banner Slide 5 (Kebersamaan)
+                        <label style="font-weight:700; font-size:13px; color:#334155; display:inline-flex; align-items:center; gap:6px; margin-bottom:8px;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:#EC4899;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <span>Banner Slide 5 (Kebersamaan)</span>
                         </label>
                         <div style="margin-bottom:10px;">
                             <img id="preview_hero_slide_5" 
@@ -229,17 +240,26 @@
                 <div class="row" style="display:flex; flex-wrap:wrap; gap:16px; margin-bottom:16px;">
                     <div style="flex:1; min-width:280px;">
                         <div class="form-group" style="margin-bottom:16px;">
-                            <label class="form-label" style="font-weight:600; color:#334155;">📍 Alamat Lengkap Sekolah</label>
+                            <label class="form-label" style="font-weight:600; color:#334155; display:inline-flex; align-items:center; gap:6px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;color:#EF4444;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                <span>Alamat Lengkap Sekolah</span>
+                            </label>
                             <textarea name="alamat_lengkap" class="form-control" rows="2" placeholder="Contoh: Desa Wedelan RT 01 / RW 09, Kec. Bangsri, Kab. Jepara, Jawa Tengah 59453">{{ old('alamat_lengkap', $profil->alamat_lengkap ?? 'Desa Wedelan RT 01 / RW 09, Kec. Bangsri, Kab. Jepara, Jawa Tengah 59453') }}</textarea>
                         </div>
                     </div>
                     <div style="flex:1; min-width:240px;">
                         <div class="form-group" style="margin-bottom:12px;">
-                            <label class="form-label" style="font-weight:600; color:#334155;">📞 Nomor Telepon / WhatsApp</label>
+                            <label class="form-label" style="font-weight:600; color:#334155; display:inline-flex; align-items:center; gap:6px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;color:#10B981;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                <span>Nomor Telepon / WhatsApp</span>
+                            </label>
                             <input type="text" name="no_telepon" class="form-control" value="{{ old('no_telepon', $profil->no_telepon ?? '0812-2922-2804') }}" placeholder="Contoh: 0812-2922-2804">
                         </div>
                         <div class="form-group">
-                            <label class="form-label" style="font-weight:600; color:#334155;">✉️ Email Sekolah</label>
+                            <label class="form-label" style="font-weight:600; color:#334155; display:inline-flex; align-items:center; gap:6px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;color:#3B82F6;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                <span>Email Sekolah</span>
+                            </label>
                             <input type="email" name="email_sekolah" class="form-control" value="{{ old('email_sekolah', $profil->email_sekolah ?? 'fatimatuzzahraalhidayah@gmail.com') }}" placeholder="Contoh: fatimatuzzahraalhidayah@gmail.com">
                         </div>
                     </div>
@@ -247,7 +267,10 @@
 
                 <div class="form-group" style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:16px;">
                     <label class="form-label" style="font-weight:700; color:#1E293B; display:flex; align-items:center; justify-content:space-between;">
-                        <span>🗺️ Titik Lokasi / Link Embed Google Maps</span>
+                        <span style="display:inline-flex; align-items:center; gap:6px;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:#3B82F6;"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+                            <span>Titik Lokasi / Link Embed Google Maps</span>
+                        </span>
                         <a href="https://www.google.com/maps/search/?api=1&query=-6.5163,110.7823" target="_blank" style="font-size:12px; color:#3B82F6; text-decoration:none; font-weight:600;">Lihat di Google Maps &nearr;</a>
                     </label>
                     <input type="text" name="maps_embed" class="form-control" value="{{ old('maps_embed', $profil->maps_embed ?? '') }}" placeholder="Kosongkan untuk menggunakan titik koordinat resmi (-6.5163, 110.7823) atau tempel link embed/iframe Google Maps baru">

@@ -158,18 +158,11 @@ class AuthController extends Controller
 
     public function showSetupPin()
     {
-        if (!session()->has('activation_user_id')) {
-            return redirect()->route('login');
-        }
         return view('auth.setup-pin');
     }
 
     public function setupPin(Request $request)
     {
-        if (!session()->has('activation_user_id')) {
-            return redirect()->route('login');
-        }
-
         $request->validate([
             'pin' => ['required', 'digits:6', 'confirmed'],
         ], [
@@ -178,19 +171,23 @@ class AuthController extends Controller
             'pin.confirmed' => 'Konfirmasi PIN tidak cocok.',
         ]);
 
-        $user = User::findOrFail(session('activation_user_id'));
-        $user->pin = $request->pin;
-        $user->save();
+        if (session()->has('activation_user_id')) {
+            $user = User::findOrFail(session('activation_user_id'));
+            $user->pin = $request->pin;
+            $user->save();
 
-        // Clear session keys
-        session()->forget(['activation_user_id', 'activation_siswa_id']);
+            // Clear session keys
+            session()->forget(['activation_user_id', 'activation_siswa_id']);
 
-        // Log in directly
-        Auth::login($user);
-        $request->session()->regenerate();
+            // Log in directly
+            Auth::login($user);
+            $request->session()->regenerate();
 
-        return redirect()->route('ortu.dashboard')
-                         ->with('success', 'Aktivasi berhasil! PIN Anda telah disimpan. Selamat datang!');
+            return redirect()->route('ortu.dashboard')
+                             ->with('success', 'Aktivasi berhasil! PIN Anda telah disimpan. Selamat datang!');
+        }
+
+        return redirect()->route('login')->with('success', 'PIN berhasil dibuat!');
     }
 
     public function logout(Request $request)

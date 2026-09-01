@@ -9,7 +9,10 @@
 @section('content')
 <div class="card" style="max-width:650px;">
     <div class="card-header" style="display:flex; justify-content:space-between; align-items:center;">
-        <span>📸 Unggah Foto Kegiatan Baru</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:#10B981;"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            <span>Unggah Foto Kegiatan Baru</span>
+        </span>
         <a href="{{ route('admin.galeri.index') }}" class="btn btn-secondary btn-sm">← Kembali</a>
     </div>
     <div class="card-body">
@@ -42,7 +45,10 @@
             </div>
 
             <div style="margin-top:24px; padding-top:16px; border-top:1px solid #E2E8F0; display:flex; gap:10px;">
-                <button type="submit" class="btn btn-primary" style="font-weight:700;">💾 Unggah & Publikasikan</button>
+                <button type="submit" class="btn btn-primary" style="font-weight:700;display:inline-flex;align-items:center;gap:6px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" style="width:15px;height:15px;color:#FFFFFF;flex-shrink:0;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                    <span>Unggah &amp; Publikasikan</span>
+                </button>
                 <a href="{{ route('admin.galeri.index') }}" class="btn btn-secondary">Batal</a>
             </div>
         </form>

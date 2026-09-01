@@ -9,7 +9,10 @@
 @section('content')
 <div class="card" style="margin-bottom:20px">
     <div class="card-header">
-        <span>🔍 Filter Kelas & Periode</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <span>Filter Kelas &amp; Periode</span>
+        </span>
     </div>
     <div class="card-body">
         <form method="GET" action="{{ route('admin.laporan.index') }}" style="display:flex; gap:16px; align-items:flex-end; flex-wrap:wrap;">
@@ -50,14 +53,20 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-primary" style="height:38px;">🔍 Tampilkan</button>
+            <button type="submit" class="btn btn-primary" style="height:38px;display:inline-flex;align-items:center;gap:6px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <span>Tampilkan</span>
+            </button>
         </form>
     </div>
 </div>
 
 <div class="card">
     <div class="card-header">
-        <span>📋 Daftar Siswa & Status Laporan Bulanan</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <span>Daftar Siswa &amp; Status Laporan Bulanan</span>
+        </span>
     </div>
     <div class="card-body" style="padding:0">
         @if($siswas && $siswas->count() > 0)
@@ -92,14 +101,14 @@
                                 </td>
                                 <td style="text-align:center;">
                                     @if($laporan)
-                                        <a href="{{ route('admin.laporan.edit', $laporan->id) }}" class="btn btn-secondary btn-sm">
+                                        <a href="{{ route('admin.laporan.edit', $laporan->id) }}" class="btn btn-secondary btn-sm" style="display:inline-flex;align-items:center;gap:4px;">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
-                                            Edit Rekap
+                                            <span>Edit Rekap</span>
                                         </a>
                                     @else
-                                        <a href="{{ route('admin.laporan.create', ['siswa_id' => $s->id, 'bulan' => $bulan, 'tahun' => $tahun]) }}" class="btn btn-primary btn-sm">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                                            Buat Rekap
+                                        <a href="{{ route('admin.laporan.create', ['siswa_id' => $s->id, 'bulan' => $bulan, 'tahun' => $tahun]) }}" class="btn btn-primary btn-sm" style="display:inline-flex;align-items:center;gap:4px;">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                            <span>Buat Rekap</span>
                                         </a>
                                     @endif
                                 </td>
@@ -110,8 +119,9 @@
             </div>
             {{ $siswas->links() }}
         @else
-            <div style="padding:40px; text-align:center; color:var(--muted);">
-                🏫 Silakan pilih kelas dan klik Tampilkan untuk memuat data siswa.
+            <div style="padding:40px; text-align:center; color:var(--muted); display:flex; align-items:center; justify-content:center; gap:8px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <span>Silakan pilih kelas dan klik Tampilkan untuk memuat data siswa.</span>
             </div>
         @endif
     </div>

@@ -9,7 +9,8 @@
 @section('content')
 <div style="margin-bottom:20px;">
     <a href="{{ route('guru.catatan.list', $siswa->id) }}" class="btn btn-secondary" style="font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
-        <span>⬅</span> Batal &amp; Kembali
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        <span>Batal &amp; Kembali</span>
     </a>
 </div>
 
@@ -37,7 +38,10 @@
     <!-- Period Info Card (Read-only since period shouldn't change to prevent duplicates) -->
     <div class="card" style="margin-bottom:24px;">
         <div class="card-header" style="background:#FFF8F2;border-bottom:1px solid var(--border);">
-            <strong>📅 Periode Penilaian</strong>
+            <strong style="display:inline-flex;align-items:center;gap:6px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <span>Periode Penilaian</span>
+            </strong>
         </div>
         <div class="card-body">
             @php
@@ -147,9 +151,9 @@
     <div class="card" style="margin-bottom:32px;">
         <div class="card-body" style="display:flex; justify-content:flex-end; gap:12px;">
             <a href="{{ route('guru.catatan.list', $siswa->id) }}" class="btn btn-secondary" style="font-weight:700;text-decoration:none;">Batal</a>
-            <button type="submit" class="btn btn-primary" style="font-weight:700;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-                Simpan Perubahan Catatan
+            <button type="submit" class="btn btn-primary" style="font-weight:700;display:inline-flex;align-items:center;gap:6px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" style="width:15px;height:15px;color:#FFFFFF;flex-shrink:0;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                <span>Simpan Perubahan Catatan</span>
             </button>
         </div>
     </div>

@@ -15,9 +15,11 @@
 @endif
 
 <div class="card" style="max-width:700px;">
-    <div class="card-header" style="display:flex;align-items:center;gap:8px;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <span>Kelola Profil & Tanda Tangan Digital</span>
+    <div class="card-header">
+        <div style="display:flex; align-items:center; gap:10px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;color:var(--primary);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span style="font-weight:700; font-size:1.05rem;">Kelola Profil &amp; Tanda Tangan Digital</span>
+        </div>
     </div>
     <div class="card-body">
         <form method="POST" action="{{ route('guru.profil.update') }}" enctype="multipart/form-data">
@@ -86,11 +88,13 @@
 
                 <!-- Pilihan Mode TTD -->
                 <div style="display:flex; gap:8px; margin-bottom:12px;">
-                    <button type="button" id="btn-tab-upload-guru" style="background:#4F46E5; color:#fff; border:none; border-radius:6px; font-size:0.8rem; font-weight:600; padding:7px 14px; cursor:pointer;" onclick="switchTtdModeGuru('upload')">
-                        📁 Upload Foto/PNG (Remove BG)
+                    <button type="button" id="btn-tab-upload-guru" style="background:#4F46E5; color:#fff; border:none; border-radius:6px; font-size:0.8rem; font-weight:600; padding:7px 14px; cursor:pointer; display:inline-flex; align-items:center; gap:6px;" onclick="switchTtdModeGuru('upload')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                        <span>Upload Foto/PNG (Remove BG)</span>
                     </button>
-                    <button type="button" id="btn-tab-draw-guru" style="background:#F1F5F9; color:#475569; border:1px solid #E2E8F0; border-radius:6px; font-size:0.8rem; font-weight:600; padding:7px 14px; cursor:pointer;" onclick="switchTtdModeGuru('draw')">
-                        ✍️ Gambar di Layar
+                    <button type="button" id="btn-tab-draw-guru" style="background:#F1F5F9; color:#475569; border:1px solid #E2E8F0; border-radius:6px; font-size:0.8rem; font-weight:600; padding:7px 14px; cursor:pointer; display:inline-flex; align-items:center; gap:6px;" onclick="switchTtdModeGuru('draw')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                        <span>Gambar di Layar</span>
                     </button>
                 </div>
 
@@ -98,8 +102,9 @@
                 <div id="section-ttd-upload-guru" style="display:block; padding:12px; background:#F8FAFC; border-radius:8px; border:1px solid #E2E8F0;">
                     <label for="ttd" style="font-size:0.82rem; font-weight:600; color:#334155; margin-bottom:6px; display:block;">Pilih file gambar TTD Anda:</label>
                     <input type="file" id="ttd" name="ttd" class="form-control" accept="image/png,image/jpeg,image/jpg,image/webp">
-                    <small style="color:#64748B; font-size:0.78rem; display:block; margin-top:6px;">
-                        💡 <strong>Rekomendasi:</strong> Unggah file gambar format <strong>.PNG transparan</strong> (yang sudah di-<em>remove background</em>) agar hasil cetak PDF bersih tanpa kotak putih/abu-abu. (Maks. 2 MB)
+                    <small style="color:#64748B; font-size:0.78rem; display:flex; align-items:flex-start; gap:6px; margin-top:6px;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;color:#F59E0B;flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                        <span><strong>Rekomendasi:</strong> Unggah file gambar format <strong>.PNG transparan</strong> (yang sudah di-<em>remove background</em>) agar hasil cetak PDF bersih tanpa kotak putih/abu-abu. (Maks. 2 MB)</span>
                     </small>
                 </div>
 
@@ -121,9 +126,9 @@
             </div>
 
             <div style="margin-top:24px; padding-top:16px; border-top:1px solid #E2E8F0;">
-                <button type="submit" class="btn btn-primary" style="font-weight:700;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-                    Simpan Perubahan Profil & TTD
+                <button type="submit" class="btn btn-primary" style="font-weight:700;display:inline-flex;align-items:center;gap:6px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" style="width:15px;height:15px;color:#FFFFFF;flex-shrink:0;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                    <span>Simpan Perubahan Profil &amp; TTD</span>
                 </button>
             </div>
         </form>

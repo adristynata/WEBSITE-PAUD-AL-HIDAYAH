@@ -53,9 +53,9 @@
     <div class="gwt">
         <h2>Halo, {{ auth()->user()->name }}!</h2>
         <p>Berikut ringkasan kelas yang Anda ampu hari ini.</p>
-        <a href="{{ route('guru.catatan.index') }}" class="btn btn-primary" style="font-size:0.85rem">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
-            Input Catatan Siswa
+        <a href="{{ route('guru.catatan.index') }}" class="btn btn-primary" style="font-size:0.85rem;font-weight:700;display:inline-flex;align-items:center;gap:6px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" style="width:15px;height:15px;color:#FFFFFF;flex-shrink:0;"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+            <span>Input Catatan Siswa</span>
         </a>
     </div>
     <div class="gws">
@@ -84,9 +84,9 @@
         </div>
         <div style="display:flex;align-items:center;gap:10px">
             <span class="badge badge-blue">{{ $k->siswas->count() }} Siswa</span>
-            <a href="{{ route('guru.catatan.index') }}" class="btn btn-primary btn-sm">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
-                Input Catatan
+            <a href="{{ route('guru.catatan.index') }}" class="btn btn-primary btn-sm" style="display:inline-flex;align-items:center;gap:5px;font-weight:700;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" style="width:13px;height:13px;color:#FFFFFF;flex-shrink:0;"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                <span>Input Catatan</span>
             </a>
         </div>
     </div>

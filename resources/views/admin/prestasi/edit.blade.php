@@ -34,10 +34,10 @@
                         <div>
                             <label class="form-label" style="font-weight:700; display:block; margin-bottom:6px;">Kategori <span style="color:red">*</span></label>
                             <select name="kategori" class="form-control @error('kategori') is-invalid @enderror" required>
-                                <option value="seni" {{ old('kategori', $prestasi->kategori) == 'seni' ? 'selected' : '' }}>🎨 Seni &amp; Kreativitas</option>
-                                <option value="agama" {{ old('kategori', $prestasi->kategori) == 'agama' ? 'selected' : '' }}>📖 Tahfidz &amp; Agama</option>
-                                <option value="olahraga" {{ old('kategori', $prestasi->kategori) == 'olahraga' ? 'selected' : '' }}>🏃 Olahraga &amp; Motorik</option>
-                                <option value="sekolah" {{ old('kategori', $prestasi->kategori) == 'sekolah' ? 'selected' : '' }}>🏫 Penghargaan Sekolah</option>
+                                <option value="seni" {{ old('kategori', $prestasi->kategori) == 'seni' ? 'selected' : '' }}>Seni &amp; Kreativitas</option>
+                                <option value="agama" {{ old('kategori', $prestasi->kategori) == 'agama' ? 'selected' : '' }}>Tahfidz &amp; Agama</option>
+                                <option value="olahraga" {{ old('kategori', $prestasi->kategori) == 'olahraga' ? 'selected' : '' }}>Olahraga &amp; Motorik</option>
+                                <option value="sekolah" {{ old('kategori', $prestasi->kategori) == 'sekolah' ? 'selected' : '' }}>Penghargaan Sekolah</option>
                             </select>
                             @error('kategori')
                                 <div class="invalid-feedback" style="color:red; font-size:12px; margin-top:4px;">{{ $message }}</div>

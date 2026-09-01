@@ -26,33 +26,55 @@ class CatatanMingguanController extends Controller
         return view('guru.catatan.siswa', compact('kelas', 'siswas'));
     }
 
-    public function listCatatan($siswa_id)
+    public function listCatatan(Request $request, $siswa_id)
     {
         $siswa = Siswa::where('id', $siswa_id)->where('is_aktif', true)->firstOrFail();
-        // Cek apakah kelas siswa diampu oleh guru ini
         if (!$siswa->kelas || $siswa->kelas->guru_id !== Auth::id()) {
             abort(403, 'Anda tidak berwenang mengakses data siswa ini.');
         }
 
-        $catatans = CatatanMingguan::where('siswa_id', $siswa_id)
+        // Ambil daftar tahun & bulan yang ada catatan untuk siswa ini
+        $monthPeriods = CatatanMingguan::where('siswa_id', $siswa_id)
+            ->selectRaw('tahun, bulan')
+            ->groupBy('tahun', 'bulan')
             ->orderBy('tahun', 'desc')
             ->orderBy('bulan', 'desc')
-            ->orderBy('minggu_ke', 'desc')
-            ->paginate(8);
+            ->paginate(1); // 1 bulan per halaman agar sangat ringkas & teratur
 
-        return view('guru.catatan.list', compact('siswa', 'catatans'));
+        // Jika belum ada catatan sama sekali, buat paginator untuk bulan saat ini
+        if ($monthPeriods->isEmpty()) {
+            $currentMonth = (int)date('n');
+            $currentYear = (int)date('Y');
+            $dummyItem = (object)['tahun' => $currentYear, 'bulan' => $currentMonth];
+            $monthPeriods = new \Illuminate\Pagination\LengthAwarePaginator(
+                collect([$dummyItem]),
+                1,
+                1,
+                1,
+                ['path' => $request->url(), 'query' => $request->query()]
+            );
+        }
+
+        $allCatatans = CatatanMingguan::where('siswa_id', $siswa_id)->get();
+
+        return view('guru.catatan.list', compact('siswa', 'monthPeriods', 'allCatatans'));
     }
 
-    public function create($siswa_id)
+    public function create(Request $request, $siswa_id)
     {
         $siswa = Siswa::where('id', $siswa_id)->where('is_aktif', true)->firstOrFail();
         if (!$siswa->kelas || $siswa->kelas->guru_id !== Auth::id()) {
             abort(403, 'Anda tidak berwenang mengakses data siswa ini.');
         }
+
+        $preMinggu = $request->query('minggu_ke');
+        $preBulan = $request->query('bulan');
+        $preTahun = $request->query('tahun');
+
         // Ambil semua indikator, kelompokkan per aspek dan nilai
         $indikators = IndikatorPenilaian::orderBy('aspek')->orderBy('nilai')->orderBy('urutan')->get()
             ->groupBy(['aspek', 'nilai']);
-        return view('guru.catatan.create', compact('siswa', 'indikators'));
+        return view('guru.catatan.create', compact('siswa', 'indikators', 'preMinggu', 'preBulan', 'preTahun'));
     }
 
     public function store(Request $request)
