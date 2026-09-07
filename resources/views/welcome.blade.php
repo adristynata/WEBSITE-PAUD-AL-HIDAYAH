@@ -2168,13 +2168,13 @@
           </div>
           <div class="flyer-polaroid-stack">
             <div class="flyer-polaroid-item">
-              <img src="{{ asset('images/hero-slide-2.jpg') }}" alt="Renang / Aktivitas Ceria" onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'">
+              <img src="{{ asset('images/' . ($profil->flyer_foto1 ?? 'hero-slide-2.jpg')) }}" alt="Renang / Aktivitas Ceria" onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'">
             </div>
             <div class="flyer-polaroid-item">
-              <img src="{{ asset('images/hero-slide-3.jpg') }}" alt="Belajar Bermain" onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'">
+              <img src="{{ asset('images/' . ($profil->flyer_foto2 ?? 'hero-slide-3.jpg')) }}" alt="Belajar Bermain" onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'">
             </div>
             <div class="flyer-polaroid-item">
-              <img src="{{ asset('images/hero-paud-ceria.jpg') }}" alt="Kreativitas Seni" onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'">
+              <img src="{{ asset('images/' . ($profil->flyer_foto3 ?? 'hero-paud-ceria.jpg')) }}" alt="Kreativitas Seni" onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'">
             </div>
           </div>
         </div>

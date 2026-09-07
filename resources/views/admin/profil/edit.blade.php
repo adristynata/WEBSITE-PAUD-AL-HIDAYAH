@@ -225,6 +225,75 @@
                 </div>
             </div>
 
+            <!-- ── FOTO AKTIVITAS CERIA SPMB (FLYER POLAROID) SECTION ── -->
+            <div style="margin-top:32px; padding-top:20px; border-top:2px dashed #CBD5E1;">
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px;">
+                    <div style="width:32px; height:32px; border-radius:8px; background:#F59E0B; display:flex; align-items:center; justify-content:center; color:#fff;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                    </div>
+                    <div>
+                        <h4 style="margin:0; font-size:16px; color:#1E293B; font-weight:700;">Foto Aktivitas Ceria SPMB (Flyer Beranda)</h4>
+                        <small style="color:#64748B;">Kelola 3 foto Polaroid Aktivitas Ceria Siswa di poster SPMB beranda website (Maks. 4 MB per foto)</small>
+                    </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-bottom:12px;">
+                    <!-- Foto Flyer 1 -->
+                    <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px;">
+                        <label style="font-weight:700; font-size:13px; color:#334155; display:inline-flex; align-items:center; gap:6px; margin-bottom:8px;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:#F59E0B;"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                            <span>Foto Aktivitas 1</span>
+                        </label>
+                        <div style="margin-bottom:10px;">
+                            <img id="preview_flyer_foto1" 
+                                 src="{{ asset('images/' . ($profil->flyer_foto1 ?? 'hero-slide-2.jpg')) }}" 
+                                 alt="Foto Flyer 1" 
+                                 onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'"
+                                 style="width:100%; height:120px; border-radius:8px; object-fit:cover; border:1px solid #CBD5E1;">
+                        </div>
+                        <input type="file" id="flyer_foto1" name="flyer_foto1" class="form-control" accept="image/jpg,image/jpeg,image/png,image/webp" style="font-size:12px;" onchange="previewImage(this, 'preview_flyer_foto1')">
+                        <small style="color:#94A3B8; font-size:11px; display:block; margin-top:4px;">Kosongkan jika tidak ingin mengubah</small>
+                        @error('flyer_foto1')<div class="invalid-feedback" style="display:block;">{{ $message }}</div>@enderror
+                    </div>
+
+                    <!-- Foto Flyer 2 -->
+                    <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px;">
+                        <label style="font-weight:700; font-size:13px; color:#334155; display:inline-flex; align-items:center; gap:6px; margin-bottom:8px;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:#3B82F6;"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                            <span>Foto Aktivitas 2</span>
+                        </label>
+                        <div style="margin-bottom:10px;">
+                            <img id="preview_flyer_foto2" 
+                                 src="{{ asset('images/' . ($profil->flyer_foto2 ?? 'hero-slide-3.jpg')) }}" 
+                                 alt="Foto Flyer 2" 
+                                 onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'"
+                                 style="width:100%; height:120px; border-radius:8px; object-fit:cover; border:1px solid #CBD5E1;">
+                        </div>
+                        <input type="file" id="flyer_foto2" name="flyer_foto2" class="form-control" accept="image/jpg,image/jpeg,image/png,image/webp" style="font-size:12px;" onchange="previewImage(this, 'preview_flyer_foto2')">
+                        <small style="color:#94A3B8; font-size:11px; display:block; margin-top:4px;">Kosongkan jika tidak ingin mengubah</small>
+                        @error('flyer_foto2')<div class="invalid-feedback" style="display:block;">{{ $message }}</div>@enderror
+                    </div>
+
+                    <!-- Foto Flyer 3 -->
+                    <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px;">
+                        <label style="font-weight:700; font-size:13px; color:#334155; display:inline-flex; align-items:center; gap:6px; margin-bottom:8px;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:#10B981;"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                            <span>Foto Aktivitas 3</span>
+                        </label>
+                        <div style="margin-bottom:10px;">
+                            <img id="preview_flyer_foto3" 
+                                 src="{{ asset('images/' . ($profil->flyer_foto3 ?? 'hero-paud-ceria.jpg')) }}" 
+                                 alt="Foto Flyer 3" 
+                                 onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'"
+                                 style="width:100%; height:120px; border-radius:8px; object-fit:cover; border:1px solid #CBD5E1;">
+                        </div>
+                        <input type="file" id="flyer_foto3" name="flyer_foto3" class="form-control" accept="image/jpg,image/jpeg,image/png,image/webp" style="font-size:12px;" onchange="previewImage(this, 'preview_flyer_foto3')">
+                        <small style="color:#94A3B8; font-size:11px; display:block; margin-top:4px;">Kosongkan jika tidak ingin mengubah</small>
+                        @error('flyer_foto3')<div class="invalid-feedback" style="display:block;">{{ $message }}</div>@enderror
+                    </div>
+                </div>
+            </div>
+
             <!-- Bagian 3: Informasi Kontak & Google Maps -->
             <div style="margin-top:28px; padding-top:20px; border-top:1px solid #E2E8F0;">
                 <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
