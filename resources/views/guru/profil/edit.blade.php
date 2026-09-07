@@ -25,6 +25,24 @@
         <form method="POST" action="{{ route('guru.profil.update') }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
+            <!-- Upload Foto Profil Guru -->
+            <div class="form-group" style="margin-bottom:20px; padding:16px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px;">
+                <label for="foto" style="font-weight:700; color:var(--secondary); display:block; margin-bottom:8px;">Foto Profil Guru</label>
+                <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+                    @if($user->foto)
+                        <img src="{{ asset('storage/profil/' . $user->foto) }}" alt="Foto {{ $user->name }}" style="width:64px; height:64px; border-radius:50%; object-fit:cover; border:3px solid #16A34A;">
+                    @else
+                        <div style="width:64px; height:64px; border-radius:50%; background:linear-gradient(135deg, #16A34A, #15803D); color:#fff; font-size:1.6rem; font-weight:800; display:flex; align-items:center; justify-content:center;">
+                            {{ strtoupper(substr($user->name, 0, 1)) }}
+                        </div>
+                    @endif
+                    <div style="flex:1; min-width:200px;">
+                        <input type="file" id="foto" name="foto" class="form-control @error('foto') is-invalid @enderror" accept="image/jpeg,image/png,image/jpg,image/webp">
+                        <small style="color:#94A3B8; font-size:0.78rem; display:block; margin-top:4px;">Format: JPG, JPEG, PNG, WEBP (Maks 2MB). Foto akan tampil di sidebar dan dashboard.</small>
+                        @error('foto')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    </div>
+                </div>
+            </div>
 
             <div class="form-grid-2">
                 <div class="form-group">

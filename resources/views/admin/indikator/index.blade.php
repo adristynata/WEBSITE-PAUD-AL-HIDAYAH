@@ -275,7 +275,8 @@
 
             @if($totalActiveFilter > 0)
                 <span class="badge-active-count">
-                    ✓ {{ $totalActiveFilter }} Filter Aktif
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:2px;"><polyline points="20 6 9 17 4 12"/></svg>
+                    <span>{{ $totalActiveFilter }} Filter Aktif</span>
                 </span>
             @endif
         </div>

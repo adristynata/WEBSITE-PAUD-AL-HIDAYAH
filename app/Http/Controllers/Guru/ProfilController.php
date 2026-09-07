@@ -24,11 +24,14 @@ class ProfilController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:6|confirmed',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'ttd' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'ttd_base64' => 'nullable|string',
         ], [
             'password.confirmed' => 'Konfirmasi password baru tidak cocok.',
             'password.min' => 'Password minimal 6 karakter.',
+            'foto.image' => 'Foto profil harus berupa file gambar.',
+            'foto.max' => 'Ukuran foto profil maksimal 2MB.',
         ]);
 
         $user->name = $request->name;
@@ -36,6 +39,16 @@ class ProfilController extends Controller
 
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
+        }
+
+        // Simpan Foto Profil Guru jika ada
+        if ($request->hasFile('foto')) {
+            if ($user->foto && \Illuminate\Support\Facades\Storage::disk('public')->exists('profil/' . $user->foto)) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete('profil/' . $user->foto);
+            }
+            $filename = 'guru_' . $user->id . '_' . time() . '.' . $request->file('foto')->getClientOriginalExtension();
+            $request->file('foto')->storeAs('profil', $filename, 'public');
+            $user->foto = $filename;
         }
 
         // Simpan TTD dari Upload File jika ada

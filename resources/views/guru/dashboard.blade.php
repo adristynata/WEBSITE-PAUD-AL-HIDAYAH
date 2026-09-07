@@ -50,13 +50,28 @@
 
 @section('content')
 <div class="guru-welcome">
-    <div class="gwt">
-        <h2>Halo, {{ auth()->user()->name }}!</h2>
-        <p>Berikut ringkasan kelas yang Anda ampu hari ini.</p>
-        <a href="{{ route('guru.catatan.index') }}" class="btn btn-primary" style="font-size:0.85rem;font-weight:700;display:inline-flex;align-items:center;gap:6px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" style="width:15px;height:15px;color:#FFFFFF;flex-shrink:0;"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
-            <span>Input Catatan Siswa</span>
-        </a>
+    <div style="display:flex; align-items:center; gap:18px; flex-wrap:wrap;" class="gwt">
+        @if(auth()->user()->foto)
+            <img src="{{ asset('storage/profil/' . auth()->user()->foto) }}" alt="{{ auth()->user()->name }}" style="width:64px; height:64px; border-radius:50%; object-fit:cover; border:3px solid #4ADE80; box-shadow:0 4px 12px rgba(0,0,0,0.2); flex-shrink:0;">
+        @else
+            <div style="width:64px; height:64px; border-radius:50%; background:linear-gradient(135deg, #10B981, #059669); color:#fff; font-size:1.6rem; font-weight:800; display:flex; align-items:center; justify-content:center; border:3px solid #4ADE80; box-shadow:0 4px 12px rgba(0,0,0,0.2); flex-shrink:0;">
+                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+            </div>
+        @endif
+        <div>
+            <h2>Halo, {{ auth()->user()->name }}!</h2>
+            <p style="margin-bottom:10px;">Berikut ringkasan kelas yang Anda ampu hari ini.</p>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <a href="{{ route('guru.catatan.index') }}" class="btn btn-primary" style="font-size:0.82rem;font-weight:700;display:inline-flex;align-items:center;gap:6px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" style="width:15px;height:15px;color:#FFFFFF;flex-shrink:0;"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                    <span>Input Catatan Siswa</span>
+                </a>
+                <a href="{{ route('guru.profil.edit') }}" class="btn" style="background:rgba(255,255,255,0.18); color:#FFF; font-size:0.82rem; font-weight:700; border:1px solid rgba(255,255,255,0.3); backdrop-filter:blur(4px); display:inline-flex; align-items:center; gap:6px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;flex-shrink:0;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <span>Kelola Profil &amp; TTD</span>
+                </a>
+            </div>
+        </div>
     </div>
     <div class="gws">
         <div class="gws-item">

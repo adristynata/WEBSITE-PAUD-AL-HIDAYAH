@@ -229,6 +229,30 @@
             border-top: 1px solid rgba(255,255,255,0.07);
             flex-shrink: 0;
         }
+        .web-preview-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            background: rgba(14, 165, 233, 0.12);
+            color: #38bdf8;
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.18s ease;
+            margin-bottom: 8px;
+        }
+        .web-preview-btn:hover {
+            background: rgba(14, 165, 233, 0.22);
+            color: #7dd3fc;
+            border-color: rgba(56, 189, 248, 0.6);
+            transform: translateY(-1px);
+        }
         .logout-btn {
             display: flex;
             align-items: center;
@@ -670,23 +694,73 @@
         }
 
         /* ════════════════════════════════
-           OVERLAY + MOBILE
+           GLOBAL MODULES MOBILE RESPONSIVE SYSTEM
         ════════════════════════════════ */
         .sidebar-overlay {
             display: none; position: fixed;
-            inset: 0; background: rgba(0,0,0,0.45);
+            inset: 0; background: rgba(0,0,0,0.5);
             z-index: 150;
+            backdrop-filter: blur(2px);
         }
+
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 0 0 14px 14px;
+        }
+
+        .form-grid, .form-grid-2, .form-grid-3, .form-grid-4 {
+            display: grid;
+            gap: 16px;
+        }
+        .form-grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .form-grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .form-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+        .galeri-grid, .prestasi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        @media (max-width: 992px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+            .form-grid-4 { grid-template-columns: repeat(2, 1fr); }
+        }
+
         @media (max-width: 768px) {
-            .sidebar { transform: translateX(-100%); }
+            .sidebar { 
+                transform: translateX(-100%); 
+                transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            }
             .sidebar.open { transform: translateX(0); }
             .sidebar-overlay.show { display: block; }
             .main-content { margin-left: 0 !important; }
             .hamburger { display: flex; }
-            .page-content { padding: 16px; }
-            .topbar { padding: 0 16px; }
+            .page-content { padding: 14px 12px; }
+            .topbar { padding: 0 14px; height: 56px; }
             .topbar-date { display: none; }
             .chip-name { display: none; }
+            .page-title { font-size: 0.95rem; }
+            .card-header { padding: 12px 14px; }
+            .card-body { padding: 14px; }
+            .form-grid-3 { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 576px) {
+            .stats-grid { grid-template-columns: 1fr; gap: 12px; }
+            .stat-card { padding: 14px; gap: 12px; }
+            .stat-value { font-size: 1.4rem; }
+            .stat-icon { width: 42px; height: 42px; }
+            .stat-icon svg { width: 20px; height: 20px; }
+            .form-grid-2, .form-grid-3, .form-grid-4 { grid-template-columns: 1fr !important; gap: 12px !important; }
+            .card-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .card-header .badge { align-self: flex-start; }
+            .top-bar-actions, .filter-bar, .action-group { flex-direction: column; width: 100%; gap: 10px; }
+            .top-bar-actions .btn, .filter-bar .btn, .action-group .btn { width: 100%; justify-content: center; }
+            .search-box, .form-control { width: 100% !important; }
+            .galeri-grid, .prestasi-grid { grid-template-columns: 1fr; }
         }
     </style>
     @stack('styles')
@@ -709,6 +783,8 @@
         <div class="sidebar-user">
             @if(auth()->user()->role === 'admin')
                 <img src="{{ asset('images/foto kepsek1.jpg') }}" alt="Profile" class="su-avatar-img">
+            @elseif(auth()->user()->foto)
+                <img src="{{ asset('storage/profil/' . auth()->user()->foto) }}" alt="Profile" class="su-avatar-img">
             @else
                 <div class="su-avatar-init">{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</div>
             @endif
@@ -728,8 +804,12 @@
             @yield('sidebar-menu')
         </nav>
 
-        {{-- Logout --}}
+        {{-- Logout & Web Preview --}}
         <div class="sidebar-footer">
+            <a href="{{ route('home') }}" target="_blank" class="web-preview-btn" title="Buka Tampilan Depan Website di Tab Baru">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                <span>Lihat Tampilan Web</span>
+            </a>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="logout-btn">

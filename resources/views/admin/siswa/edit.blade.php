@@ -64,9 +64,11 @@
                                      style="width:64px;height:64px;border-radius:12px;object-fit:cover;border:2px solid #E2E8F0; display:block;">
                                 <span onclick="removeStudentPhoto()"
                                       style="position:absolute; top:-8px; right:-8px; background:#EF4444; color:#fff; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; cursor:pointer; border:2px solid #fff; font-weight:bold; box-shadow:0 2px 4px rgba(0,0,0,0.2);"
-                                      title="Hapus Foto">✕</span>
+                                      title="Hapus Foto">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:12px;height:12px;display:inline-block;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                                </span>
                             </div>
-                            <small style="display:block;color:#94A3B8;margin-top:4px;">Klik tanda ✕ untuk menghapus foto</small>
+                            <small style="display:block;color:#94A3B8;margin-top:4px;">Klik tombol hapus untuk menghapus foto</small>
                         </div>
                     @endif
                     <input type="file" id="foto" name="foto" class="form-control" accept="image/jpg,image/jpeg,image/png">

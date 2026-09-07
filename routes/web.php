@@ -17,22 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 // ─── Halaman Publik ────────────────────────────────────────────────────────────
 Route::get('/', function () {
-    // Auto-copy 3 colorful hero slider images
-    $slides = [
-        "C:\\Users\\HP\\.gemini\\antigravity\\brain\\03753526-d35b-42fa-b7fe-6ac8a552c3ba\\paud_hero_al_hidayah_1787814146223.jpg" => public_path('images/hero-slide-1.jpg'),
-        "C:\\Users\\HP\\.gemini\\antigravity\\brain\\03753526-d35b-42fa-b7fe-6ac8a552c3ba\\paud_hero_slide_classroom_1787814651247.jpg" => public_path('images/hero-slide-2.jpg'),
-        "C:\\Users\\HP\\.gemini\\antigravity\\brain\\03753526-d35b-42fa-b7fe-6ac8a552c3ba\\paud_al_hidayah_hero_1787813844600.jpg" => public_path('images/hero-slide-3.jpg'),
-    ];
-    foreach ($slides as $src => $dest) {
-        if (file_exists($src)) {
-            @copy($src, $dest);
-        }
-    }
-    // Also copy slide 1 as default gedung-sekolah.jpg
-    if (file_exists("C:\\Users\\HP\\.gemini\\antigravity\\brain\\03753526-d35b-42fa-b7fe-6ac8a552c3ba\\paud_hero_al_hidayah_1787814146223.jpg")) {
-        @copy("C:\\Users\\HP\\.gemini\\antigravity\\brain\\03753526-d35b-42fa-b7fe-6ac8a552c3ba\\paud_hero_al_hidayah_1787814146223.jpg", public_path('images/gedung-sekolah.jpg'));
-    }
-
     $profil = \App\Models\ProfilSekolah::query()->first();
     $galeris = \App\Models\Galeri::query()->orderBy('created_at', 'desc')->take(6)->get();
     return view('welcome', compact('profil', 'galeris'));
@@ -52,11 +36,13 @@ Route::get('/galeri', function () {
 
 // ─── Auth ──────────────────────────────────────────────────────────────────────
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-Route::post('/login/ortu', [AuthController::class, 'loginOrtu'])->name('login.ortu');
-Route::get('/login/check-nis/{nis}', [AuthController::class, 'checkNisStatus'])->name('login.check-nis');
+Route::get('/login/ortu', function() { return redirect()->route('login'); });
+Route::post('/login', [AuthController::class, 'login'])->name('login.post')->middleware('throttle:10,1');
+Route::post('/login/ortu', [AuthController::class, 'loginOrtu'])->name('login.ortu')->middleware('throttle:10,1');
+Route::get('/login/check-nis/{nis}', [AuthController::class, 'checkNisStatus'])->name('login.check-nis')->middleware('throttle:30,1');
 Route::get('/login/setup-pin', [AuthController::class, 'showSetupPin'])->name('login.setup-pin');
-Route::post('/login/setup-pin', [AuthController::class, 'setupPin'])->name('login.setup-pin.post');
+Route::post('/login/setup-pin', [AuthController::class, 'setupPin'])->name('login.setup-pin.post')->middleware('throttle:10,1');
+Route::get('/test-429', function() { return response()->view('errors.429', [], 429); })->name('test-429');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // ─── Admin ─────────────────────────────────────────────────────────────────────
@@ -106,7 +92,7 @@ Route::prefix('guru')->name('guru.')->middleware(['auth', 'role:guru'])->group(f
 
     // Profil & TTD Guru
     Route::get('/profil', [GuruProfil::class, 'edit'])->name('profil.edit');
-    Route::put('/profil', [GuruProfil::class, 'update'])->name('profil.update');
+    Route::match(['post', 'put'], '/profil', [GuruProfil::class, 'update'])->name('profil.update');
 });
 
 // ─── Orang Tua ─────────────────────────────────────────────────────────────────
@@ -115,4 +101,5 @@ Route::prefix('ortu')->name('ortu.')->middleware(['auth', 'role:orang_tua'])->gr
     Route::get('/laporan/{id}', [OrtuDashboard::class, 'showLaporan'])->name('laporan.show');
     Route::get('/laporan/{id}/download', [OrtuDashboard::class, 'downloadPdf'])->name('laporan.download');
     Route::get('/notifikasi/{id}/read', [OrtuDashboard::class, 'readNotifikasi'])->name('notifikasi.read');
+    Route::post('/profil/foto', [OrtuDashboard::class, 'updateFoto'])->name('profil.foto');
 });

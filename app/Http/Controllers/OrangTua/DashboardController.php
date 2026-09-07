@@ -31,7 +31,34 @@ class DashboardController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('ortu.dashboard', compact('siswas', 'notifications'));
+        // Tarik data catatan guru terbaru & statistik capaian untuk setiap anak
+        $latestCatatans = [];
+        $capaianStatsPerSiswa = [];
+
+        foreach ($siswas as $s) {
+            // Catatan mingguan terbaru
+            $latestCatatans[$s->id] = CatatanMingguan::where('siswa_id', $s->id)
+                ->orderBy('tahun', 'desc')
+                ->orderBy('bulan', 'desc')
+                ->orderBy('minggu_ke', 'desc')
+                ->take(3)
+                ->get();
+
+            // Hitung statistik capaian 7 aspek dari semua catatan mingguan
+            $allCatatans = CatatanMingguan::where('siswa_id', $s->id)->get();
+            $capaianCounts = ['BSB' => 0, 'BSH' => 0, 'MB' => 0, 'BB' => 0];
+            foreach ($allCatatans as $c) {
+                foreach (['nilai_agama_moral', 'motorik_kasar', 'motorik_halus', 'kognitif', 'bahasa', 'sosial_emosional', 'seni'] as $aspek) {
+                    $val = $c->$aspek;
+                    if (isset($capaianCounts[$val])) {
+                        $capaianCounts[$val]++;
+                    }
+                }
+            }
+            $capaianStatsPerSiswa[$s->id] = $capaianCounts;
+        }
+
+        return view('ortu.dashboard', compact('siswas', 'notifications', 'latestCatatans', 'capaianStatsPerSiswa'));
     }
 
     public function showLaporan($id)
@@ -60,49 +87,52 @@ class DashboardController extends Controller
         return view('ortu.laporan.show', compact('laporan', 'catatansGuru', 'notifications'));
     }
 
-    public function readNotifikasi($id)
-    {
-        $notif = Notifikasi::query()
-            ->where('user_id', Auth::id())
-            ->findOrFail($id);
-
-        $notif->update(['is_read' => true]);
-
-        return redirect($notif->link ?? route('ortu.dashboard'));
-    }
-
     public function downloadPdf($id)
     {
         $user = Auth::user();
         $laporan = LaporanBulanan::query()->with(['siswa.kelas.guru'])->findOrFail($id);
 
-        // Validasi hak akses orang tua terhadap data anak
         if (!$user->siswas->contains($laporan->siswa_id)) {
             abort(403, 'Anda tidak memiliki hak akses untuk mengunduh laporan ini.');
         }
 
-        // Ambil catatan evaluasi mingguan dari guru untuk periode bulan & tahun yang sama
+        $profil = ProfilSekolah::query()->first();
+
+        // Ambil catatan evaluasi mingguan dari guru untuk disertakan pada PDF
         $catatansGuru = CatatanMingguan::where('siswa_id', $laporan->siswa_id)
             ->where('bulan', $laporan->bulan)
             ->where('tahun', $laporan->tahun)
             ->orderBy('minggu_ke', 'asc')
             ->get();
 
-        $months = [
-            1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April',
-            5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus',
-            9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
-        ];
-        $namaBulan = $months[$laporan->bulan] ?? $laporan->bulan;
+        $pdf = Pdf::loadView('ortu.laporan.pdf', compact('laporan', 'profil', 'catatansGuru'));
+        return $pdf->download('Laporan_' . str_replace(' ', '_', $laporan->siswa->nama) . '_' . $laporan->bulan . '_' . $laporan->tahun . '.pdf');
+    }
 
-        $profil = ProfilSekolah::query()->first();
+    public function updateFoto(\Illuminate\Http\Request $request)
+    {
+        $request->validate([
+            'foto' => ['required', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+        ], [
+            'foto.required' => 'Pilih file foto terlebih dahulu.',
+            'foto.image'    => 'File harus berupa gambar.',
+            'foto.mimes'    => 'Format gambar harus JPG, JPEG, atau PNG.',
+            'foto.max'      => 'Ukuran foto maksimal 2MB.',
+        ]);
 
-        // Render view ke PDF
-        $pdf = Pdf::loadView('ortu.laporan.pdf', compact('laporan', 'catatansGuru', 'profil'));
+        $user = Auth::user();
 
-        // Nama file dinamis
-        $filename = 'Laporan_Perkembangan_' . str_replace(' ', '_', $laporan->siswa->nama) . '_' . $namaBulan . '_' . $laporan->tahun . '.pdf';
+        // Hapus foto lama jika ada
+        if ($user->foto && \Illuminate\Support\Facades\Storage::disk('public')->exists('profil/' . $user->foto)) {
+            \Illuminate\Support\Facades\Storage::disk('public')->delete('profil/' . $user->foto);
+        }
 
-        return $pdf->download($filename);
+        $filename = 'ortu_' . $user->id . '_' . time() . '.' . $request->file('foto')->getClientOriginalExtension();
+        $request->file('foto')->storeAs('profil', $filename, 'public');
+
+        $user->foto = $filename;
+        $user->save();
+
+        return back()->with('success', 'Foto profil Anda berhasil diperbarui!');
     }
 }

@@ -23,7 +23,6 @@
             background: linear-gradient(135deg, #7C3AED, #F97316);
             padding: 36px 32px; text-align: center; color: #fff;
         }
-        .header .emoji { font-size: 3rem; margin-bottom: 12px; }
         .header h1 { font-size: 1.4rem; font-weight: 900; margin-bottom: 6px; }
         .header p { font-size: 0.9rem; color: rgba(255,255,255,0.85); line-height: 1.5; }
 
@@ -33,7 +32,7 @@
             border-radius: 12px; padding: 14px 16px; margin-bottom: 24px;
             font-size: 0.875rem; color: #9A3412; line-height: 1.6;
         }
-        .info-box strong { display: block; margin-bottom: 4px; }
+        .info-box strong { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
 
         .form-group { margin-bottom: 18px; }
         .form-group label { display: block; font-size: 0.85rem; font-weight: 700; color: #374151; margin-bottom: 6px; }
@@ -53,6 +52,7 @@
             color: #fff; border: none; border-radius: 12px;
             font-family: inherit; font-size: 1rem; font-weight: 800;
             cursor: pointer; transition: all 0.2s; margin-top: 8px;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
         }
         .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(249,115,22,0.4); }
 
@@ -66,19 +66,25 @@
 <body>
 <div class="wrap">
     <div class="header">
-        <div class="emoji">🔗</div>
+        <div style="width:60px;height:60px;margin:0 auto 12px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" style="width:30px;height:30px"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </div>
         <h1>Tautkan Akun ke Data Anak</h1>
         <p>Masukkan NIS dan tanggal lahir anak Anda untuk menghubungkan akun ini.</p>
     </div>
     <div class="body">
         @if(session('success'))
-            <div style="background:#DCFCE7;border:1px solid #BBF7D0;color:#16A34A;padding:12px 16px;border-radius:10px;margin-bottom:20px;font-weight:600;font-size:0.875rem">
-                ✅ {{ session('success') }}
+            <div style="background:#DCFCE7;border:1px solid #BBF7D0;color:#16A34A;padding:12px 16px;border-radius:10px;margin-bottom:20px;font-weight:600;font-size:0.875rem;display:flex;align-items:center;gap:8px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>{{ session('success') }}</span>
             </div>
         @endif
 
         <div class="info-box">
-            <strong>ℹ️ Cara pengisian:</strong>
+            <strong>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Cara Pengisian:
+            </strong>
             NIS dan tanggal lahir ada di buku laporan atau dapat ditanyakan langsung ke pihak sekolah.
         </div>
 
@@ -98,7 +104,10 @@
                        value="{{ old('tanggal_lahir') }}" required>
                 @error('tanggal_lahir')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
-            <button type="submit" class="btn-submit">🔗 Tautkan Sekarang</button>
+            <button type="submit" class="btn-submit">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                <span>Tautkan Sekarang</span>
+            </button>
         </form>
 
         <form method="POST" action="{{ route('logout') }}">

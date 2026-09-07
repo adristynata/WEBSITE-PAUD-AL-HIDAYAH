@@ -358,7 +358,7 @@
   }
 
   /* sambutan kepala sekolah */
-  .sambutan{padding:80px 0;background:var(--cream-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .sambutan{padding:35px 0;background:var(--cream-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
   .sambutan-grid{display:grid;grid-template-columns:260px 1fr;gap:56px;align-items:center;}
   .sambutan-photo{
     border-radius: 16px; /* Elegant rounded rectangle */
@@ -434,17 +434,17 @@
 
   /* ── Tentang / Profil Section (UI Persis Section Program) ── */
   .profil-section {
-    padding: 90px 0 100px;
+    padding: 32px 0 24px;
   }
   .profil-inner {
     background: var(--cream-soft);
     border: 1px solid var(--line);
     border-radius: 28px;
-    padding: 56px 44px;
+    padding: 32px 28px;
   }
   .profil-head {
     text-align: center;
-    margin-bottom: 36px;
+    margin-bottom: 24px;
   }
   .profil-head .eyebrow {
     color: #5FA05F;
@@ -485,14 +485,14 @@
   }
 
   /* ── PROGRAM PEMBELAJARAN 1 TAHUN ── */
-  .programs { padding: 90px 0 100px; }
+  .programs { padding: 32px 0 24px; }
   .programs-inner {
     background: var(--cream-soft);
     border: 1px solid var(--line);
     border-radius: 28px;
-    padding: 56px 44px;
+    padding: 32px 28px;
   }
-  .programs-head { text-align: center; margin-bottom: 36px; }
+  .programs-head { text-align: center; margin-bottom: 24px; }
   .programs-head .eyebrow { color: #5FA05F; margin-bottom: 6px; }
   .programs-head h2 { font-size: 32px; color: var(--navy); margin-top: 6px; font-weight: 800; font-family: 'Baloo 2', sans-serif; }
   .programs-head p { font-size: 15px; color: #64748B; max-width: 720px; margin: 10px auto 0; line-height: 1.65; }
@@ -502,7 +502,7 @@
     display: flex;
     justify-content: center;
     gap: 12px;
-    margin-bottom: 36px;
+    margin-bottom: 24px;
     flex-wrap: wrap;
   }
   .p-tab-btn {
@@ -976,7 +976,7 @@
 
   /* Portal Ortu CMS Classes */
   .portal-ortu{
-    padding:80px 0;
+    padding:35px 0;
     background:var(--cream-soft);
     border-top:1px solid var(--line);
     border-bottom:1px solid var(--line);
@@ -1271,7 +1271,7 @@
     .feature-item:nth-child(5) { grid-column: span 2; }
 
     /* Sambutan Kepala Sekolah */
-    .sambutan { padding: 50px 0; }
+    .sambutan { padding: 28px 0; }
     .sambutan-grid { grid-template-columns: 1fr; text-align: center; gap: 28px; }
     .sambutan-photo { max-width: 180px; margin: 0 auto; aspect-ratio: 3/4; }
     .ks-title { justify-content: center; margin-bottom: 12px; padding-bottom: 10px; }
@@ -1286,9 +1286,9 @@
     }
 
     /* Tentang Kami (Profil) */
-    .profil-section { padding: 50px 0 40px; }
-    .profil-head { margin-bottom: 28px; }
-    .profil-head h2 { font-size: 26px; }
+    .profil-section { padding: 28px 0 20px; }
+    .profil-head { margin-bottom: 20px; }
+    .profil-head h2 { font-size: 24px; }
     .profil-cards { gap: 16px; padding: 0 12px; }
     .profil-card {
       padding: 22px 20px;
@@ -1319,7 +1319,7 @@
     }
 
     /* Portal Orang Tua */
-    .portal-ortu { padding: 50px 0; }
+    .portal-ortu { padding: 28px 0; }
     .portal-grid { grid-template-columns: 1fr; gap: 16px; }
     .portal-header h2 { font-size: 24px; }
   }
@@ -1350,9 +1350,9 @@
     }
 
     /* Program Grid */
-    .programs { padding: 50px 0; }
-    .programs-inner { padding: 28px 16px; }
-    .programs-head h2 { font-size: 24px; }
+    .programs { padding: 28px 0; }
+    .programs-inner { padding: 20px 14px; }
+    .programs-head h2 { font-size: 22px; }
     .program-semester-grid { grid-template-columns: 1fr; gap: 14px; }
     .pbox-header h4 { font-size: 16.5px; }
     .pbox-body {
@@ -1363,7 +1363,8 @@
     }
 
     /* Tentang Kami (Profil) */
-    .profil-section { padding: 50px 0; }
+    .profil-section { padding: 28px 0; }
+    .profil-inner { padding: 20px 14px; }
     .profil-inner { padding: 28px 16px; }
     .profil-head h2 { font-size: 24px; }
     .profil-grid { grid-template-columns: 1fr; gap: 14px; }
@@ -1807,7 +1808,7 @@
             <div class="nav-item-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             </div>
-            <span>Program Belajar</span>
+            <span>Program Unggulan</span>
           </div>
           <span class="nav-item-arrow">›</span>
         </a>
@@ -1827,7 +1828,7 @@
             <div class="nav-item-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
             </div>
-            <span>Galeri Kegiatan</span>
+            <span> Kegiatan</span>
           </div>
           <span class="nav-item-arrow">›</span>
         </a>
@@ -1837,7 +1838,7 @@
             <div class="nav-item-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
-            <span>Kontak &amp; Lokasi</span>
+            <span>Kontak</span>
           </div>
           <span class="nav-item-arrow">›</span>
         </a>
@@ -2028,9 +2029,9 @@
             <strong>PAUD Al-Hidayah</strong> merupakan lembaga pendidikan anak usia dini berbasis Islami di Desa Wedelan, Kecamatan Bangsri, Kabupaten Jepara. Kami berkomitmen menyelenggarakan pendidikan berkualitas yang berlandaskan nilai-nilai keagamaan, kemandirian, dan kreativitas.
           </div>
           <div class="pbox-highlights">
-            <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Pendidikan Berbasis Agama &amp; Moral Islami</span></div>
-            <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Metode Praktik Belajar Sambil Bermain Ceria</span></div>
-            <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Pengembangan Holistik (Agama, Kognitif, Motorik, Bahasa, Seni)</span></div>
+            <div class="pbox-hl-item"><span class="bullet" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#DCFCE7;color:#16A34A;flex-shrink:0;margin-right:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Pendidikan Berbasis Agama &amp; Moral Islami</span></div>
+            <div class="pbox-hl-item"><span class="bullet" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#DCFCE7;color:#16A34A;flex-shrink:0;margin-right:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Metode Praktik Belajar Sambil Bermain Ceria</span></div>
+            <div class="pbox-hl-item"><span class="bullet" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#DCFCE7;color:#16A34A;flex-shrink:0;margin-right:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Pengembangan Holistik (Agama, Kognitif, Motorik, Bahasa, Seni)</span></div>
           </div>
         </div>
 
@@ -2051,11 +2052,6 @@
             </p>
             Visi ini menjadi arah dasar kami dalam membimbing tumbuh kembang buah hati Anda agar menjadi pribadi unggul yang cerdas intelektualnya, santun perilakunya, dan kokoh kemandiriannya.
           </div>
-          <div class="pbox-highlights">
-            <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Cerdas Intelektual &amp; Kreatif Bermain</span></div>
-            <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Berakhlakul Karimah &amp; Sholih/Sholihah</span></div>
-            <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Mandiri &amp; Terampil Menyelesaikan Masalah</span></div>
-          </div>
         </div>
 
         <!-- BOX 3: MISI SEKOLAH -->
@@ -2073,9 +2069,9 @@
             Untuk mewujudkan visi unggul sekolah, PAUD Al-Hidayah menjalankan misi-misi strategis berikut dalam setiap kegiatan belajar mengajar:
           </div>
           <div class="pbox-highlights">
-            <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Melaksanakan pembelajaran aktif, kreatif, efektif, dan inovatif.</span></div>
-            <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Mendidik dan menstimulasi anak secara optimal sesuai tahap perkembangan.</span></div>
-            <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Menyiapkan anak didik menuju jenjang pendidikan dasar dengan matang.</span></div>
+            <div class="pbox-hl-item"><span class="bullet" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#DCFCE7;color:#16A34A;flex-shrink:0;margin-right:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Melaksanakan pembelajaran aktif, kreatif, efektif, dan inovatif.</span></div>
+            <div class="pbox-hl-item"><span class="bullet" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#DCFCE7;color:#16A34A;flex-shrink:0;margin-right:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Mendidik dan menstimulasi anak secara optimal sesuai tahap perkembangan.</span></div>
+            <div class="pbox-hl-item"><span class="bullet" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#DCFCE7;color:#16A34A;flex-shrink:0;margin-right:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Menyiapkan anak didik menuju jenjang pendidikan dasar dengan matang.</span></div>
           </div>
         </div>
 
@@ -2094,9 +2090,9 @@
             Tujuan pendidikan PAUD Al-Hidayah dirancang secara komprehensif untuk mendukung perkembangan anak dan mutu sekolah:
           </div>
           <div class="pbox-highlights">
-            <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Layanan pendidikan berkualitas agar anak tumbuh dan berkembang secara optimal.</span></div>
-            <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Pembinaan karakter &amp; keimanan yang seimbang serta berkesinambungan.</span></div>
-            <div class="pbox-hl-item"><span class="bullet">✔</span> <span>Memenuhi standar mutu pendidikan demi meningkatkan profesionalitas pendidik.</span></div>
+            <div class="pbox-hl-item"><span class="bullet" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#DCFCE7;color:#16A34A;flex-shrink:0;margin-right:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Layanan pendidikan berkualitas agar anak tumbuh dan berkembang secara optimal.</span></div>
+            <div class="pbox-hl-item"><span class="bullet" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#DCFCE7;color:#16A34A;flex-shrink:0;margin-right:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Pembinaan karakter &amp; keimanan yang seimbang serta berkesinambungan.</span></div>
+            <div class="pbox-hl-item"><span class="bullet" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#DCFCE7;color:#16A34A;flex-shrink:0;margin-right:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Memenuhi standar mutu pendidikan demi meningkatkan profesionalitas pendidik.</span></div>
           </div>
         </div>
 
@@ -2319,14 +2315,14 @@
         <div style="margin-top:18px;padding-top:14px;border-top:1px dashed #F59E0B;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
           <div>
             <div style="font-size:12px;font-weight:800;color:#B45309;">Informasi Pendaftaran / WhatsApp:</div>
-            <div style="font-size:14px;font-weight:900;color:#78350F;">📞 {{ $profil && $profil->no_telepon ? $profil->no_telepon : '0812-3456-7890' }}</div>
+            <div style="font-size:14px;font-weight:900;color:#78350F;display:flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="#E11D48" stroke-width="2.5" style="width:16px;height:16px;flex-shrink:0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>{{ $profil && $profil->no_telepon ? $profil->no_telepon : '0812-3456-7890' }}</div>
           </div>
           <div style="display:flex;gap:8px;">
             <button type="button" onclick="window.print()" class="btn btn-secondary" style="font-size:12px;padding:8px 14px;font-weight:700;">
-              🖨️ Cetak Brosur
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;flex-shrink:0;"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg><span>Cetak Brosur</span>
             </button>
             <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $profil->no_telepon ?? '081234567890') }}?text=Halo%20Admin%20KB-PAUD%20Al-Hidayah,%20saya%20ingin%20bertanya%20informasi%20pendaftaran%20siswa%20baru" target="_blank" class="btn btn-primary" style="font-size:12px;padding:8px 14px;font-weight:700;background:#25D366;border-color:#25D366;">
-              📲 Hubungi WA
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;flex-shrink:0;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span>Hubungi Kami</span>
             </a>
           </div>
         </div>
@@ -2424,8 +2420,8 @@
       </div>
 
       <div style="margin-top:auto; padding-top:16px; border-top:1px solid rgba(255,255,255,0.1); font-size:12px; color:#94A3B8; display:flex; align-items:center; justify-content:space-between;">
-        <span>🏫 KB-PAUD Al-Hidayah Jepara</span>
-        <span style="font-size:11px;">Gunakan tombol panah ⬅️ ➡️ pada keyboard</span>
+        <span>KB-PAUD Al-Hidayah Jepara</span>
+        <span style="font-size:11px;">Gunakan tombol panah panah Kiri / Kanan pada keyboard</span>
       </div>
     </div>
 
