@@ -582,7 +582,7 @@
            FORM
         ════════════════════════════════ */
         .form-group { margin-bottom: 18px; }
-        .form-label { display: block; font-size: 0.825rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+        .form-group label, .form-label { display: block; font-size: 0.825rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
         .form-control {
             width: 100%; padding: 10px 14px;
             border: 1.5px solid var(--border);
@@ -590,11 +590,17 @@
             font-family: inherit; font-size: 0.875rem;
             color: var(--text); background: #fafafa;
             transition: border-color 0.18s, box-shadow 0.18s;
+            box-sizing: border-box;
+        }
+        select.form-control {
+            width: 100%;
+            height: 42px;
+            cursor: pointer;
         }
         .form-control:focus { outline: none; border-color: var(--green-500); background: #fff; box-shadow: 0 0 0 3px rgba(34,197,94,0.1); }
         .form-control.is-invalid { border-color: var(--red); }
         .invalid-feedback { color: var(--red); font-size: 0.78rem; margin-top: 4px; font-weight: 600; }
-        .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
         @media (max-width: 640px) { .form-grid-2 { grid-template-columns: 1fr; } }
 
         /* ════════════════════════════════
@@ -602,7 +608,7 @@
         ════════════════════════════════ */
         .search-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
         .search-bar .form-control { max-width: 280px; }
-        select.form-control { max-width: 200px; }
+        .search-bar select.form-control { max-width: 200px; }
 
         /* ════════════════════════════════
            PAGINATION (MODERN NUMBERS & NAVIGATION)

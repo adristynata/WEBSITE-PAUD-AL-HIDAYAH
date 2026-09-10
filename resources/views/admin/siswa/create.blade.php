@@ -17,7 +17,7 @@
             @csrf
             <div class="form-grid-2">
                 <div class="form-group">
-                    <label for="nis">NIS (Nomor Induk Siswa) <span style="color:red">*</span></label>
+                    <label for="nis" class="form-label">NIS (Nomor Induk Siswa) <span style="color:red">*</span></label>
                     <input type="text" id="nis" name="nis"
                            class="form-control {{ $errors->has('nis') ? 'is-invalid' : '' }}"
                            value="{{ old('nis', $nisPreview) }}" placeholder="Nomor Induk Siswa" required>
@@ -27,21 +27,21 @@
                     @error('nis')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-group">
-                    <label for="nama">Nama Lengkap <span style="color:red">*</span></label>
+                    <label for="nama" class="form-label">Nama Lengkap <span style="color:red">*</span></label>
                     <input type="text" id="nama" name="nama"
                            class="form-control {{ $errors->has('nama') ? 'is-invalid' : '' }}"
                            value="{{ old('nama') }}" placeholder="Nama lengkap siswa" required>
                     @error('nama')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-group">
-                    <label for="tanggal_lahir">Tanggal Lahir <span style="color:red">*</span></label>
+                    <label for="tanggal_lahir" class="form-label">Tanggal Lahir <span style="color:red">*</span></label>
                     <input type="date" id="tanggal_lahir" name="tanggal_lahir"
                            class="form-control {{ $errors->has('tanggal_lahir') ? 'is-invalid' : '' }}"
                            value="{{ old('tanggal_lahir') }}" required>
                     @error('tanggal_lahir')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-group">
-                    <label for="kelas_id">Kelas</label>
+                    <label for="kelas_id" class="form-label">Kelas</label>
                     <select id="kelas_id" name="kelas_id" class="form-control">
                         <option value="">-- Pilih Kelas --</option>
                         @foreach($kelasList as $k)
@@ -53,14 +53,14 @@
                     @error('kelas_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-group">
-                    <label for="kontak_ortu">No. HP Orang Tua</label>
+                    <label for="kontak_ortu" class="form-label">No. HP Orang Tua</label>
                     <input type="text" id="kontak_ortu" name="kontak_ortu"
                            class="form-control {{ $errors->has('kontak_ortu') ? 'is-invalid' : '' }}"
                            value="{{ old('kontak_ortu') }}" placeholder="08xxxxxxxxxx">
                     @error('kontak_ortu')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-group">
-                    <label for="foto">Foto Siswa</label>
+                    <label for="foto" class="form-label">Foto Siswa</label>
                     <input type="file" id="foto" name="foto"
                            class="form-control {{ $errors->has('foto') ? 'is-invalid' : '' }}"
                            accept="image/jpg,image/jpeg,image/png">

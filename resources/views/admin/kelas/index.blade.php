@@ -36,12 +36,18 @@
                         <td><span class="badge badge-blue">{{ $k->tahun_ajaran }}</span></td>
                         <td>{{ $k->guru?->name ?? '<span style="color:#94A3B8">Belum ditentukan</span>' }}</td>
                         <td><span class="badge badge-orange">{{ $k->siswas_count }} siswa</span></td>
-                        <td>
-                            <a href="{{ route('admin.kelas.edit', $k) }}" class="btn btn-secondary btn-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg> Edit</a>
+                        <td style="white-space:nowrap">
+                            <a href="{{ route('admin.kelas.edit', $k) }}" class="btn btn-secondary btn-sm" style="display:inline-flex;align-items:center;gap:4px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                                <span>Edit</span>
+                            </a>
                             <form method="POST" action="{{ route('admin.kelas.destroy', $k) }}" style="display:inline"
-                                  onsubmit="return confirm('Hapus kelas {{ $k->nama_kelas }}?')">
+                                  onsubmit="return confirm('Apakah Anda yakin ingin menghapus kelas {{ $k->nama_kelas }} ({{ $k->tahun_ajaran }})?')">
                                 @csrf @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></button>
+                                <button type="submit" class="btn btn-danger btn-sm" style="display:inline-flex;align-items:center;gap:4px;" title="Hapus Kelas">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                                    <span>Hapus</span>
+                                </button>
                             </form>
                         </td>
                     </tr>
