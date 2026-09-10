@@ -107,6 +107,19 @@ class SiswaController extends Controller
                          ->with('success', "Siswa berhasil {$status}!");
     }
 
+    public function destroy(Siswa $siswa)
+    {
+        if ($siswa->foto) {
+            Storage::disk('public')->delete($siswa->foto);
+        }
+
+        $nama = $siswa->nama;
+        $siswa->delete();
+
+        return redirect()->route('admin.siswa.index')
+                         ->with('success', "Data siswa {$nama} berhasil dihapus secara permanen.");
+    }
+
     // ── Generate NIS otomatis: format TAHUN + 3 digit urutan ────────────────
     // Contoh: 2025001, 2025002, 2026001 (reset tiap tahun ajaran)
     private function generateNis(): string

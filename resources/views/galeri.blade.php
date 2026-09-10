@@ -696,19 +696,45 @@
   <section class="galeri-section">
     <div class="wrap">
 
-      <!-- GRID GALERI FOTO -->
-      <div class="galeri-grid">
+      <!-- FILTER TABS -->
+      <div style="display:flex; justify-content:center; gap:12px; margin-bottom:32px; flex-wrap:wrap;">
+        <button type="button" class="btn-gtab active" onclick="filterGaleri('all', this)" style="padding:9px 24px; border-radius:25px; font-weight:700; font-size:13.5px; cursor:pointer; border:1.5px solid #143818; background:#143818; color:#fff; transition:all 0.2s ease;">Semua Media</button>
+        <button type="button" class="btn-gtab" onclick="filterGaleri('foto', this)" style="padding:9px 24px; border-radius:25px; font-weight:700; font-size:13.5px; cursor:pointer; border:1.5px solid #CBD5E1; background:#fff; color:#475569; transition:all 0.2s ease;">Foto Kegiatan</button>
+        <button type="button" class="btn-gtab" onclick="filterGaleri('video', this)" style="padding:9px 24px; border-radius:25px; font-weight:700; font-size:13.5px; cursor:pointer; border:1.5px solid #CBD5E1; background:#fff; color:#475569; transition:all 0.2s ease;">Video Dokumentasi</button>
+      </div>
+
+      <!-- GRID GALERI FOTO & VIDEO -->
+      <div class="galeri-grid" id="galeriGrid">
         @forelse($galeris as $g)
-          <div class="galeri-card" onclick="openModal('{{ asset($g->foto) }}', '{{ addslashes($g->judul) }}', '{{ addslashes($g->deskripsi ?? 'Dokumentasi kegiatan siswa PAUD Al-Hidayah.') }}', '{{ $g->created_at->format('d M Y') }}')">
+          @php
+            $isVideo = ($g->kategori === 'video');
+            $mediaType = $isVideo ? ($g->video_url ? 'video_url' : 'video_file') : 'foto';
+            $mediaUrl = $isVideo ? ($g->embed_url) : asset($g->foto);
+          @endphp
+          <div class="galeri-card galeri-item-card" data-kat="{{ $g->kategori }}" onclick="openModalMedia('{{ $mediaType }}', '{{ $mediaUrl }}', '{{ $g->thumbnail_url }}', '{{ addslashes($g->judul) }}', '{{ addslashes($g->deskripsi ?? 'Dokumentasi kegiatan siswa PAUD Al-Hidayah.') }}', '{{ $g->created_at->format('d M Y') }}')">
             <div class="galeri-img-wrapper">
               <span class="galeri-date-badge" style="display:inline-flex;align-items:center;gap:4px;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;color:#FFF;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                 <span>{{ $g->created_at->format('d M Y') }}</span>
               </span>
-              <img src="{{ asset($g->foto) }}" alt="{{ $g->judul }}" onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'">
-              <div class="galeri-zoom-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:28px;height:28px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-              </div>
+              
+              <img src="{{ $g->thumbnail_url }}" alt="{{ $g->judul }}" onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'">
+              
+              @if($isVideo)
+                <div style="position:absolute; top:14px; right:14px; background:#EF4444; color:#FFF; font-size:10px; font-weight:800; padding:4px 10px; border-radius:12px; letter-spacing:0.05em; display:inline-flex; align-items:center; gap:4px; box-shadow:0 4px 10px rgba(0,0,0,0.3);">
+                  <svg viewBox="0 0 24 24" fill="currentColor" style="width:10px;height:10px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  <span>VIDEO</span>
+                </div>
+                <div class="galeri-zoom-icon" style="opacity:0.95; background:rgba(0,0,0,0.35);">
+                  <div style="width:52px; height:52px; border-radius:50%; background:rgba(239,68,68,0.95); display:flex; align-items:center; justify-content:center; color:#FFF; box-shadow:0 6px 20px rgba(239,68,68,0.5); transition:transform 0.3s ease;" class="play-btn-circle">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;margin-left:3px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </div>
+                </div>
+              @else
+                <div class="galeri-zoom-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:28px;height:28px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                </div>
+              @endif
             </div>
             <div class="galeri-info">
               <h3 class="galeri-title">{{ $g->judul }}</h3>
@@ -718,8 +744,8 @@
         @empty
           <div style="grid-column: span 3; text-align:center; padding: 60px 0; color:#64748B;">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:48px;height:48px;color:#143818;margin-bottom:12px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            <div style="font-size:18px;font-weight:800;color:var(--navy);">Belum Ada Foto Galeri</div>
-            <div style="font-size:14px;">Foto dokumentasi kegiatan belum diunggah.</div>
+            <div style="font-size:18px;font-weight:800;color:var(--navy);">Belum Ada Galeri</div>
+            <div style="font-size:14px;">Foto dan video dokumentasi kegiatan belum diunggah.</div>
           </div>
         @endforelse
       </div>
@@ -738,8 +764,8 @@
       <button class="modal-close-btn" onclick="closeModal()" aria-label="Tutup">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:20px;height:20px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
-      <div class="modal-img-container">
-        <img id="modalImg" src="" alt="Momen Galeri">
+      <div class="modal-img-container" id="modalMediaContainer" style="background:#0F172A; min-height:280px; display:flex; align-items:center; justify-content:center;">
+        <!-- Dynamic Photo or Video Player injected via JS -->
       </div>
       <div class="modal-body-text">
         <div id="modalDate" style="font-size:12px;font-weight:800;color:var(--green-dark);margin-bottom:4px;"></div>
@@ -786,17 +812,48 @@
       toggle.classList.remove('active');
     }
 
-    // Lightbox Modal
-    function openModal(imgUrl, title, desc, date) {
-      document.getElementById('modalImg').src = imgUrl;
+    // Filter Tab Function
+    function filterGaleri(kat, btn) {
+      document.querySelectorAll('.btn-gtab').forEach(b => {
+        b.style.background = '#fff';
+        b.style.color = '#475569';
+        b.style.borderColor = '#CBD5E1';
+      });
+      btn.style.background = '#143818';
+      btn.style.color = '#fff';
+      btn.style.borderColor = '#143818';
+
+      const items = document.querySelectorAll('.galeri-item-card');
+      items.forEach(item => {
+        if (kat === 'all' || item.dataset.kat === kat) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    // Lightbox Modal for Photo & Video
+    function openModalMedia(type, mediaUrl, thumbUrl, title, desc, date) {
+      const container = document.getElementById('modalMediaContainer');
       document.getElementById('modalTitle').innerText = title;
       document.getElementById('modalDesc').innerText = desc;
       document.getElementById('modalDate').innerText = date;
+
+      if (type === 'video_url') {
+        container.innerHTML = `<iframe src="${mediaUrl}" style="width:100%; height:450px; border:none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      } else if (type === 'video_file') {
+        container.innerHTML = `<video controls autoplay style="width:100%; max-height:450px; background:#000;"><source src="${mediaUrl}" type="video/mp4">Browser Anda tidak mendukung pemutar video.</video>`;
+      } else {
+        container.innerHTML = `<img src="${mediaUrl}" alt="${title}" style="width:100%; height:100%; max-height:450px; object-fit:contain; display:block;">`;
+      }
+
       document.getElementById('galleryModal').classList.add('active');
     }
 
     function closeModal() {
       document.getElementById('galleryModal').classList.remove('active');
+      document.getElementById('modalMediaContainer').innerHTML = '';
     }
   </script>
 </body>

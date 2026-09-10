@@ -17,6 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
+        $exceptions->render(function (\Illuminate\Http\Exceptions\PostTooLargeException $e, Request $request) {
+            return redirect()->back()->withInput($request->except(['foto', 'video_file', 'ttd_kepsek']))->with('error', 'Ukuran file yang Anda unggah terlalu besar (melebihi batas maksimal upload server PHP). Disarankan menggunakan opsi Link YouTube atau gunakan file video di bawah 20 MB.');
+        });
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*'),
         );

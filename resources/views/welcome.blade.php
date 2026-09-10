@@ -467,16 +467,18 @@
   .profil-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 24px;
+    align-items: stretch;
   }
   .profil-box {
     background: #ffffff;
     border: 1px solid #E2E8F0;
     border-radius: 20px;
-    padding: 26px 28px;
+    padding: 28px 30px;
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     display: flex;
     flex-direction: column;
+    height: 100%;
   }
   .profil-box:hover {
     transform: translateY(-4px);
@@ -581,10 +583,11 @@
     display: flex;
     align-items: center;
     gap: 14px;
+    margin-bottom: 16px;
   }
   .pbox-icon {
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
     border-radius: 14px;
     display: flex;
     align-items: center;
@@ -605,40 +608,56 @@
     font-weight: 800;
     letter-spacing: .08em;
     text-transform: uppercase;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
   }
   .pbox-header h4 {
-    font-size: 18px;
+    font-size: 20px;
     color: var(--navy);
     font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
     line-height: 1.25;
+    margin: 0;
   }
   .pbox-body {
-    font-size: 13.5px;
-    color: #555;
+    font-size: 14px;
+    color: #475569;
     line-height: 1.65;
+    flex: 1;
+    margin-bottom: 16px;
   }
   .pbox-highlights {
-    margin-top: 6px;
-    padding-top: 12px;
-    border-top: 1px dashed var(--line);
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px dashed #E2E8F0;
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    font-size: 12.5px;
+    gap: 10px;
+    font-size: 13px;
   }
   .pbox-hl-item {
     display: flex;
     align-items: flex-start;
-    gap: 8px;
-    color: #475569;
+    gap: 10px;
+    color: #334155;
     line-height: 1.5;
+    font-size: 13px;
   }
-  .pbox-hl-item span.bullet {
-    color: var(--green);
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 1;
+  .pbox-hl-bullet {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #DCFCE7;
+    color: #16A34A;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .pbox-hl-bullet svg {
+    width: 12px;
+    height: 12px;
+    stroke-width: 3;
   }
 
   /* ── FLYER BROSUR REALISTIC SPLIT LAYOUT (PERSIS GAMBAR CONTOH) ── */
@@ -801,8 +820,8 @@
   }
   .flyer-poster-features-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
     margin-bottom: 20px;
   }
   .flyer-feature-block {
@@ -932,7 +951,7 @@
   }
 
   /* testimonial + cta */
-  .bottom-row{padding:0 0 90px;}
+  .bottom-row{padding:20px 0 90px; margin-top:20px;}
   .bottom-grid{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:24px;}
   .testi-card{
     background:var(--cream-soft);border:1px solid var(--line);
@@ -976,10 +995,11 @@
 
   /* Portal Ortu CMS Classes */
   .portal-ortu{
-    padding:35px 0;
+    padding:50px 0 54px;
     background:var(--cream-soft);
     border-top:1px solid var(--line);
     border-bottom:1px solid var(--line);
+    margin-bottom:40px;
   }
   .portal-header{
     text-align:center;
@@ -1035,11 +1055,15 @@
   }
   .portal-footer{
     text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
   }
   .portal-footer p{
-    margin-top:14px;
-    font-size:12.5px;
-    color:#8b8b93;
+    margin-top:10px;
+    font-size:13px;
+    color:#64748B;
   }
 
   /* Mobile Masuk Button in Nav Drawer */
@@ -2029,9 +2053,9 @@
             <strong>PAUD Al-Hidayah</strong> merupakan lembaga pendidikan anak usia dini berbasis Islami di Desa Wedelan, Kecamatan Bangsri, Kabupaten Jepara. Kami berkomitmen menyelenggarakan pendidikan berkualitas yang berlandaskan nilai-nilai keagamaan, kemandirian, dan kreativitas.
           </div>
           <div class="pbox-highlights">
-            <div class="pbox-hl-item"><span class="bullet" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#DCFCE7;color:#16A34A;flex-shrink:0;margin-right:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Pendidikan Berbasis Agama &amp; Moral Islami</span></div>
-            <div class="pbox-hl-item"><span class="bullet" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#DCFCE7;color:#16A34A;flex-shrink:0;margin-right:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Metode Praktik Belajar Sambil Bermain Ceria</span></div>
-            <div class="pbox-hl-item"><span class="bullet" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#DCFCE7;color:#16A34A;flex-shrink:0;margin-right:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Pengembangan Holistik (Agama, Kognitif, Motorik, Bahasa, Seni)</span></div>
+            <div class="pbox-hl-item"><span class="pbox-hl-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Pendidikan Berbasis Agama &amp; Moral Islami</span></div>
+            <div class="pbox-hl-item"><span class="pbox-hl-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Metode Praktik Belajar Sambil Bermain Ceria</span></div>
+            <div class="pbox-hl-item"><span class="pbox-hl-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Pengembangan Holistik (Agama, Kognitif, Motorik, Bahasa, Seni)</span></div>
           </div>
         </div>
 
@@ -2047,10 +2071,10 @@
             </div>
           </div>
           <div class="pbox-body">
-            <p style="font-size: 15px; font-weight: 700; color: var(--navy); line-height: 1.5; margin-bottom: 8px; font-family: 'Baloo 2', sans-serif;">
+            <p style="font-size: 14.5px; font-weight: 700; color: var(--navy); line-height: 1.5; margin-bottom: 8px; font-family: 'Baloo 2', sans-serif;">
               "Membentuk anak yang cerdas, baik, terampil, berakhlak mulia, sholih/sholihah, kreatif, dan mandiri."
             </p>
-            Visi ini menjadi arah dasar kami dalam membimbing tumbuh kembang buah hati Anda agar menjadi pribadi unggul yang cerdas intelektualnya, santun perilakunya, dan kokoh kemandiriannya.
+            Visi ini menjadi arah dasar kami dalam membimbing tumbuh kembang buah hati Anda agar menjadi pribadi unggul:
           </div>
         </div>
 
@@ -2069,9 +2093,9 @@
             Untuk mewujudkan visi unggul sekolah, PAUD Al-Hidayah menjalankan misi-misi strategis berikut dalam setiap kegiatan belajar mengajar:
           </div>
           <div class="pbox-highlights">
-            <div class="pbox-hl-item"><span class="bullet" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#DCFCE7;color:#16A34A;flex-shrink:0;margin-right:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Melaksanakan pembelajaran aktif, kreatif, efektif, dan inovatif.</span></div>
-            <div class="pbox-hl-item"><span class="bullet" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#DCFCE7;color:#16A34A;flex-shrink:0;margin-right:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Mendidik dan menstimulasi anak secara optimal sesuai tahap perkembangan.</span></div>
-            <div class="pbox-hl-item"><span class="bullet" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#DCFCE7;color:#16A34A;flex-shrink:0;margin-right:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Menyiapkan anak didik menuju jenjang pendidikan dasar dengan matang.</span></div>
+            <div class="pbox-hl-item"><span class="pbox-hl-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Melaksanakan pembelajaran aktif, kreatif, efektif, dan inovatif.</span></div>
+            <div class="pbox-hl-item"><span class="pbox-hl-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Mendidik dan menstimulasi anak secara optimal sesuai tahap perkembangan.</span></div>
+            <div class="pbox-hl-item"><span class="pbox-hl-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Menyiapkan anak didik menuju jenjang pendidikan dasar dengan matang.</span></div>
           </div>
         </div>
 
@@ -2090,9 +2114,9 @@
             Tujuan pendidikan PAUD Al-Hidayah dirancang secara komprehensif untuk mendukung perkembangan anak dan mutu sekolah:
           </div>
           <div class="pbox-highlights">
-            <div class="pbox-hl-item"><span class="bullet" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#DCFCE7;color:#16A34A;flex-shrink:0;margin-right:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Layanan pendidikan berkualitas agar anak tumbuh dan berkembang secara optimal.</span></div>
-            <div class="pbox-hl-item"><span class="bullet" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#DCFCE7;color:#16A34A;flex-shrink:0;margin-right:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Pembinaan karakter &amp; keimanan yang seimbang serta berkesinambungan.</span></div>
-            <div class="pbox-hl-item"><span class="bullet" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#DCFCE7;color:#16A34A;flex-shrink:0;margin-right:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Memenuhi standar mutu pendidikan demi meningkatkan profesionalitas pendidik.</span></div>
+            <div class="pbox-hl-item"><span class="pbox-hl-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Layanan pendidikan berkualitas agar anak tumbuh dan berkembang secara optimal.</span></div>
+            <div class="pbox-hl-item"><span class="pbox-hl-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Pembinaan karakter &amp; keimanan yang seimbang serta berkesinambungan.</span></div>
+            <div class="pbox-hl-item"><span class="pbox-hl-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Memenuhi standar mutu pendidikan demi meningkatkan profesionalitas pendidik.</span></div>
           </div>
         </div>
 
@@ -2131,31 +2155,41 @@
             <span class="flyer-age-title">KELOMPOK BERMAIN (KB)</span>
           </div>
           <div class="flyer-age-number-box">
-            <span class="flyer-age-num">3 – 4</span>
+            <span class="flyer-age-num">2 – 4</span>
             <span class="flyer-age-lbl">TAHUN</span>
           </div>
         </div>
+
+        @php
+          $flyerProgItems = array_filter(array_map('trim', explode("\n", $profil->flyer_program_unggulan ?? "Pemeriksaan Kesehatan Dasar\nKunjungan Edukasi\nBakti Sosial\nOuting Class\nParenting\nCooking Day\nPeringatan Hari Besar\nPentas Seni & Kreativitas\nMarket Day")));
+          $flyerSyaratItems = array_filter(array_map('trim', explode("\n", $profil->flyer_persyaratan ?? "Usia 3 - 6 Tahun\nFC Akta Kelahiran & KK\nFC KTP Wali Murid\nPas Foto 3x4 (4 Lembar)\nFormulir Pendaftaran")));
+          $flyerEkskulItems = array_filter(array_map('trim', explode("\n", $profil->flyer_ekskul ?? "Seni Tari & Suara\nMewarnai & Gambar\nBerenang & Senam\nHafalan Surah Pendek")));
+        @endphp
 
         <!-- Features Grid (Program Unggulan, Persyaratan & Ekskul) -->
         <div class="flyer-poster-features-grid">
           <div class="flyer-feature-block">
             <span class="flyer-feature-head">Program Unggulan</span>
             <ul class="flyer-feature-list">
-              <li>Nilai Agama &amp; Budi Pekerti</li>
-              <li>Belajar Bermakna (Deep Learning)</li>
-              <li>Read Aloud &amp; Dongeng</li>
-              <li>Cooking Class Cilik</li>
-              <li>Praktek Ibadah &amp; Wudhu</li>
+              @foreach($flyerProgItems as $item)
+                <li>{{ $item }}</li>
+              @endforeach
             </ul>
           </div>
           <div class="flyer-feature-block">
-            <span class="flyer-feature-head yellow">Persyaratan &amp; Ekskul</span>
+            <span class="flyer-feature-head yellow">Persyaratan</span>
             <ul class="flyer-feature-list">
-              <li>FC Akta Kelahiran &amp; KK</li>
-              <li>Pas Foto 3x4 (2 lembar)</li>
-              <li>FC KMS &amp; Formulir</li>
-              <li><strong>Ekskul:</strong> Seni Tari &amp; Melukis</li>
-              <li><strong>Ekskul:</strong> Renang &amp; Bahasa Inggris</li>
+              @foreach($flyerSyaratItems as $item)
+                <li>{{ $item }}</li>
+              @endforeach
+            </ul>
+          </div>
+          <div class="flyer-feature-block">
+            <span class="flyer-feature-head purple">Ekstrakurikuler</span>
+            <ul class="flyer-feature-list">
+              @foreach($flyerEkskulItems as $item)
+                <li>{{ $item }}</li>
+              @endforeach
             </ul>
           </div>
         </div>
@@ -2207,7 +2241,7 @@
             Syarat Khusus Usia Calon Anak Didik
           </div>
           <ul class="flyer-detail-list">
-            <li><strong>KB (Kelompok Bermain):</strong> Usia 3 – 4 Tahun (per 1 Juli 2026).</li>
+            <li><strong>KB (Kelompok Bermain):</strong> Usia 2 – 4 Tahun (per 1 Juli 2026).</li>
           </ul>
         </div>
 
@@ -2344,13 +2378,24 @@
     </div>
     <div class="gallery-grid">
       @forelse($galeris as $index => $galeri)
-        <div class="gallery-card" onclick="openLightbox({{ $index }})" title="Klik untuk lihat foto dan detail">
-          <div class="gallery-img-wrapper">
-            <img src="{{ asset($galeri->foto) }}" alt="{{ $galeri->judul }}" loading="lazy">
-            <div class="gallery-overlay-badge">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              <span>Lihat Detail</span>
-            </div>
+        <div class="gallery-card" onclick="openLightbox({{ $index }})" title="Klik untuk lihat media dan detail">
+          <div class="gallery-img-wrapper" style="position:relative;">
+            <img src="{{ $galeri->thumbnail_url }}" alt="{{ $galeri->judul }}" loading="lazy">
+            @if($galeri->kategori === 'video')
+              <div style="position:absolute; top:12px; right:12px; background:#EF4444; color:#FFF; font-size:10px; font-weight:800; padding:4px 10px; border-radius:10px; display:inline-flex; align-items:center; gap:4px; box-shadow:0 2px 8px rgba(0,0,0,0.3);">
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width:10px;height:10px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <span>VIDEO</span>
+              </div>
+              <div class="gallery-overlay-badge" style="background:rgba(239,68,68,0.9);">
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <span>Putar Video</span>
+              </div>
+            @else
+              <div class="gallery-overlay-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <span>Lihat Detail</span>
+              </div>
+            @endif
           </div>
           <div class="gallery-info">
             <h4>{{ $galeri->judul }}</h4>
@@ -2696,10 +2741,14 @@
   // ── GALLERY FULLSCREEN LIGHTBOX CONTROLLER ──
   @php
     $galleryList = $galeris->map(function($g) {
+        $isVideo = ($g->kategori === 'video');
         return [
             'judul' => $g->judul,
             'deskripsi' => $g->deskripsi,
-            'foto' => asset($g->foto),
+            'kategori' => $g->kategori,
+            'media_url' => $isVideo ? $g->embed_url : asset($g->foto),
+            'media_type' => $isVideo ? ($g->video_url ? 'video_url' : 'video_file') : 'foto',
+            'foto' => $g->thumbnail_url,
             'tanggal' => $g->created_at ? $g->created_at->translatedFormat('d F Y') : 'Dokumentasi Sekolah'
         ];
     });
@@ -2721,6 +2770,10 @@
       const modal = document.getElementById('galleryLightbox');
       modal.classList.remove('active');
       document.body.style.overflow = '';
+      const mediaContainer = document.querySelector('.lightbox-image-container');
+      if (mediaContainer) {
+        mediaContainer.innerHTML = '<img id="lightboxImg" src="" alt="Dokumentasi Kegiatan">';
+      }
   }
 
   function handleLightboxBackdrop(e) {
@@ -2733,11 +2786,23 @@
       const item = galleryData[currentGalleryIndex];
       if (!item) return;
 
-      document.getElementById('lightboxImg').src = item.foto;
+      const mediaContainer = document.querySelector('.lightbox-image-container');
+      if (mediaContainer) {
+          if (item.kategori === 'video') {
+              if (item.media_type === 'video_url') {
+                  mediaContainer.innerHTML = `<iframe src="${item.media_url}" style="width:100%; height:450px; border:none; border-radius:12px;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+              } else {
+                  mediaContainer.innerHTML = `<video controls autoplay style="width:100%; max-height:450px; background:#000; border-radius:12px;"><source src="${item.media_url}" type="video/mp4">Browser Anda tidak mendukung pemutar video.</video>`;
+              }
+          } else {
+              mediaContainer.innerHTML = `<img id="lightboxImg" src="${item.foto}" alt="${item.judul}" style="width:100%; height:100%; max-height:450px; object-fit:contain; display:block;">`;
+          }
+      }
+
       document.getElementById('lightboxTitle').textContent = item.judul;
       document.getElementById('lightboxDesc').textContent = item.deskripsi || 'Dokumentasi kegiatan pembelajaran dan kreativitas anak di KB-PAUD Al-Hidayah.';
       document.getElementById('lightboxDate').textContent = item.tanggal;
-      document.getElementById('lightboxCounter').textContent = `Foto ${currentGalleryIndex + 1} dari ${galleryData.length}`;
+      document.getElementById('lightboxCounter').textContent = `${item.kategori === 'video' ? 'Video' : 'Foto'} ${currentGalleryIndex + 1} dari ${galleryData.length}`;
       
       const downloadBtn = document.getElementById('lightboxDownloadBtn');
       downloadBtn.href = item.foto;

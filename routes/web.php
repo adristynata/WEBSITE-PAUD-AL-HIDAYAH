@@ -53,7 +53,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::resource('kelas', KelasController::class)->parameters(['kelas' => 'kelas']);
 
     // Siswa
-    Route::resource('siswa', SiswaController::class)->except(['destroy', 'show']);
+    Route::resource('siswa', SiswaController::class)->except(['show']);
     Route::patch('siswa/{siswa}/toggle-aktif', [SiswaController::class, 'toggleAktif'])->name('siswa.toggle-aktif');
 
     // Laporan Bulanan

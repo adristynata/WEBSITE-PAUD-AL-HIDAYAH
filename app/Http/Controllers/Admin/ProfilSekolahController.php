@@ -67,6 +67,9 @@ class ProfilSekolahController extends Controller
             'flyer_foto1' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:10240',
             'flyer_foto2' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:10240',
             'flyer_foto3' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:10240',
+            'flyer_program_unggulan' => 'nullable|string',
+            'flyer_persyaratan' => 'nullable|string',
+            'flyer_ekskul' => 'nullable|string',
             'ttd_kepsek' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'ttd_kepsek_base64' => 'nullable|string',
         ], $messages);
@@ -79,6 +82,9 @@ class ProfilSekolahController extends Controller
         $profil->no_telepon = $request->no_telepon;
         $profil->email_sekolah = $request->email_sekolah;
         $profil->maps_embed = $request->maps_embed;
+        $profil->flyer_program_unggulan = $request->flyer_program_unggulan;
+        $profil->flyer_persyaratan = $request->flyer_persyaratan;
+        $profil->flyer_ekskul = $request->flyer_ekskul;
 
         if ($request->hasFile('sambutan_foto')) {
             // Delete old photo if exists and is not the default seeder file

@@ -292,6 +292,44 @@
                         @error('flyer_foto3')<div class="invalid-feedback" style="display:block;">{{ $message }}</div>@enderror
                     </div>
                 </div>
+
+                <!-- Textarea Konten Teks SPMB Flyer -->
+                <div style="margin-top:20px; padding:16px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px;">
+                    <h5 style="margin:0 0 6px 0; font-size:14px; font-weight:700; color:#1E293B;">Daftar Poin Teks Poster SPMB (Isi 1 Poin per Baris)</h5>
+                    <small style="color:#64748B; display:block; margin-bottom:14px;">Masukkan daftar item yang akan ditampilkan pada poster SPMB di halaman depan website. Tuliskan 1 item per baris.</small>
+
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px;">
+                        <!-- Program Unggulan -->
+                        <div class="form-group" style="margin-bottom:0;">
+                            <label for="flyer_program_unggulan" style="font-weight:700; font-size:13px; color:#BE185D; display:flex; align-items:center; gap:6px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:#EC4899;"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <span>Program Unggulan</span>
+                            </label>
+                            <textarea id="flyer_program_unggulan" name="flyer_program_unggulan" class="form-control" rows="5" style="font-size:13px; line-height:1.5;" placeholder="Pendidikan Karakter & Islami&#10;Pengenalan Huruf & Angka Ceria&#10;Motorik & Seni Kreatif&#10;Kunjungan Edukasi (Field Trip)&#10;Pemeriksaan Kesehatan Rutin">{{ old('flyer_program_unggulan', $profil->flyer_program_unggulan ?? "Pendidikan Karakter & Islami\nPengenalan Huruf & Angka Ceria\nMotorik & Seni Kreatif\nKunjungan Edukasi (Field Trip)\nPemeriksaan Kesehatan Rutin") }}</textarea>
+                            @error('flyer_program_unggulan')<div class="invalid-feedback" style="display:block;">{{ $message }}</div>@enderror
+                        </div>
+
+                        <!-- Persyaratan Pendaftaran -->
+                        <div class="form-group" style="margin-bottom:0;">
+                            <label for="flyer_persyaratan" style="font-weight:700; font-size:13px; color:#B45309; display:flex; align-items:center; gap:6px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:#F59E0B;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                                <span>Persyaratan Pendaftaran</span>
+                            </label>
+                            <textarea id="flyer_persyaratan" name="flyer_persyaratan" class="form-control" rows="5" style="font-size:13px; line-height:1.5;" placeholder="Usia 3 - 6 Tahun&#10;Fotokopi Akta Kelahiran (2 Lembar)&#10;Fotokopi Kartu Keluarga (2 Lembar)&#10;Pas Foto Anak 3x4 (4 Lembar)&#10;Mengisi Formulir Pendaftaran">{{ old('flyer_persyaratan', $profil->flyer_persyaratan ?? "Usia 3 - 6 Tahun\nFotokopi Akta Kelahiran (2 Lembar)\nFotokopi Kartu Keluarga (2 Lembar)\nPas Foto Anak 3x4 (4 Lembar)\nMengisi Formulir Pendaftaran") }}</textarea>
+                            @error('flyer_persyaratan')<div class="invalid-feedback" style="display:block;">{{ $message }}</div>@enderror
+                        </div>
+
+                        <!-- Ekstrakurikuler -->
+                        <div class="form-group" style="margin-bottom:0;">
+                            <label for="flyer_ekskul" style="font-weight:700; font-size:13px; color:#6D28D9; display:flex; align-items:center; gap:6px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:#8B5CF6;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                <span>Ekstrakurikuler</span>
+                            </label>
+                            <textarea id="flyer_ekskul" name="flyer_ekskul" class="form-control" rows="5" style="font-size:13px; line-height:1.5;" placeholder="Tari & Seni Suara&#10;Mewarnai & Menggambar&#10;Berenang & Senam Ceria&#10;Hafalan Surah Pendek & Doa">{{ old('flyer_ekskul', $profil->flyer_ekskul ?? "Tari & Seni Suara\nMewarnai & Menggambar\nBerenang & Senam Ceria\nHafalan Surah Pendek & Doa") }}</textarea>
+                            @error('flyer_ekskul')<div class="invalid-feedback" style="display:block;">{{ $message }}</div>@enderror
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Bagian 3: Informasi Kontak & Google Maps -->
