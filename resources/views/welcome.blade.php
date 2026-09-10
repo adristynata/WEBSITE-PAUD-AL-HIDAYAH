@@ -909,45 +909,46 @@
     background: #FFFBEB;
     border: 2px solid #FDE68A;
     border-radius: 24px;
-    padding: 32px 30px;
+    padding: 24px 26px;
     box-shadow: 0 16px 35px rgba(217, 119, 6, 0.08);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 12px;
   }
   .flyer-detail-head h3 {
     font-family: 'Baloo 2', sans-serif;
-    font-size: 26px;
+    font-size: 23px;
     font-weight: 900;
     color: #B45309;
     line-height: 1.25;
-    margin-bottom: 20px;
+    margin-bottom: 4px;
     text-align: center;
   }
   .flyer-section-title {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 900;
     color: #78350F;
-    margin-top: 16px;
-    margin-bottom: 8px;
+    margin-top: 0;
+    margin-bottom: 4px;
     display: flex;
     align-items: center;
     gap: 8px;
   }
   .flyer-detail-text {
-    font-size: 13.5px;
+    font-size: 13px;
     color: #451A03;
-    line-height: 1.6;
+    line-height: 1.5;
   }
   .flyer-detail-list {
-    margin: 4px 0 14px 18px;
+    margin: 2px 0 6px 18px;
     padding: 0;
     font-size: 13px;
     color: #78350F;
-    line-height: 1.6;
+    line-height: 1.5;
   }
   .flyer-detail-list li {
-    margin-bottom: 4px;
+    margin-bottom: 3px;
   }
 
   /* testimonial + cta */
@@ -1852,7 +1853,7 @@
             <div class="nav-item-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
             </div>
-            <span> Kegiatan</span>
+            <span>Kegiatan</span>
           </div>
           <span class="nav-item-arrow">›</span>
         </a>
@@ -2094,8 +2095,8 @@
           </div>
           <div class="pbox-highlights">
             <div class="pbox-hl-item"><span class="pbox-hl-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Melaksanakan pembelajaran aktif, kreatif, efektif, dan inovatif.</span></div>
-            <div class="pbox-hl-item"><span class="pbox-hl-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Mendidik dan menstimulasi anak secara optimal sesuai tahap perkembangan.</span></div>
-            <div class="pbox-hl-item"><span class="pbox-hl-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Menyiapkan anak didik menuju jenjang pendidikan dasar dengan matang.</span></div>
+            <div class="pbox-hl-item"><span class="pbox-hl-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Mendidik dan menstimulasi anak secara optimal sesuai kemampuan anak.</span></div>
+            <div class="pbox-hl-item"><span class="pbox-hl-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span> <span>Menyiapkan anak didik menuju jenjang pendidikan dasar dengan ketercapaian kompetensi dasar sesuai tahap perkembangan anak.</span></div>
           </div>
         </div>
 
@@ -2253,7 +2254,7 @@
           </div>
 
           <!-- Tab Switcher -->
-          <div class="program-tabs" style="justify-content:flex-start;margin-bottom:14px;gap:6px;">
+          <div class="program-tabs" style="justify-content:flex-start;margin-bottom:8px;gap:6px;">
             <button type="button" class="p-tab-btn active" style="padding:6px 14px;font-size:12px;" onclick="switchProgramTab('sem1', this)">
               Semester 1 (Ganjil)
             </button>
@@ -2345,8 +2346,24 @@
 
         </div>
 
+        <!-- Strip Keunggulan Utama PAUD Al-Hidayah -->
+        <div style="background:linear-gradient(135deg, #FEF3C7, #FDE68A); border:1px solid #F59E0B; border-radius:12px; padding:10px 14px; margin-top:12px; display:flex; align-items:center; justify-content:space-around; flex-wrap:wrap; gap:8px; font-size:11.5px; font-weight:800; color:#78350F;">
+          <span style="display:inline-flex;align-items:center;gap:5px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" style="width:14px;height:14px;flex-shrink:0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span>Lingkungan Islami &amp; Ramah Anak</span>
+          </span>
+          <span style="display:inline-flex;align-items:center;gap:5px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" style="width:14px;height:14px;flex-shrink:0;"><path d="M17 21v-2a4 4 0 0 4-4H5a4 4 0 0 4-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <span>Pendidik Sabar &amp; Berpengalaman</span>
+          </span>
+          <span style="display:inline-flex;align-items:center;gap:5px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;flex-shrink:0;color:#D97706;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>Fasilitas Lengkap &amp; Aman</span>
+          </span>
+        </div>
+
         <!-- Bagian D: Prosedur Pendaftaran & Akses Cetak Flyer -->
-        <div style="margin-top:18px;padding-top:14px;border-top:1px dashed #F59E0B;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <div style="margin-top:14px;padding-top:14px;border-top:1px dashed #F59E0B;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
           <div>
             <div style="font-size:12px;font-weight:800;color:#B45309;">Informasi Pendaftaran / WhatsApp:</div>
             <div style="font-size:14px;font-weight:900;color:#78350F;display:flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="#E11D48" stroke-width="2.5" style="width:16px;height:16px;flex-shrink:0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>{{ $profil && $profil->no_telepon ? $profil->no_telepon : '0812-3456-7890' }}</div>

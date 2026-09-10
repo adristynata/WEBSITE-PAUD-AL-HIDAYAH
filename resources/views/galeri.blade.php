@@ -194,6 +194,15 @@
       border-radius: 3px;
       transition: all 0.3s ease;
     }
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(7.5px) rotate(45deg);
+    }
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.active span:nth-child(3) {
+      transform: translateY(-7.5px) rotate(-45deg);
+    }
 
     /* ── MOBILE RESPONSIVE NAVIGATION DRAWER ── */
     @media (max-width: 992px) {
@@ -204,43 +213,54 @@
         display: block;
         position: fixed;
         inset: 0;
-        background: rgba(15, 23, 42, 0.55);
-        backdrop-filter: blur(4px);
+        background: rgba(15, 23, 42, 0.65);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        z-index: 1050;
         opacity: 0;
         visibility: hidden;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 1050;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
       }
       .nav-backdrop.active {
         opacity: 1;
         visibility: visible;
       }
+
+      /* Mobile Drawer Nav Container */
       nav#mobileNav {
         position: fixed;
         top: 0;
-        right: -320px;
-        width: 300px;
+        right: 0;
+        width: 320px;
+        max-width: 86vw;
         height: 100vh;
         background: #FFFFFF;
-        box-shadow: -8px 0 32px rgba(15, 23, 42, 0.18);
-        z-index: 1100;
-        display: flex;
         flex-direction: column;
+        align-items: stretch;
         justify-content: space-between;
+        gap: 0;
         padding: 0;
-        transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: -10px 0 35px rgba(0, 0, 0, 0.18);
+        transform: translateX(100%);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 1060;
+        border-top-left-radius: 24px;
+        border-bottom-left-radius: 24px;
         overflow-y: auto;
       }
       nav#mobileNav.active {
-        right: 0;
+        transform: translateX(0);
       }
+
+      /* Drawer Header */
       .nav-drawer-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 20px 24px;
-        border-bottom: 1px solid #F1F5F9;
-        background: #FAFAFA;
+        padding: 18px 20px;
+        border-bottom: 1px solid #EEF2F6;
+        background: #FAFDFB;
+        border-top-left-radius: 24px;
       }
       .drawer-brand {
         display: flex;
@@ -248,38 +268,54 @@
         gap: 10px;
       }
       .nav-drawer-close {
-        background: #F1F5F9;
-        border: none;
-        width: 34px;
-        height: 34px;
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
+        background: #F1F5F9;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #475569;
+        border: none;
         cursor: pointer;
+        color: #64748B;
+        transition: all 0.2s ease;
       }
+      .nav-drawer-close:hover {
+        background: #EF4444;
+        color: #FFFFFF;
+        transform: rotate(90deg);
+      }
+
+      /* Menu List */
       .nav-menu-list {
         display: flex;
         flex-direction: column;
-        gap: 4px;
-        padding: 16px 16px 0;
-        align-items: stretch;
+        gap: 8px;
+        padding: 18px 16px;
+        flex: 1;
       }
       nav a.nav-link-item {
-        padding: 12px 16px;
-        border-radius: 12px;
+        display: flex;
+        align-items: center;
         justify-content: space-between;
-        color: #334155;
-        font-size: 14.5px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        font-size: 15px;
         font-weight: 700;
+        color: #334155;
+        text-align: left;
+        transition: all 0.2s ease;
+        background: transparent;
+        width: 100%;
+        border: 1px solid transparent;
+        box-sizing: border-box;
       }
-      nav a.nav-link-item:hover,
-      nav a.nav-link-item.active {
-        background: #F0FDF4;
+      nav a.nav-link-item::after { display: none !important; }
+      nav a.nav-link-item:hover, nav a.nav-link-item.active {
+        background: #EBF5EE;
         color: #143818;
+        border-color: #D1E7D6;
       }
-      nav a.nav-link-item::after { display: none; }
       .nav-item-left {
         display: flex;
         align-items: center;
@@ -287,42 +323,66 @@
       }
       .nav-item-icon {
         display: flex;
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: #F4F9F4;
+        color: #143818;
         align-items: center;
         justify-content: center;
-        width: 32px;
-        height: 32px;
-        border-radius: 8px;
-        background: #F1F5F9;
-        color: #475569;
+        flex-shrink: 0;
+        transition: all 0.2s ease;
       }
-      .nav-item-icon svg { width: 16px; height: 16px; }
+      .nav-item-icon svg {
+        width: 18px;
+        height: 18px;
+      }
+      nav a.nav-link-item:hover .nav-item-icon, nav a.nav-link-item.active .nav-item-icon {
+        background: #143818;
+        color: #F4B93E;
+      }
       .nav-item-arrow {
         display: block;
         font-size: 18px;
         color: #94A3B8;
         font-weight: 400;
+        transition: transform 0.2s ease;
       }
+      nav a.nav-link-item:hover .nav-item-arrow, nav a.nav-link-item.active .nav-item-arrow {
+        color: #143818;
+        transform: translateX(3px);
+      }
+
+      /* Drawer Footer */
       .nav-drawer-footer {
         display: flex;
+        padding: 16px 18px 24px;
+        border-top: 1px solid #EEF2F6;
+        background: #FAFDFB;
         flex-direction: column;
-        gap: 12px;
-        padding: 20px 24px 28px;
-        border-top: 1px solid #F1F5F9;
-        background: #FAFAFA;
+        gap: 10px;
+        border-bottom-left-radius: 24px;
       }
       .btn-masuk-drawer {
-        background: #143818;
-        color: #FFFFFF;
-        font-weight: 800;
-        font-size: 14px;
-        padding: 12px;
-        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
-        box-shadow: 0 4px 12px rgba(20, 56, 24, 0.2);
+        background: #143818;
+        color: #FFFFFF !important;
+        font-weight: 800;
+        font-size: 14px;
+        padding: 12px 18px;
+        border-radius: 30px;
+        box-shadow: 0 4px 14px rgba(20, 56, 24, 0.25);
+        transition: all 0.2s ease;
+        width: 100%;
         text-decoration: none;
+        box-sizing: border-box;
+      }
+      .btn-masuk-drawer:hover {
+        background: #0d2610;
+        transform: translateY(-2px);
       }
       .header-actions .btn-masuk {
         padding: 8px 18px;
@@ -330,10 +390,17 @@
       }
     }
 
+    @media (max-width: 576px) {
+      .logo img { height: 32px !important; }
+      .logo-text .brand { font-size: 15px; }
+      .logo-text .sub { display: none; }
+      header { padding: 10px 0; }
+    }
+
     /* ── HERO GALERI ── */
     .hero-galeri {
       margin-top: 72px;
-      background: linear-gradient(135deg, #143818 0%, #1E4024 50%, #064E3B 100%);
+      background: linear-gradient(135deg, #0284C7 0%, #0D9488 40%, #059669 100%);
       color: #FFFFFF;
       padding: 70px 0 90px;
       position: relative;
@@ -343,17 +410,18 @@
     .hero-galeri-bg {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.2) 0%, transparent 40%),
-                  radial-gradient(circle at 20% 80%, rgba(244, 185, 62, 0.15) 0%, transparent 40%);
+      background: radial-gradient(circle at 15% 20%, rgba(251, 191, 36, 0.25) 0%, transparent 45%),
+                  radial-gradient(circle at 85% 75%, rgba(244, 114, 182, 0.25) 0%, transparent 45%),
+                  radial-gradient(circle at 50% 50%, rgba(52, 211, 153, 0.15) 0%, transparent 60%);
       pointer-events: none;
     }
     .badge-hero-galeri {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: #FEE2E2;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.3), rgba(217, 119, 6, 0.4));
+      border: 1.5px solid rgba(251, 191, 36, 0.6);
+      color: #FEF08A;
       font-weight: 800;
       font-size: 12px;
       letter-spacing: 0.08em;
@@ -361,7 +429,7 @@
       padding: 6px 18px;
       border-radius: 20px;
       margin-bottom: 16px;
-      backdrop-filter: blur(4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
     .hero-galeri h1 {
       font-family: 'Baloo 2', sans-serif;
@@ -370,6 +438,7 @@
       line-height: 1.2;
       margin-bottom: 12px;
       color: #FFFFFF;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
     .hero-galeri p {
       font-size: 16px;
@@ -381,7 +450,56 @@
     /* ── GALERI MAIN SECTION ── */
     .galeri-section {
       padding: 60px 0 90px;
+      background: linear-gradient(180deg, #F0FDF4 0%, #FEFCE8 40%, #F0F9FF 70%, #F8FAFC 100%);
     }
+
+    /* FILTER TABS GALERI */
+    .btn-gtab {
+      padding: 10px 24px;
+      border-radius: 25px;
+      font-weight: 800;
+      font-size: 13.5px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+    }
+    .btn-gtab.btn-gall {
+      background: #F0FDF4;
+      border: 1.5px solid #A7F3D0;
+      color: #047857;
+    }
+    .btn-gtab.btn-gall:hover, .btn-gtab.btn-gall.active {
+      background: linear-gradient(135deg, #10B981, #059669);
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35);
+    }
+    .btn-gtab.btn-gfoto {
+      background: #FEF3C7;
+      border: 1.5px solid #FDE68A;
+      color: #B45309;
+    }
+    .btn-gtab.btn-gfoto:hover, .btn-gtab.btn-gfoto.active {
+      background: linear-gradient(135deg, #F59E0B, #D97706);
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 6px 18px rgba(245, 158, 11, 0.35);
+    }
+    .btn-gtab.btn-gvideo {
+      background: #FEF2F2;
+      border: 1.5px solid #FECACA;
+      color: #991B1B;
+    }
+    .btn-gtab.btn-gvideo:hover, .btn-gtab.btn-gvideo.active {
+      background: linear-gradient(135deg, #EF4444, #DC2626);
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 6px 18px rgba(239, 68, 68, 0.35);
+    }
+
     .galeri-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -558,7 +676,6 @@
     @media (max-width: 576px) {
       .galeri-grid { grid-template-columns: 1fr; }
       .hero-galeri h1 { font-size: 30px; }
-      .nav-menu-list { display: none; }
     }
   </style>
 </head>
@@ -635,12 +752,12 @@
             <span class="nav-item-arrow">›</span>
           </a>
 
-          <a href="{{ route('galeri.publik') }}" class="nav-link-item active">
+          <a href="{{ route('galeri.publik') }}" class="nav-link-item {{ request()->routeIs('galeri.publik') ? 'active' : '' }}">
             <div class="nav-item-left">
               <div class="nav-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
               </div>
-              <span>Galeri</span>
+              <span>Kegiatan</span>
             </div>
             <span class="nav-item-arrow">›</span>
           </a>
@@ -697,10 +814,19 @@
     <div class="wrap">
 
       <!-- FILTER TABS -->
-      <div style="display:flex; justify-content:center; gap:12px; margin-bottom:32px; flex-wrap:wrap;">
-        <button type="button" class="btn-gtab active" onclick="filterGaleri('all', this)" style="padding:9px 24px; border-radius:25px; font-weight:700; font-size:13.5px; cursor:pointer; border:1.5px solid #143818; background:#143818; color:#fff; transition:all 0.2s ease;">Semua Media</button>
-        <button type="button" class="btn-gtab" onclick="filterGaleri('foto', this)" style="padding:9px 24px; border-radius:25px; font-weight:700; font-size:13.5px; cursor:pointer; border:1.5px solid #CBD5E1; background:#fff; color:#475569; transition:all 0.2s ease;">Foto Kegiatan</button>
-        <button type="button" class="btn-gtab" onclick="filterGaleri('video', this)" style="padding:9px 24px; border-radius:25px; font-weight:700; font-size:13.5px; cursor:pointer; border:1.5px solid #CBD5E1; background:#fff; color:#475569; transition:all 0.2s ease;">Video Dokumentasi</button>
+      <div style="display:flex; justify-content:center; gap:12px; margin-bottom:36px; flex-wrap:wrap;">
+        <button type="button" class="btn-gtab btn-gall active" onclick="filterGaleri('all', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Semua Media</span>
+        </button>
+        <button type="button" class="btn-gtab btn-gfoto" onclick="filterGaleri('foto', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span>Foto Kegiatan</span>
+        </button>
+        <button type="button" class="btn-gtab btn-gvideo" onclick="filterGaleri('video', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          <span>Video Dokumentasi</span>
+        </button>
       </div>
 
       <!-- GRID GALERI FOTO & VIDEO -->
@@ -794,22 +920,30 @@
     });
 
     // Mobile Navigation Drawer Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('mobileNav') || document.querySelector('nav');
+    const navBackdrop = document.getElementById('navBackdrop');
+
     function toggleMobileNav() {
-      const nav = document.getElementById('mobileNav');
-      const backdrop = document.getElementById('navBackdrop');
-      const toggle = document.getElementById('menuToggle');
-      nav.classList.toggle('active');
-      backdrop.classList.toggle('active');
-      toggle.classList.toggle('active');
+      if (navMenu && navMenu.classList.contains('active')) {
+        closeMobileNav();
+      } else {
+        openMobileNav();
+      }
+    }
+
+    function openMobileNav() {
+      if (menuToggle) menuToggle.classList.add('active');
+      if (navMenu) navMenu.classList.add('active');
+      if (navBackdrop) navBackdrop.classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
 
     function closeMobileNav() {
-      const nav = document.getElementById('mobileNav');
-      const backdrop = document.getElementById('navBackdrop');
-      const toggle = document.getElementById('menuToggle');
-      nav.classList.remove('active');
-      backdrop.classList.remove('active');
-      toggle.classList.remove('active');
+      if (menuToggle) menuToggle.classList.remove('active');
+      if (navMenu) navMenu.classList.remove('active');
+      if (navBackdrop) navBackdrop.classList.remove('active');
+      document.body.style.overflow = '';
     }
 
     // Filter Tab Function

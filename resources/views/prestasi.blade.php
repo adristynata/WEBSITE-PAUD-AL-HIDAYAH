@@ -194,6 +194,15 @@
       border-radius: 3px;
       transition: all 0.3s ease;
     }
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(7.5px) rotate(45deg);
+    }
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.active span:nth-child(3) {
+      transform: translateY(-7.5px) rotate(-45deg);
+    }
 
     /* ── MOBILE RESPONSIVE NAVIGATION DRAWER ── */
     @media (max-width: 992px) {
@@ -204,43 +213,54 @@
         display: block;
         position: fixed;
         inset: 0;
-        background: rgba(15, 23, 42, 0.55);
-        backdrop-filter: blur(4px);
+        background: rgba(15, 23, 42, 0.65);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        z-index: 1050;
         opacity: 0;
         visibility: hidden;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 1050;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
       }
       .nav-backdrop.active {
         opacity: 1;
         visibility: visible;
       }
+
+      /* Mobile Drawer Nav Container */
       nav#mobileNav {
         position: fixed;
         top: 0;
-        right: -320px;
-        width: 300px;
+        right: 0;
+        width: 320px;
+        max-width: 86vw;
         height: 100vh;
         background: #FFFFFF;
-        box-shadow: -8px 0 32px rgba(15, 23, 42, 0.18);
-        z-index: 1100;
-        display: flex;
         flex-direction: column;
+        align-items: stretch;
         justify-content: space-between;
+        gap: 0;
         padding: 0;
-        transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: -10px 0 35px rgba(0, 0, 0, 0.18);
+        transform: translateX(100%);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 1060;
+        border-top-left-radius: 24px;
+        border-bottom-left-radius: 24px;
         overflow-y: auto;
       }
       nav#mobileNav.active {
-        right: 0;
+        transform: translateX(0);
       }
+
+      /* Drawer Header */
       .nav-drawer-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 20px 24px;
-        border-bottom: 1px solid #F1F5F9;
-        background: #FAFAFA;
+        padding: 18px 20px;
+        border-bottom: 1px solid #EEF2F6;
+        background: #FAFDFB;
+        border-top-left-radius: 24px;
       }
       .drawer-brand {
         display: flex;
@@ -248,38 +268,54 @@
         gap: 10px;
       }
       .nav-drawer-close {
-        background: #F1F5F9;
-        border: none;
-        width: 34px;
-        height: 34px;
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
+        background: #F1F5F9;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #475569;
+        border: none;
         cursor: pointer;
+        color: #64748B;
+        transition: all 0.2s ease;
       }
+      .nav-drawer-close:hover {
+        background: #EF4444;
+        color: #FFFFFF;
+        transform: rotate(90deg);
+      }
+
+      /* Menu List */
       .nav-menu-list {
         display: flex;
         flex-direction: column;
-        gap: 4px;
-        padding: 16px 16px 0;
-        align-items: stretch;
+        gap: 8px;
+        padding: 18px 16px;
+        flex: 1;
       }
       nav a.nav-link-item {
-        padding: 12px 16px;
-        border-radius: 12px;
+        display: flex;
+        align-items: center;
         justify-content: space-between;
-        color: #334155;
-        font-size: 14.5px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        font-size: 15px;
         font-weight: 700;
+        color: #334155;
+        text-align: left;
+        transition: all 0.2s ease;
+        background: transparent;
+        width: 100%;
+        border: 1px solid transparent;
+        box-sizing: border-box;
       }
-      nav a.nav-link-item:hover,
-      nav a.nav-link-item.active {
-        background: #F0FDF4;
+      nav a.nav-link-item::after { display: none !important; }
+      nav a.nav-link-item:hover, nav a.nav-link-item.active {
+        background: #EBF5EE;
         color: #143818;
+        border-color: #D1E7D6;
       }
-      nav a.nav-link-item::after { display: none; }
       .nav-item-left {
         display: flex;
         align-items: center;
@@ -287,42 +323,66 @@
       }
       .nav-item-icon {
         display: flex;
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: #F4F9F4;
+        color: #143818;
         align-items: center;
         justify-content: center;
-        width: 32px;
-        height: 32px;
-        border-radius: 8px;
-        background: #F1F5F9;
-        color: #475569;
+        flex-shrink: 0;
+        transition: all 0.2s ease;
       }
-      .nav-item-icon svg { width: 16px; height: 16px; }
+      .nav-item-icon svg {
+        width: 18px;
+        height: 18px;
+      }
+      nav a.nav-link-item:hover .nav-item-icon, nav a.nav-link-item.active .nav-item-icon {
+        background: #143818;
+        color: #F4B93E;
+      }
       .nav-item-arrow {
         display: block;
         font-size: 18px;
         color: #94A3B8;
         font-weight: 400;
+        transition: transform 0.2s ease;
       }
+      nav a.nav-link-item:hover .nav-item-arrow, nav a.nav-link-item.active .nav-item-arrow {
+        color: #143818;
+        transform: translateX(3px);
+      }
+
+      /* Drawer Footer */
       .nav-drawer-footer {
         display: flex;
+        padding: 16px 18px 24px;
+        border-top: 1px solid #EEF2F6;
+        background: #FAFDFB;
         flex-direction: column;
-        gap: 12px;
-        padding: 20px 24px 28px;
-        border-top: 1px solid #F1F5F9;
-        background: #FAFAFA;
+        gap: 10px;
+        border-bottom-left-radius: 24px;
       }
       .btn-masuk-drawer {
-        background: #143818;
-        color: #FFFFFF;
-        font-weight: 800;
-        font-size: 14px;
-        padding: 12px;
-        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
-        box-shadow: 0 4px 12px rgba(20, 56, 24, 0.2);
+        background: #143818;
+        color: #FFFFFF !important;
+        font-weight: 800;
+        font-size: 14px;
+        padding: 12px 18px;
+        border-radius: 30px;
+        box-shadow: 0 4px 14px rgba(20, 56, 24, 0.25);
+        transition: all 0.2s ease;
+        width: 100%;
         text-decoration: none;
+        box-sizing: border-box;
+      }
+      .btn-masuk-drawer:hover {
+        background: #0d2610;
+        transform: translateY(-2px);
       }
       .header-actions .btn-masuk {
         padding: 8px 18px;
@@ -330,10 +390,17 @@
       }
     }
 
+    @media (max-width: 576px) {
+      .logo img { height: 32px !important; }
+      .logo-text .brand { font-size: 15px; }
+      .logo-text .sub { display: none; }
+      header { padding: 10px 0; }
+    }
+
     /* ── HERO PRESTASI ── */
     .hero-prestasi {
       margin-top: 72px;
-      background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #064E3B 100%);
+      background: linear-gradient(135deg, #1E3A8A 0%, #0D9488 45%, #059669 100%);
       color: #FFFFFF;
       padding: 70px 0 90px;
       position: relative;
@@ -343,17 +410,18 @@
     .hero-prestasi-cloud {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at 10% 20%, rgba(16,185,129,0.15) 0%, transparent 40%),
-                  radial-gradient(circle at 90% 80%, rgba(245,158,11,0.15) 0%, transparent 40%);
+      background: radial-gradient(circle at 15% 20%, rgba(251, 191, 36, 0.25) 0%, transparent 45%),
+                  radial-gradient(circle at 85% 75%, rgba(244, 114, 182, 0.25) 0%, transparent 45%),
+                  radial-gradient(circle at 50% 50%, rgba(52, 211, 153, 0.15) 0%, transparent 60%);
       pointer-events: none;
     }
     .badge-hero-trophy {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(245, 158, 11, 0.2);
-      border: 1px solid rgba(245, 158, 11, 0.4);
-      color: #FBBF24;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.3), rgba(217, 119, 6, 0.4));
+      border: 1.5px solid rgba(251, 191, 36, 0.6);
+      color: #FEF08A;
       font-weight: 800;
       font-size: 12px;
       letter-spacing: 0.08em;
@@ -361,6 +429,7 @@
       padding: 6px 18px;
       border-radius: 20px;
       margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
     .hero-prestasi h1 {
       font-family: 'Baloo 2', sans-serif;
@@ -369,10 +438,11 @@
       line-height: 1.2;
       margin-bottom: 12px;
       color: #FFFFFF;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
     .hero-prestasi p {
       font-size: 16px;
-      color: #94A3B8;
+      color: #E2E8F0;
       max-width: 680px;
       margin: 0 auto 36px;
     }
@@ -386,25 +456,54 @@
       margin: 0 auto;
     }
     .stat-card {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
       border-radius: 20px;
-      padding: 20px;
+      padding: 20px 16px;
       text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .stat-card:hover {
+      transform: translateY(-4px);
+    }
+    .stat-card.stat-amber {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.28), rgba(180, 83, 9, 0.38));
+      border: 1.5px solid rgba(251, 191, 36, 0.6);
+      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.2);
+    }
+    .stat-card.stat-pink {
+      background: linear-gradient(135deg, rgba(236, 72, 153, 0.28), rgba(190, 24, 93, 0.38));
+      border: 1.5px solid rgba(244, 114, 182, 0.6);
+      box-shadow: 0 8px 24px rgba(236, 72, 153, 0.2);
+    }
+    .stat-card.stat-emerald {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.28), rgba(4, 120, 87, 0.38));
+      border: 1.5px solid rgba(52, 211, 153, 0.6);
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
+    }
+    .stat-card.stat-purple {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.28), rgba(109, 40, 217, 0.38));
+      border: 1.5px solid rgba(167, 139, 250, 0.6);
+      box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
+    }
+    .stat-icon-wrap {
+      margin-bottom: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
     .stat-number {
       font-family: 'Baloo 2', sans-serif;
-      font-size: 32px;
+      font-size: 34px;
       font-weight: 900;
-      color: #FBBF24;
+      color: #FFFFFF;
       line-height: 1;
       margin-bottom: 4px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
     .stat-label {
       font-size: 12px;
-      font-weight: 700;
-      color: #CBD5E1;
+      font-weight: 800;
+      color: #F1F5F9;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
@@ -412,33 +511,83 @@
     /* ── SECTION PRESTASI MAIN ── */
     .prestasi-section {
       padding: 60px 0 90px;
+      background: linear-gradient(180deg, #F0FDF4 0%, #FAF5FF 40%, #F0F9FF 70%, #F8FAFC 100%);
     }
     
     /* FILTER TABS */
     .filter-tabs {
       display: flex;
       justify-content: center;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
       margin-bottom: 40px;
     }
     .filter-btn {
-      background: #FFFFFF;
-      border: 1px solid #CBD5E1;
-      color: #475569;
       font-weight: 800;
       font-size: 13.5px;
       padding: 10px 22px;
       border-radius: 25px;
       cursor: pointer;
       transition: all 0.25s ease;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
-    .filter-btn:hover, .filter-btn.active {
-      background: var(--green-dark);
+    .filter-btn.btn-all {
+      background: #F0FDF4;
+      border: 1.5px solid #A7F3D0;
+      color: #047857;
+    }
+    .filter-btn.btn-all:hover, .filter-btn.btn-all.active {
+      background: linear-gradient(135deg, #10B981, #059669);
       color: #FFFFFF;
-      border-color: var(--green-dark);
-      box-shadow: 0 6px 16px rgba(5, 150, 105, 0.25);
+      border-color: transparent;
+      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35);
+    }
+    .filter-btn.btn-seni {
+      background: #FDF2F8;
+      border: 1.5px solid #FBCFE8;
+      color: #BE185D;
+    }
+    .filter-btn.btn-seni:hover, .filter-btn.btn-seni.active {
+      background: linear-gradient(135deg, #EC4899, #DB2777);
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 6px 18px rgba(236, 72, 153, 0.35);
+    }
+    .filter-btn.btn-agama {
+      background: #FEF3C7;
+      border: 1.5px solid #FDE68A;
+      color: #B45309;
+    }
+    .filter-btn.btn-agama:hover, .filter-btn.btn-agama.active {
+      background: linear-gradient(135deg, #F59E0B, #D97706);
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 6px 18px rgba(245, 158, 11, 0.35);
+    }
+    .filter-btn.btn-olahraga {
+      background: #E0F2FE;
+      border: 1.5px solid #BAE6FD;
+      color: #0369A1;
+    }
+    .filter-btn.btn-olahraga:hover, .filter-btn.btn-olahraga.active {
+      background: linear-gradient(135deg, #0284C7, #0369A1);
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.35);
+    }
+    .filter-btn.btn-sekolah {
+      background: #F3E8FF;
+      border: 1.5px solid #DDD6FE;
+      color: #6D28D9;
+    }
+    .filter-btn.btn-sekolah:hover, .filter-btn.btn-sekolah.active {
+      background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 6px 18px rgba(139, 92, 246, 0.35);
     }
 
     /* PRESTASI GRID */
@@ -472,7 +621,23 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: top center;
       transition: transform 0.4s ease;
+    }
+    .prestasi-zoom-icon {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      color: #FFFFFF;
+      z-index: 5;
+    }
+    .prestasi-card:hover .prestasi-zoom-icon {
+      opacity: 1;
     }
     .prestasi-card:hover .prestasi-img-box img {
       transform: scale(1.06);
@@ -584,6 +749,135 @@
       border-top: 1px solid #1E293B;
     }
 
+    /* LIGHTBOX MODAL STYLES */
+    .prestasi-card {
+      cursor: pointer;
+    }
+    .modal-prestasi-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    .modal-prestasi-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-prestasi-content {
+      background: #FFFFFF;
+      width: 100%;
+      max-width: 850px;
+      max-height: 90vh;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transform: scale(0.92);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .modal-prestasi-overlay.active .modal-prestasi-content {
+      transform: scale(1);
+    }
+    .modal-prestasi-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.6);
+      color: #FFFFFF;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.2s ease;
+    }
+    .modal-prestasi-close:hover {
+      background: rgba(239, 68, 68, 0.9);
+    }
+    .modal-prestasi-body {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      overflow-y: auto;
+      max-height: 90vh;
+    }
+    .modal-img-wrapper {
+      background: #0F172A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 350px;
+      position: relative;
+      padding: 16px;
+    }
+    .modal-img-wrapper img {
+      width: 100%;
+      max-height: 500px;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+    .modal-prestasi-details {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #FFFFFF;
+    }
+    .modal-meta-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .modal-title {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+    .modal-desc {
+      font-size: 14px;
+      color: #475569;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .modal-winner-card {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    @media (max-width: 768px) {
+      .modal-prestasi-body {
+        grid-template-columns: 1fr;
+      }
+      .modal-img-wrapper {
+        min-height: 250px;
+      }
+      .modal-prestasi-details {
+        padding: 20px;
+      }
+    }
+
     /* RESPONSIVE */
     @media (max-width: 992px) {
       .prestasi-grid { grid-template-columns: repeat(2, 1fr); }
@@ -659,7 +953,7 @@
             <span class="nav-item-arrow">›</span>
           </a>
 
-          <a href="{{ route('prestasi') }}" class="nav-link-item active">
+          <a href="{{ route('prestasi') }}" class="nav-link-item {{ request()->routeIs('prestasi') ? 'active' : '' }}">
             <div class="nav-item-left">
               <div class="nav-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H7v3h10v-3h-2c-.55 0-1-.45-1-1v-2.34"/><path d="M18 4H6v7a6 6 0 0 0 12 0V4z"/></svg>
@@ -669,12 +963,12 @@
             <span class="nav-item-arrow">›</span>
           </a>
 
-          <a href="{{ route('galeri.publik') }}" class="nav-link-item">
+          <a href="{{ route('galeri.publik') }}" class="nav-link-item {{ request()->routeIs('galeri.publik') ? 'active' : '' }}">
             <div class="nav-item-left">
               <div class="nav-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
               </div>
-              <span>Galeri</span>
+              <span>Kegiatan</span>
             </div>
             <span class="nav-item-arrow">›</span>
           </a>
@@ -724,21 +1018,39 @@
       <h1>Prestasi &amp; Penjurian Terbaik KB-PAUD Al-Hidayah</h1>
       <p>Deretan trofi kejuaraan, sertifikat penghargaan, dan prestasi membanggakan yang diraih oleh siswa-siswi serta sekolah dalam mengasah kreativitas, keberanian, dan akhlak Sejak Dini.</p>
 
+      @php
+        $totalJuara1 = $prestasis->filter(fn($p) => str_contains(strtolower($p->peringkat), '1') || str_contains(strtolower($p->peringkat), 'utama'))->count();
+        $totalJuara2 = $prestasis->filter(fn($p) => str_contains(strtolower($p->peringkat), '2') || str_contains(strtolower($p->peringkat), 'harapan') || str_contains(strtolower($p->peringkat), '3'))->count();
+        $totalTrofi = $prestasis->count();
+      @endphp
+
       <!-- COUNTER STATS -->
       <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number">12+</div>
+        <div class="stat-card stat-amber">
+          <div class="stat-icon-wrap" style="color:#FBBF24;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H7v3h10v-3h-2c-.55 0-1-.45-1-1v-2.34"/><path d="M18 4H6v7a6 6 0 0 0 12 0V4z"/></svg>
+          </div>
+          <div class="stat-number">{{ $totalJuara1 > 0 ? $totalJuara1 . '+' : '0' }}</div>
           <div class="stat-label">Juara 1 &amp; Utama</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-number">8+</div>
+        <div class="stat-card stat-pink">
+          <div class="stat-icon-wrap" style="color:#F472B6;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="stat-number">{{ $totalJuara2 > 0 ? $totalJuara2 . '+' : '8+' }}</div>
           <div class="stat-label">Juara 2 &amp; Harapan</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-number">15+</div>
+        <div class="stat-card stat-emerald">
+          <div class="stat-icon-wrap" style="color:#34D399;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><path d="M12 15l-2 5 2-1 2 1-2-5z"/><circle cx="12" cy="9" r="6"/></svg>
+          </div>
+          <div class="stat-number">{{ $totalTrofi > 0 ? $totalTrofi . '+' : '15+' }}</div>
           <div class="stat-label">Trofi Kejuaraan</div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card stat-purple">
+          <div class="stat-icon-wrap" style="color:#C084FC;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
           <div class="stat-number">100%</div>
           <div class="stat-label">Apresiasi Siswa</div>
         </div>
@@ -752,20 +1064,23 @@
 
       <!-- FILTER TABS -->
       <div class="filter-tabs">
-        <button class="filter-btn active" onclick="filterPrestasi('all', this)">Semua Prestasi</button>
-        <button class="filter-btn" onclick="filterPrestasi('seni', this)" style="display:inline-flex;align-items:center;gap:6px;">
+        <button class="filter-btn btn-all active" onclick="filterPrestasi('all', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span>Semua Prestasi</span>
+        </button>
+        <button class="filter-btn btn-seni" onclick="filterPrestasi('seni', this)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20c1.5 0 2.5-1 2.5-2.5 0-.7-.3-1.3-.7-1.7-.4-.4-.7-1-.7-1.8 0-1.4 1.1-2.5 2.5-2.5H18a4 4 0 0 0 4-4c0-4.4-4.5-8-10-8z"/></svg>
           <span>Seni &amp; Kreativitas</span>
         </button>
-        <button class="filter-btn" onclick="filterPrestasi('agama', this)" style="display:inline-flex;align-items:center;gap:6px;">
+        <button class="filter-btn btn-agama" onclick="filterPrestasi('agama', this)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5V3A2.5 2.5 0 0 1 6.5 .5H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
           <span>Tahfidz &amp; Agama</span>
         </button>
-        <button class="filter-btn" onclick="filterPrestasi('olahraga', this)" style="display:inline-flex;align-items:center;gap:6px;">
+        <button class="filter-btn btn-olahraga" onclick="filterPrestasi('olahraga', this)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><circle cx="12" cy="5" r="3"/><path d="M12 8v8M8 12l4-2 4 2M9 20l3-4 3 4"/></svg>
           <span>Olahraga &amp; Motorik</span>
         </button>
-        <button class="filter-btn" onclick="filterPrestasi('sekolah', this)" style="display:inline-flex;align-items:center;gap:6px;">
+        <button class="filter-btn btn-sekolah" onclick="filterPrestasi('sekolah', this)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           <span>Penghargaan Sekolah</span>
         </button>
@@ -775,13 +1090,16 @@
       <div class="prestasi-grid">
 
         @forelse($prestasis as $item)
-          <div class="prestasi-card" data-cat="{{ $item->kategori }}">
+          <div class="prestasi-card" data-cat="{{ $item->kategori }}" onclick="openModalPrestasi('{{ asset($item->foto ?: 'images/gedung-sekolah.jpg') }}', '{{ addslashes($item->judul) }}', '{{ strtoupper($item->peringkat) }}', '{{ $item->tahun }}', '{{ addslashes($item->pemenang) }}', '{{ addslashes($item->deskripsi) }}', '{{ $item->kategori }}')">
             <div class="prestasi-img-box">
               <span class="prestasi-rank-badge @if(str_contains(strtolower($item->peringkat), '2')) silver @elseif(str_contains(strtolower($item->peringkat), '3')) bronze @elseif($item->kategori == 'sekolah' || $item->kategori == 'agama') green @endif">
                 {{ strtoupper($item->peringkat) }}
               </span>
               <span class="prestasi-year-tag">{{ $item->tahun }}</span>
               <img src="{{ asset($item->foto ?: 'images/gedung-sekolah.jpg') }}" alt="{{ $item->judul }}" onerror="this.src='{{ asset('images/gedung-sekolah.jpg') }}'">
+              <div class="prestasi-zoom-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:32px;height:32px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+              </div>
             </div>
             <div class="prestasi-content">
               <div>
@@ -827,6 +1145,40 @@
     </div>
   </section>
 
+  <!-- MODAL PRESTASI DETAIL (LIGHTBOX) -->
+  <div class="modal-prestasi-overlay" id="prestasiModal" onclick="if(event.target === this) closeModalPrestasi()">
+    <div class="modal-prestasi-content">
+      <button class="modal-prestasi-close" onclick="closeModalPrestasi()" title="Tutup">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:20px;height:20px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="modal-prestasi-body">
+        <div class="modal-img-wrapper">
+          <img id="mPrestasiImg" src="" alt="Detail Prestasi">
+        </div>
+        <div class="modal-prestasi-details">
+          <div>
+            <div class="modal-meta-header">
+              <span id="mPrestasiRank" class="prestasi-rank-badge" style="position:static;">JUARA 1</span>
+              <span id="mPrestasiYear" class="prestasi-year-tag" style="position:static;">2024</span>
+              <span id="mPrestasiCategory" class="prestasi-category" style="margin-bottom:0;">Seni &amp; Kreativitas</span>
+            </div>
+            <h2 id="mPrestasiTitle" class="modal-title">Judul Prestasi</h2>
+            <p id="mPrestasiDesc" class="modal-desc">Deskripsi lengkap prestasi...</p>
+          </div>
+          <div class="modal-winner-card">
+            <div class="winner-avatar" style="width:42px;height:42px;font-size:18px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px;height:22px;color:#D97706;"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H7v3h10v-3h-2c-.55 0-1-.45-1-1v-2.34"/><path d="M18 4H6v7a6 6 0 0 0 12 0V4z"/></svg>
+            </div>
+            <div class="winner-info">
+              <span style="font-size:11px;color:#64748B;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Pemenang / Penerima</span>
+              <span id="mPrestasiWinner" class="winner-name" style="font-size:15px;color:var(--navy);">Nama Siswa</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer>
     <div class="wrap">
@@ -846,22 +1198,30 @@
     });
 
     // Mobile Navigation Drawer Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('mobileNav') || document.querySelector('nav');
+    const navBackdrop = document.getElementById('navBackdrop');
+
     function toggleMobileNav() {
-      const nav = document.getElementById('mobileNav');
-      const backdrop = document.getElementById('navBackdrop');
-      const toggle = document.getElementById('menuToggle');
-      nav.classList.toggle('active');
-      backdrop.classList.toggle('active');
-      toggle.classList.toggle('active');
+      if (navMenu && navMenu.classList.contains('active')) {
+        closeMobileNav();
+      } else {
+        openMobileNav();
+      }
+    }
+
+    function openMobileNav() {
+      if (menuToggle) menuToggle.classList.add('active');
+      if (navMenu) navMenu.classList.add('active');
+      if (navBackdrop) navBackdrop.classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
 
     function closeMobileNav() {
-      const nav = document.getElementById('mobileNav');
-      const backdrop = document.getElementById('navBackdrop');
-      const toggle = document.getElementById('menuToggle');
-      nav.classList.remove('active');
-      backdrop.classList.remove('active');
-      toggle.classList.remove('active');
+      if (menuToggle) menuToggle.classList.remove('active');
+      if (navMenu) navMenu.classList.remove('active');
+      if (navBackdrop) navBackdrop.classList.remove('active');
+      document.body.style.overflow = '';
     }
 
     // Filter Prestasi Categories
@@ -878,6 +1238,51 @@
         }
       });
     }
+
+    // Modal Prestasi Lightbox Handlers
+    function openModalPrestasi(foto, judul, peringkat, tahun, pemenang, deskripsi, kategori) {
+      document.getElementById('mPrestasiImg').src = foto;
+      document.getElementById('mPrestasiTitle').innerText = judul;
+      document.getElementById('mPrestasiRank').innerText = peringkat;
+      document.getElementById('mPrestasiYear').innerText = tahun;
+      document.getElementById('mPrestasiWinner').innerText = pemenang;
+      document.getElementById('mPrestasiDesc').innerText = deskripsi || 'Tidak ada deskripsi tambahan.';
+
+      // Badge rank styling
+      const rankBadge = document.getElementById('mPrestasiRank');
+      rankBadge.className = 'prestasi-rank-badge';
+      const pLower = peringkat.toLowerCase();
+      if (pLower.includes('2')) {
+        rankBadge.classList.add('silver');
+      } else if (pLower.includes('3')) {
+        rankBadge.classList.add('bronze');
+      } else if (kategori === 'sekolah' || kategori === 'agama') {
+        rankBadge.classList.add('green');
+      }
+
+      // Category text
+      const catElem = document.getElementById('mPrestasiCategory');
+      let catText = 'Prestasi';
+      if (kategori === 'seni') catText = 'Seni &amp; Kreativitas';
+      else if (kategori === 'agama') catText = 'Tahfidz &amp; Agama';
+      else if (kategori === 'olahraga') catText = 'Olahraga &amp; Motorik';
+      else if (kategori === 'sekolah') catText = 'Penghargaan Sekolah';
+      catElem.innerHTML = catText;
+
+      document.getElementById('prestasiModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModalPrestasi() {
+      document.getElementById('prestasiModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModalPrestasi();
+      }
+    });
   </script>
 </body>
 </html>
