@@ -1971,8 +1971,8 @@
       </div>
       <div class="feature-item">
         <div class="feature-icon" style="background:var(--pink)">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 21s-7-4.35-9.5-8.5C.7 9 2 5.5 5.5 5c2-.3 3.5.7 4.5 2 1-1.3 2.5-2.3 4.5-2 3.5.5 4.8 4 3 7.5C19 16.65 12 21 12 21z"/>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
           </svg>
         </div>
         <h4>Perkembangan<br>Holistik</h4>
@@ -2616,58 +2616,7 @@
 </section>
 
 {{-- ── FOOTER ──────────────────────────────────────────────────────────── --}}
-<footer>
-  <div class="wrap">
-    <div class="foot-top">
-      <div class="logo">
-        <img src="{{ asset('images/logo.png') }}" alt="Logo KB-PAUD Al Hidayah" style="height:42px;width:auto;display:block;">
-        <div class="logo-text">
-          <div class="brand" style="font-size:16px;font-weight:800;line-height:1.2;color:var(--navy);">KB-PAUD AL HIDAYAH</div>
-          <div class="sub" style="font-size:9.5px;font-weight:700;color:#8b8672;line-height:1.2;letter-spacing:0.5px;text-transform:uppercase;">SEKOLAH USIA DINI</div>
-        </div>
-      </div>
-      <div class="foot-copy">&copy; {{ date('Y') }} KB-PAUD Al-Hidayah. Hak cipta dilindungi.</div>
-    </div>
-    <div class="foot-strip">
-      <div class="foot-item">
-        <div class="fi-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 21s-7-4.35-9.5-8.5C.7 9 2 5.5 5.5 5c2-.3 3.5.7 4.5 2 1-1.3 2.5-2.3 4.5-2 3.5.5 4.8 4 3 7.5C19 16.65 12 21 12 21z"/>
-          </svg>
-        </div>
-        <div><h5>Bersih, Aman &amp; Terjaga</h5><p>Keamanan anak Anda adalah prioritas utama kami.</p></div>
-      </div>
-      <div class="foot-item">
-        <div class="fi-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="9" cy="8" r="3"/><path d="M2 21c0-3.3 3-6 7-6s7 2.7 7 6"/>
-            <circle cx="17" cy="9" r="2.5"/><path d="M17 12.5c2.3 0 4.5 1.6 4.8 5"/>
-          </svg>
-        </div>
-        <div><h5>Makanan Bergizi</h5><p>Makanan dan camilan sehat untuk tubuh yang berkembang.</p></div>
-      </div>
-      <div class="foot-item">
-        <div class="fi-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="7" width="18" height="13" rx="2"/>
-            <path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/>
-            <circle cx="12" cy="13" r="3"/>
-          </svg>
-        </div>
-        <div><h5>Laporan Berkala</h5><p>Pantau perkembangan anak lewat portal digital.</p></div>
-      </div>
-      <div class="foot-item">
-        <div class="fi-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="4" width="18" height="17" rx="2"/>
-            <path d="M3 9h18M8 3v3M16 3v3"/>
-          </svg>
-        </div>
-        <div><h5>Jadwal Fleksibel</h5><p>Pilihan waktu yang sesuai untuk keluarga Anda.</p></div>
-      </div>
-    </div>
-  </div>
-</footer>
+@include('partials.footer')
 
 <script>
   const menuToggle = document.getElementById('menuToggle');

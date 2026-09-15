@@ -10,6 +10,8 @@ use App\Models\LaporanBulanan;
 use App\Models\Notifikasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class LaporanBulananController extends Controller
 {
@@ -87,9 +89,10 @@ class LaporanBulananController extends Controller
 
         $laporan = LaporanBulanan::query()->create($validated);
 
-        // Jika status published, buat notifikasi untuk orang tua
+        // Jika status published, buat notifikasi untuk orang tua & kirim pesan Fonnte WA
         if ($request->status === 'published') {
             $this->createNotification($laporan);
+            $this->sendFonnteWaNotification($laporan);
         }
 
         return redirect()->route('admin.laporan.index', [
@@ -137,9 +140,10 @@ class LaporanBulananController extends Controller
             'rekap_kognitif', 'rekap_bahasa', 'rekap_sosial_emosional', 'rekap_seni', 'status'
         ]));
 
-        // Kirim notifikasi jika status baru dipublish
-        if ($oldStatus === 'draft' && $request->status === 'published') {
+        // Kirim notifikasi jika status dipublish
+        if ($request->status === 'published') {
             $this->createNotification($laporan);
+            $this->sendFonnteWaNotification($laporan);
         }
 
         return redirect()->route('admin.laporan.index', [
@@ -171,4 +175,102 @@ class LaporanBulananController extends Controller
             ]);
         }
     }
+
+    private function sendFonnteWaNotification(LaporanBulanan $laporan)
+    {
+        // Ambil konfigurasi Fonnte dari database (Admin dapat mengaturnya di halaman Profil Sekolah)
+        $profil = \App\Models\ProfilSekolah::first();
+        $token = $profil?->fonnte_token ?? config('services.fonnte.token');
+
+        if (empty($token)) {
+            Log::warning('Fonnte WA skipped: Fonnte API Token belum diatur di Profil Sekolah / .env');
+            return;
+        }
+
+        $months = [
+            1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April',
+            5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus',
+            9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+        ];
+        $namaBulan = $months[$laporan->bulan] ?? $laporan->bulan;
+
+        $appUrl  = $profil?->app_url ?? config('app.url', 'https://paud-alhidayah.com');
+        $siswa   = $laporan->siswa;
+        $nis     = $siswa->nis;
+        // Hint password awal: tanggal lahir format DDMMYYYY
+        $tglLahir = $siswa->tanggal_lahir
+            ? \Carbon\Carbon::parse($siswa->tanggal_lahir)->format('dmY')
+            : 'Tanggal Lahir Anak (DDMMYYYY)';
+
+        $message = "📢 *PEMBERITAHUAN RESMI*\n"
+                 . "*KB-PAUD AL-HIDAYAH WEDELAN*\n\n"
+                 . "Yth. Bapak/Ibu Orang Tua/Wali dari *{$siswa->nama}*,\n\n"
+                 . "Laporan perkembangan anak Anda untuk periode *{$namaBulan} {$laporan->tahun}* "
+                 . "telah diterbitkan oleh wali kelas.\n\n"
+                 . "📋 *Data Akses Portal Orang Tua:*\n"
+                 . "• NIS Anak       : *{$nis}*\n"
+                 . "• Password Awal  : *{$tglLahir}*\n\n"
+                 . "🌐 Silakan buka website resmi kami:\n"
+                 . "*{$appUrl}*\n\n"
+                 . "Masuk menggunakan NIS anak dan PIN yang sudah Anda daftarkan. "
+                 . "Jika belum pernah login, gunakan Tanggal Lahir anak (format: DDMMYYYY) "
+                 . "sebagai password awal untuk membuat PIN baru.\n\n"
+                 . "Terima kasih atas kepercayaan Bapak/Ibu kepada kami.\n\n"
+                 . "_KB-PAUD Al-Hidayah Wedelan_";
+
+        // Tentukan target: kirim per nomor orang tua, atau ke nomor/grup tetap jika diisi
+        $fixedTarget = $profil?->fonnte_target ?? config('services.fonnte.target');
+
+        if (!empty($fixedTarget)) {
+            // Kirim ke nomor/grup tetap (misal grup WA kelas / nomor admin)
+            try {
+                $response = Http::withoutVerifying()
+                    ->withHeaders(['Authorization' => $token])
+                    ->post('https://api.fonnte.com/send', [
+                        'target'  => $fixedTarget,
+                        'message' => $message,
+                    ]);
+                Log::info('Fonnte WA (fixed target) Response: ' . $response->body());
+            } catch (\Exception $e) {
+                Log::error('Fonnte WA (fixed target) Error: ' . $e->getMessage());
+            }
+        } else {
+            // Kirim personal ke nomor HP masing-masing orang tua
+            $phones = [];
+            if (!empty($siswa->kontak_ortu)) {
+                $phones[] = $siswa->kontak_ortu;
+            }
+            foreach ($siswa->orangTuas as $parent) {
+                if (!empty($parent->email) && preg_match('/^[0-9+]+$/', $parent->email)) {
+                    $phones[] = $parent->email;
+                }
+            }
+            $phones = array_unique(array_filter($phones));
+
+            if (empty($phones)) {
+                Log::warning("Fonnte WA skipped for {$siswa->nama}: Kontak Ortu / Nomor WA belum diisi pada data siswa.");
+                return;
+            }
+
+            foreach ($phones as $rawPhone) {
+                $phone = preg_replace('/[^0-9]/', '', $rawPhone);
+                if (str_starts_with($phone, '0')) {
+                    $phone = '62' . substr($phone, 1);
+                }
+
+                try {
+                    $response = Http::withoutVerifying()
+                        ->withHeaders(['Authorization' => $token])
+                        ->post('https://api.fonnte.com/send', [
+                            'target'  => $phone,
+                            'message' => $message,
+                        ]);
+                    Log::info("Fonnte WA (personal) Response [{$phone}]: " . $response->body());
+                } catch (\Exception $e) {
+                    Log::error("Fonnte WA (personal) Error [{$phone}]: " . $e->getMessage());
+                }
+            }
+        }
+    }
 }
+

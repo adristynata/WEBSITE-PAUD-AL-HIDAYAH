@@ -63,9 +63,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::get('/laporan/{id}/edit', [LaporanBulananController::class, 'edit'])->name('laporan.edit');
     Route::put('/laporan/{id}', [LaporanBulananController::class, 'update'])->name('laporan.update');
 
-    // Profil Sekolah (CMS Sambutan)
+    // Profil Sekolah (CMS Sambutan & Fonnte)
     Route::get('/profil', [ProfilSekolahController::class, 'edit'])->name('profil.edit');
     Route::put('/profil', [ProfilSekolahController::class, 'update'])->name('profil.update');
+    Route::post('/profil/test-fonnte', [ProfilSekolahController::class, 'testFonnte'])->name('profil.test-fonnte');
 
     // Galeri
     Route::resource('galeri', GaleriController::class)->only(['index', 'create', 'store', 'destroy']);

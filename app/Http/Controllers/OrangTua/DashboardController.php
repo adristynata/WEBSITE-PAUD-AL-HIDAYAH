@@ -71,6 +71,11 @@ class DashboardController extends Controller
             abort(403, 'Anda tidak memiliki hak akses untuk melihat laporan ini.');
         }
 
+        // Status notifikasi berubah menjadi telah dibaca setelah orang tua membuka laporan
+        Notifikasi::where('user_id', $user->id)
+            ->where('is_read', false)
+            ->update(['is_read' => true]);
+
         // Ambil catatan evaluasi mingguan dari guru untuk periode bulan & tahun yang sama
         $catatansGuru = CatatanMingguan::where('siswa_id', $laporan->siswa_id)
             ->where('bulan', $laporan->bulan)
@@ -85,6 +90,17 @@ class DashboardController extends Controller
             ->get();
 
         return view('ortu.laporan.show', compact('laporan', 'catatansGuru', 'notifications'));
+    }
+
+    public function readNotifikasi($id)
+    {
+        $user = Auth::user();
+        $notif = Notifikasi::where('user_id', $user->id)->findOrFail($id);
+        
+        $notif->is_read = true;
+        $notif->save();
+
+        return redirect($notif->link ?? route('ortu.dashboard'));
     }
 
     public function downloadPdf($id)

@@ -72,6 +72,9 @@ class ProfilSekolahController extends Controller
             'flyer_ekskul' => 'nullable|string',
             'ttd_kepsek' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'ttd_kepsek_base64' => 'nullable|string',
+            'fonnte_token' => 'nullable|string|max:255',
+            'fonnte_target' => 'nullable|string|max:100',
+            'app_url' => 'nullable|url|max:255',
         ], $messages);
 
         $profil->sambutan_judul = $request->sambutan_judul;
@@ -85,6 +88,9 @@ class ProfilSekolahController extends Controller
         $profil->flyer_program_unggulan = $request->flyer_program_unggulan;
         $profil->flyer_persyaratan = $request->flyer_persyaratan;
         $profil->flyer_ekskul = $request->flyer_ekskul;
+        $profil->fonnte_token = $request->fonnte_token;
+        $profil->fonnte_target = $request->fonnte_target;
+        $profil->app_url = $request->app_url;
 
         if ($request->hasFile('sambutan_foto')) {
             // Delete old photo if exists and is not the default seeder file
@@ -251,5 +257,51 @@ class ProfilSekolahController extends Controller
         $profil->save();
 
         return redirect()->route('admin.profil.edit')->with('success', 'Profil Sekolah, Banner Hero, dan Tanda Tangan Kepala Sekolah berhasil diperbarui.');
+    }
+
+    public function testFonnte(Request $request)
+    {
+        $profil = ProfilSekolah::first();
+        $token = $request->input('fonnte_token', $profil?->fonnte_token);
+        $target = $request->input('fonnte_target', $profil?->fonnte_target);
+
+        if (empty($token)) {
+            return back()->with('error', 'Token API Fonnte belum diisi. Silakan isi Token Fonnte terlebih dahulu.')->withInput();
+        }
+
+        if (empty($target)) {
+            return back()->with('error', 'Nomor Target Uji Coba belum diisi. Silakan isi Nomor Target di form di bawah ini.')->withInput();
+        }
+
+        $targetClean = preg_replace('/[^0-9]/', '', $target);
+        if (str_starts_with($targetClean, '0')) {
+            $targetClean = '62' . substr($targetClean, 1);
+        }
+
+        try {
+            $response = \Illuminate\Support\Facades\Http::withoutVerifying()
+                ->withHeaders(['Authorization' => $token])
+                ->post('https://api.fonnte.com/send', [
+                    'target' => $targetClean,
+                    'message' => "📢 *UJI COBA NOTIFIKASI FONNTE WA*\n\n"
+                               . "Pesan ini dikirim dari Dashboard Admin KB-PAUD Al-Hidayah Wedelan.\n"
+                               . "Status Koneksi API Fonnte: *TERHUBUNG / AKTIF* ✅\n\n"
+                               . "_Waktu Uji Coba: " . date('d-m-Y H:i:s') . "_",
+                ]);
+
+            $resData = $response->json();
+
+            if (isset($resData['status']) && $resData['status'] === true) {
+                return back()->with('success', '✅ Pesan Uji Coba WhatsApp BERHASIL dikirim ke nomor ' . $targetClean . '!');
+            } else {
+                $reason = $resData['reason'] ?? 'Tidak diketahui dari Fonnte';
+                if (str_contains(strtolower($reason), 'disconnected device')) {
+                    $reason = 'Perangkat WhatsApp di akun Fonnte Anda TERPUTUS (Disconnected Device). Silakan login ke fonnte.com dan Scan QR Code WhatsApp Anda terlebih dahulu.';
+                }
+                return back()->with('error', '⚠️ Fonnte Menolak Pengiriman: ' . $reason);
+            }
+        } catch (\Exception $e) {
+            return back()->with('error', '❌ Gagal Menghubungi Server Fonnte: ' . $e->getMessage());
+        }
     }
 }

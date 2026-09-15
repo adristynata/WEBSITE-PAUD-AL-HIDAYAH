@@ -1180,11 +1180,7 @@
   </div>
 
   <!-- FOOTER -->
-  <footer>
-    <div class="wrap">
-      <p>&copy; {{ date('Y') }} KB-PAUD Al-Hidayah Wedelan. Seluruh Hak Cipta Dilindungi.</p>
-    </div>
-  </footer>
+  @include('partials.footer')
 
   <script>
     // Header scroll background effect

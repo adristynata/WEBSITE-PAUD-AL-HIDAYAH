@@ -15,6 +15,20 @@
         </span>
     </div>
     <div class="card-body">
+        @if(session('success'))
+            <div style="background:#DCFCE7;border:1px solid #86EFAC;color:#166534;padding:12px 16px;border-radius:8px;margin-bottom:20px;font-size:14px;display:flex;align-items:center;gap:8px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;flex-shrink:0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span>{{ session('success') }}</span>
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div style="background:#FEE2E2;border:1px solid #FCA5A5;color:#991B1B;padding:12px 16px;border-radius:8px;margin-bottom:20px;font-size:14px;display:flex;align-items:center;gap:8px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <span>{{ session('error') }}</span>
+            </div>
+        @endif
+
         <form method="POST" action="{{ route('admin.profil.update') }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -387,12 +401,123 @@
                 </div>
             </div>
 
+            {{-- ════ PENGATURAN NOTIFIKASI WHATSAPP (FONNTE) ════ --}}
+            <div style="margin-top:32px; border-top:2px solid #E2E8F0; padding-top:28px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+                    <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#25D366,#128C7E);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;color:#fff;">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.564 4.136 1.545 5.875L.057 23.99l6.267-1.641A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.071-1.41l-.364-.216-3.721.975.994-3.636-.235-.374A9.772 9.772 0 0 1 2.182 12C2.182 6.565 6.565 2.182 12 2.182S21.818 6.565 21.818 12 17.435 21.818 12 21.818z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div style="font-weight:800;font-size:1rem;color:#0F172A;">Pengaturan Notifikasi WhatsApp (Fonnte)</div>
+                        <div style="font-size:12px;color:#64748B;margin-top:1px;">Konfigurasi API Fonnte untuk pengiriman notifikasi otomatis ke orang tua saat laporan bulanan diterbitkan.</div>
+                    </div>
+                </div>
+
+                <div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:10px;padding:14px 16px;margin-bottom:20px;font-size:13px;color:#14532D;">
+                    <strong>Cara Mendapatkan Token Fonnte:</strong><br>
+                    1. Daftar akun di <a href="https://fonnte.com" target="_blank" style="color:#15803D;font-weight:700;">fonnte.com</a> &rarr; Login &rarr; Buka menu <strong>Devices</strong><br>
+                    2. Tambahkan perangkat &rarr; Scan QR Code dengan nomor WA pengirim<br>
+                    3. Salin <strong>API Token</strong> yang tampil dan tempelkan di kolom di bawah<br>
+                    4. Isi kolom <strong>URL Website</strong> dengan alamat domain resmi PAUD Al-Hidayah
+                </div>
+
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label for="fonnte_token">
+                            API Token Fonnte
+                            <span style="color:#64748B;font-weight:500;font-size:11px;"> (dari portal fonnte.com)</span>
+                        </label>
+                        <input type="text" id="fonnte_token" name="fonnte_token"
+                               class="form-control @error('fonnte_token') is-invalid @enderror"
+                               value="{{ old('fonnte_token', $profil->fonnte_token ?? '') }}"
+                               placeholder="Contoh: abcxyz123...">
+                        <small style="color:#64748B;font-size:12px;margin-top:4px;display:block;">Token autentikasi dari akun Fonnte Anda. Jaga kerahasiaannya.</small>
+                        @error('fonnte_token')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fonnte_target">
+                            Nomor Tujuan / ID Grup WhatsApp
+                            <span style="color:#64748B;font-weight:500;font-size:11px;"> (opsional — kosongkan untuk kirim per ortu)</span>
+                        </label>
+                        <input type="text" id="fonnte_target" name="fonnte_target"
+                               class="form-control @error('fonnte_target') is-invalid @enderror"
+                               value="{{ old('fonnte_target', $profil->fonnte_target ?? '') }}"
+                               placeholder="Contoh: 628123456789 atau ID Grup">
+                        <small style="color:#64748B;font-size:12px;margin-top:4px;display:block;">Jika dikosongkan, notifikasi dikirim ke <strong>nomor HP masing-masing orang tua</strong>. Isi jika ingin dikirim ke satu nomor/grup tertentu.</small>
+                        @error('fonnte_target')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="app_url">
+                        URL Website Resmi PAUD
+                        <span style="color:#64748B;font-weight:500;font-size:11px;"> (disertakan dalam pesan WA ke orang tua)</span>
+                    </label>
+                    <input type="url" id="app_url" name="app_url"
+                           class="form-control @error('app_url') is-invalid @enderror"
+                           value="{{ old('app_url', $profil->app_url ?? config('app.url')) }}"
+                           placeholder="Contoh: https://paud-alhidayah.sch.id">
+                    <small style="color:#64748B;font-size:12px;margin-top:4px;display:block;">URL ini akan dicantumkan di pesan WhatsApp notifikasi laporan sehingga orang tua dapat langsung membuka website.</small>
+                    @error('app_url')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+
+                {{-- Uji Coba WhatsApp --}}
+                <div style="margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; background:#F0FDF4; border:1px solid #86EFAC; border-radius:10px; padding:12px 16px; gap:12px; flex-wrap:wrap;">
+                    <div>
+                        <strong style="font-size:13px; color:#14532D; display:flex; align-items:center; gap:6px;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:#16A34A;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            Uji Coba Koneksi Fonnte WhatsApp
+                        </strong>
+                        <div style="font-size:12px; color:#166534; margin-top:2px;">Klik tombol di kanan untuk mencoba mengirim pesan tes langsung dan memastikan status WhatsApp Fonnte Anda Aktif/Connected.</div>
+                    </div>
+                    <button type="submit" form="form-test-fonnte" class="btn" style="background:#16A34A; color:#fff; font-weight:700; border:none; display:inline-flex; align-items:center; gap:6px; font-size:13px; padding:8px 16px; border-radius:8px; cursor:pointer; box-shadow:0 2px 4px rgba(22,163,74,0.2);">
+                        <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+                        <span>Tes Kirim WA</span>
+                    </button>
+                </div>
+
+                {{-- Preview Template Pesan WA --}}
+                <div style="background:#1F2937;border-radius:12px;padding:20px;margin-top:4px;">
+                    <div style="font-size:12px;color:#9CA3AF;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:12px;">Pratinjau Pesan WhatsApp yang Dikirimkan:</div>
+                    <div style="background:#075E54;border-radius:10px 10px 0 0;padding:8px 16px;font-size:11px;font-weight:700;color:#E5E7EB;">KB-PAUD Al-Hidayah</div>
+                    <div style="background:#DCF8C6;border-radius:0 0 10px 10px;padding:14px 16px;font-size:13px;color:#1F2937;white-space:pre-line;line-height:1.6;">📢 *PEMBERITAHUAN RESMI*
+*KB-PAUD AL-HIDAYAH WEDELAN*
+
+Yth. Bapak/Ibu Orang Tua/Wali dari *[Nama Anak]*,
+
+Laporan perkembangan anak Anda untuk periode *[Bulan Tahun]* telah diterbitkan oleh wali kelas.
+
+📋 *Data Akses Portal Orang Tua:*
+• NIS Anak: *[NIS]*
+• Password Login: *[Password Awal / NIS]*
+
+🌐 Silakan buka website resmi kami:
+*[URL Website]*
+
+Masuk menggunakan NIS dan PIN yang sudah Anda daftarkan. Jika belum memiliki PIN, gunakan Tanggal Lahir anak (format: DDMMYYYY) sebagai password awal.
+
+Terima kasih atas kepercayaan Bapak/Ibu kepada kami.
+
+_KB-PAUD Al-Hidayah Wedelan_</div>
+                </div>
+            </div>
+
             <div style="margin-top:24px; padding-top:16px; border-top:1px solid #E2E8F0;">
                 <button type="submit" class="btn btn-primary" style="font-weight:700;">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-                    Simpan Perubahan Profil, Banner &amp; Lokasi
+                    Simpan Semua Perubahan
                 </button>
-            </div>
+        </form>
+
+        {{-- Hidden Form Uji Coba Fonnte --}}
+        <form id="form-test-fonnte" method="POST" action="{{ route('admin.profil.test-fonnte') }}" onsubmit="document.getElementById('test_fonnte_token').value = document.getElementById('fonnte_token').value; document.getElementById('test_fonnte_target').value = document.getElementById('fonnte_target').value;">
+            @csrf
+            <input type="hidden" name="fonnte_token" id="test_fonnte_token">
+            <input type="hidden" name="fonnte_target" id="test_fonnte_target">
         </form>
     </div>
 </div>
