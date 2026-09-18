@@ -951,31 +951,30 @@
     margin-bottom: 3px;
   }
 
-  /* testimonial + cta */
-  .bottom-row{padding:20px 0 90px; margin-top:20px;}
-  .bottom-grid{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:24px;}
-  .testi-card{
-    background:var(--cream-soft);border:1px solid var(--line);
-    border-radius:22px;padding:34px;display:flex;flex-direction:column;justify-content:center;gap:18px;
+  /* Review / Testimonial Orang Tua Section */
+  .bottom-row { padding: 48px 0 64px; background: #FAFDFB; border-top: 1px solid var(--line); }
+  .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .testi-card {
+    background: #FFFFFF;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-  .testi-avatar{display:flex;align-items:center;gap:14px;}
-  .testi-avatar img{width:52px;height:52px;border-radius:50%;object-fit:cover;}
-  .quote-mark{font-family:'Baloo 2',sans-serif;font-size:34px;color:var(--gold);line-height:.4;}
-  .testi-card p{font-size:15px;line-height:1.65;color:#4b4b55;font-style:italic;}
-  .testi-name{font-size:13px;font-weight:800;color:var(--navy);}
-  .cta-card{
-    background:var(--navy);border-radius:22px;color:#fff;
-    padding:34px 28px;display:flex;flex-direction:column;justify-content:center;gap:16px;
-    position:relative;overflow:hidden;
+  .testi-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.07);
   }
-  .cta-card h3{font-size:27px;font-family:'Baloo 2',sans-serif;}
-  .cta-card p{font-size:14px;color:#c7cde0;line-height:1.6;}
-  .cta-card .btn-gold{width:fit-content;margin-top:6px;font-size:12px;padding:10px 20px;}
-  .map-card{
-    border-radius:22px;overflow:hidden;border:1px solid var(--line);
-    height:100%;min-height:300px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  }
+  .testi-avatar { display: flex; align-items: center; gap: 12px; margin-top: 6px; }
+  .testi-avatar img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+  .quote-mark { font-family: 'Baloo 2', sans-serif; font-size: 32px; color: var(--gold); line-height: .3; margin-bottom: 4px; }
+  .testi-card p { font-size: 13.5px; line-height: 1.65; color: #475569; font-style: italic; margin: 0; }
+  .testi-name { font-size: 13px; font-weight: 800; color: var(--navy); }
 
   /* footer strip */
   footer{padding:44px 0 60px;position:relative;}
@@ -1077,9 +1076,11 @@
     .wrap { padding: 0 24px; }
     .sambutan-grid { gap: 40px; }
     .valued-grid { gap: 40px; }
-    .program-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    .bottom-grid { grid-template-columns: 1fr 1fr; }
-    .map-card { grid-column: span 2; min-height: 320px; }
+    .review-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 640px) {
+    .review-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 768px) {
@@ -1455,6 +1456,42 @@
     .flyer-agenda-grid {
       grid-template-columns: 1fr !important;
       gap: 10px !important;
+    }
+  }
+
+  /* ── PRINT MEDIA RULES (CETAK BROSUR SPMB & PROGRAM) ── */
+  @media print {
+    @page {
+      size: A4 portrait;
+      margin: 8mm;
+    }
+    html, body {
+      background: #FFFFFF !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    header, footer, nav, .hero, .features, .sambutan, .profil-section, .gallery-sec, .portal-ortu, .bottom-row, .modal, .lightbox-modal, .site-header, .site-footer {
+      display: none !important;
+    }
+    button, .btn, a.btn {
+      display: none !important;
+    }
+    section.programs#program {
+      display: block !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      background: transparent !important;
+    }
+    .flyer-split-grid {
+      display: grid !important;
+      grid-template-columns: 1fr 1.1fr !important;
+      gap: 16px !important;
+    }
+    .flyer-poster-card, .flyer-detail-card {
+      box-shadow: none !important;
+      page-break-inside: avoid;
     }
   }
 
@@ -2546,72 +2583,66 @@
 </section>
 
 {{-- ── TESTIMONIAL + CTA + MAPS ─────────────────────────────────────────── --}}
+{{-- ── REVIEW / TESTIMONI ORANG TUA ─────────────────────────────────────────── --}}
 <section class="bottom-row" id="kontak">
   <div class="wrap">
-    <div class="bottom-grid">
-      {{-- Testimonial Card --}}
+    
+    <div style="text-align: center; margin-bottom: 32px;">
+      <div class="eyebrow eyebrow-green">REVIEW ORANG TUA</div>
+      <h2 style="font-size:28px; font-family:'Baloo 2',sans-serif; font-weight:900; color:var(--navy); margin-top:6px;">Pengalaman Wali Murid KB-PAUD Al-Hidayah</h2>
+      <p style="color:#64748B; font-size:14px; max-width:580px; margin:6px auto 0;">Testimoni jujur dan kesan mendalam dari para orang tua murid mengenai lingkungan belajar dan pengasuhan anak-anaknya.</p>
+    </div>
+
+    <div class="review-grid">
+      {{-- Review 1 --}}
       <div class="testi-card">
-        <div class="quote-mark">&ldquo;</div>
-        <p>PAUD Al-Hidayah adalah keputusan terbaik untuk keluarga kami. Para guru benar-benar peduli, dan anak kami selalu menantikan sekolah setiap hari.</p>
+        <div>
+          <div style="color:#F59E0B; font-size:14px; margin-bottom:4px;">★★★★★</div>
+          <div class="quote-mark">&ldquo;</div>
+          <p>PAUD Al-Hidayah adalah keputusan terbaik untuk keluarga kami. Para guru benar-benar peduli, sabar, dan anak kami selalu menantikan sekolah setiap hari dengan gembira.</p>
+        </div>
         <div class="testi-avatar">
-          <img
-            src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop"
-            alt="Wali murid PAUD Al-Hidayah">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop" alt="Wali murid PAUD Al-Hidayah">
           <div>
             <div class="testi-name">Ibu Siti R. &mdash; Wali Murid</div>
-            <div style="font-size:11.5px;color:#8b8b93;margin-top:2px">Orang tua siswa Kelompok B</div>
+            <div style="font-size:11.5px;color:#64748B;margin-top:2px">Orang tua siswa Kelompok B</div>
           </div>
         </div>
       </div>
 
-      {{-- Contact Card --}}
-      <div class="cta-card">
-        <h3>Hubungi Kami</h3>
-        <p>Kami dengan senang hati menyambut Anda dan buah hati untuk bergabung bersama keluarga besar PAUD Al-Hidayah.</p>
-        <div style="display:flex;flex-direction:column;gap:12px;margin-top:10px">
-          <div style="display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:#c7cde0">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:#F4B93E;flex-shrink:0;margin-top:3px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>{{ $profil->alamat_lengkap ?? 'Desa Wedelan RT 01 / RW 09, Kec. Bangsri, Kab. Jepara, Jawa Tengah 59453' }}</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#c7cde0">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:#F4B93E;flex-shrink:0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span>{{ $profil->no_telepon ?? '0812-2922-2804' }}</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#c7cde0">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:#F4B93E;flex-shrink:0;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <span>{{ $profil->email_sekolah ?? 'fatimatuzzahraalhidayah@gmail.com' }}</span>
+      {{-- Review 2 --}}
+      <div class="testi-card">
+        <div>
+          <div style="color:#F59E0B; font-size:14px; margin-bottom:4px;">★★★★★</div>
+          <div class="quote-mark">&ldquo;</div>
+          <p>Metode pembelajarannya sangat ramah anak. Pembiasaan sholat Dhuha berjamaah dan hafalan surat pendek membuat perkembangan karakter dan keagamaan anak saya pesat sekali.</p>
+        </div>
+        <div class="testi-avatar">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop" alt="Wali murid PAUD Al-Hidayah">
+          <div>
+            <div class="testi-name">Ibu Nurul H. &mdash; Wali Murid</div>
+            <div style="font-size:11.5px;color:#64748B;margin-top:2px">Orang tua siswa Kelompok Bermain</div>
           </div>
         </div>
-        <a href="{{ route('login') }}" class="btn btn-gold" style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width:16px;height:16px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Portal Laporan Anak &rarr;</span></a>
       </div>
 
-      {{-- Google Maps Card --}}
-      <div class="map-card">
-        @if(!empty($profil->maps_embed) && str_contains($profil->maps_embed, 'src='))
-          {!! $profil->maps_embed !!}
-        @elseif(!empty($profil->maps_embed))
-          <iframe
-            src="{{ $profil->maps_embed }}"
-            width="100%"
-            height="100%"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        @else
-          <iframe
-            src="https://maps.google.com/maps?q=-6.5163,110.7823+(KB-PAUD+Al-Hidayah+Wedelan)&t=&z=17&ie=UTF8&iwloc=&output=embed"
-            width="100%"
-            height="100%"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        @endif
+      {{-- Review 3 --}}
+      <div class="testi-card">
+        <div>
+          <div style="color:#F59E0B; font-size:14px; margin-bottom:4px;">★★★★★</div>
+          <div class="quote-mark">&ldquo;</div>
+          <p>Laporan perkembangan bulanan via portal online &amp; notifikasi WhatsApp sangat memudahkan kami memantau aspek kognitif, motorik &amp; bahasa anak meskipun kami sibuk bekerja.</p>
+        </div>
+        <div class="testi-avatar">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" alt="Wali murid PAUD Al-Hidayah">
+          <div>
+            <div class="testi-name">Bpk. Ahmad F. &mdash; Wali Murid</div>
+            <div style="font-size:11.5px;color:#64748B;margin-top:2px">Orang tua siswa Kelompok A</div>
+          </div>
+        </div>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -2823,5 +2854,6 @@
       }
   });
 </script>
+
 </body>
 </html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagram Flowchart Keseluruhan — KB-PAUD Al-Hidayah (Bisa di-Zoom / Export Canva)</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header-bar {
+            background: #1E1E1E;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            text-align: center;
+            max-width: 900px;
+            border: 1px solid #333;
+        }
+        h1 {
+            margin: 0 0 6px 0;
+            font-size: 22px;
+            color: #4ADE80;
+        }
+        p {
+            margin: 0;
+            font-size: 13px;
+            color: #A1A1AA;
+        }
+        .btn-group {
+            margin-top: 12px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .btn {
+            background: #2563EB;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn:hover { background: #1D4ED8; }
+        .diagram-container {
+            background: #18181B;
+            border: 2px solid #27272A;
+            border-radius: 16px;
+            padding: 20px;
+            overflow: auto;
+            max-width: 98vw;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+        }
+        .mermaid {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-bar">
+        <h1>📐 DIAGRAM FLOWCHART SISTEM KESELURUHAN (KB-PAUD AL-HIDAYAH)</h1>
+        <p>Diagram ini dirender secara Vector (SVG). Sangat tajam, tidak akan blur saat di-zoom atau dimasukkan ke <strong>Canva</strong>.</p>
+        <div class="btn-group">
+            <button class="btn" onclick="window.print()">🖨️ Cetak / Simpan ke PDF 4K</button>
+            <button class="btn" style="background:#16A34A;" onclick="copySvg()">📋 Salin Kode SVG (untuk Canva)</button>
+        </div>
+    </div>
+
+    <div class="diagram-container">
+        <div class="mermaid">
+graph TD
+    %% SUB-SISTEM 1: PUBLIK & MANAGEMENT MASTER (ADMIN)
+    subgraph Sub1 ["Sub-Sistem 1: Pengelolaan CMS & Master Data (Kelola)"]
+        A1([Mulai]) --> A2[/Admin Input Kredensial Login/]
+        A2 --> A3[Sistem Validasi User Admin di DB 'users']
+        A3 --> A4[/Masuk Dashboard Admin/]
+        
+        A4 --> A5[/Input Pengaturan Profil Sekolah, Alamat, Maps/]
+        A5 --> A6[/Upload/Draw Tanda Tangan Digital Kepsek/]
+        A6 --> A7[ImageHelper Trim Latar TTD-Digital]
+        A7 --> A8[/Upload Banner Hero 5 Slide & SPMB Flyer 3 Foto/]
+        A8 --> A9[/Input Token API Fonnte WA, Target, & App URL/]
+        A9 --> A10[(Simpan ke Database 'profil_sekolahs')]
+        
+        A4 --> A11[/Kelola Master Data Kelas, Siswa, Users, Galeri, Prestasi/]
+        A11 --> A12[(Simpan ke DB 'kelas', 'siswa', 'users', 'galeris', 'prestasis')]
+    end
+
+    %% SUB-SISTEM 2: AUTENTIKASI & SETUP PIN ORANG TUA
+    subgraph Sub2 ["Sub-Sistem 2: Autentikasi & Setup Akses Orang Tua"]
+        B1[/Pengunjung / Orang Tua Buka Website/] --> B2{Akses Halaman?}
+        B2 -- Publik --> B3[/Lihat Beranda, Banner Hero, Sambutan Kepsek, Galeri, Prestasi/] --> Z1([Selesai])
+        B2 -- Login Ortu --> B4[/Input NIS Anak & Password Awal DDMMYYYY / PIN/]
+        
+        B4 --> B5[Sistem Cek Data Siswa di DB 'siswa']
+        B5 --> B6{Data NIS Valid?}
+        B6 -- Tidak --> B7[/Tampilkan Pesan Error: NIS Tidak Ditemukan/] --> B4
+        B6 -- Ya --> B8{Apakah Akun Memiliki PIN 6-Digit?}
+        
+        B8 -- Belum --> B9[/Arahkan ke Form Setup PIN Baru (/ortu/setup-pin)/]
+        B9 --> B10[/Orang Tua Input 6 Digit PIN Baru/]
+        B10 --> B11[(Simpan PIN di DB 'users')] --> B12
+        
+        B8 -- Sudah --> B12[/Masuk Dashboard Orang Tua (/ortu/dashboard)/]
+    end
+
+    %% SUB-SISTEM 3: PENILAIAN 7 ASPEK PERKEMBANGAN (GURU)
+    subgraph Sub3 ["Sub-Sistem 3: Penilaian & Evaluasi 7 Aspek PAUD (Guru)"]
+        C1[/Guru Login ke Dashboard Guru/] --> C2[/Pilih Kelas & Nama Siswa/]
+        
+        C2 --> C3[/Input Catatan Observasi Mingguan M1 - M5/]
+        C3 --> C4[Input 7 Aspek: Agama/Moral, Motorik Kasar/Halus, Kognitif, Bahasa, Sosio-Emosional, Seni]
+        C4 --> C5[(Simpan ke DB 'catatan_mingguans')]
+        
+        C5 --> C6[/Guru Buka Form Laporan Bulanan/]
+        C6 --> C7[Sistem Load Referensi Catatan M1-M5 Side-by-Side]
+        C7 --> C8[/Guru Input Rekap Narasi Bulanan 7 Aspek/]
+        C8 --> C9[Sistem Cek Duplikasi Laporan di DB 'laporan_bulanans']
+        
+        C9 --> C10{Pilih Status Laporan?}
+        C10 -- Draft --> C11[(Simpan Status Draft di DB 'laporan_bulanans')]
+        C11 --> C12[/Tersimpan Sementara - Belum Dipublish/] --> Z2([Selesai])
+        
+        C10 -- Published --> C13[(Simpan Status Published di DB 'laporan_bulanans')]
+    end
+
+    %% SUB-SISTEM 4: DUAL NOTIFICATION ENGINE (FONNTE WA & IN-APP)
+    subgraph Sub4 ["Sub-Sistem 4: Multi-Channel Notification Engine"]
+        C13 --> D1[Trigger Controller: sendFonnteWaNotification()]
+        D1 --> D2[Ambil fonnte_token, target, app_url dari 'profil_sekolahs']
+        D2 --> D3[Ambil nama, nis, tanggal_lahir, kontak_ortu dari 'siswa']
+        
+        D3 --> D4[Sistem Susun Format Pesan WA Resmi]
+        D4 --> D5[Normalisasi Nomor HP: 08xxx -> 628xxx]
+        D5 --> D6[[Kirim HTTP POST ke API Fonnte withoutVerifying]]
+        D6 --> D7{Respons Status Fonnte?}
+        D7 -- Sukses --> D8[/Log Status Success di laravel.log & Pesan WA Masuk HP Ortu/]
+        D7 -- Gagal --> D9[/Log Error Reason di laravel.log/]
+        
+        C13 --> D10[Trigger Controller: createNotification()]
+        D10 --> D11[(Simpan Notifikasi In-App di DB 'notifikasis')]
+    end
+
+    %% SUB-SISTEM 5: PORTAL ORANG TUA & CETAK PDF
+    subgraph Sub5 ["Sub-Sistem 5: Portal Ortu, Evaluasi, & Cetak PDF"]
+        B12 --> E1[/Orang Tua Lihat Grafik Progress & Daftar Laporan Terbit/]
+        E1 --> E2[/Buka Rincian Evaluasi Laporan 7 Aspek Perkembangan/]
+        E2 --> E3[/Klik Tombol 'Cetak / Unduh PDF Laporan'/]
+        
+        E3 --> E4[Sistem Load Template PDF DomPDF]
+        E4 --> E5[Ambil Header Kop Surat, Identitas Siswa & Kelas]
+        E5 --> E6[Ambil Narasi Evaluasi 7 Aspek Perkembangan]
+        E6 --> E7[Ambil File TTD Kepsek Digital dari DB 'profil_sekolahs']
+        E7 --> E8[Sistem Rendisi File PDF Resmi]
+        E8 --> E9[/File PDF Laporan Berhasil Terunduh / Dicetak/]
+        E9 --> Z3([Selesai])
+    end
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { curve: 'linear', useMaxWidth: false }
+        });
+
+        function copySvg() {
+            var svg = document.querySelector('.mermaid svg');
+            if (svg) {
+                var svgData = new XMLSerializer().serializeToString(svg);
+                navigator.clipboard.writeText(svgData).then(function() {
+                    alert('Kode SVG Berhasil Disalin! Anda bisa langsung masukan (import/paste) ke Canva.');
+                });
+            }
+        }
+    </script>
+</body>
+</html>
