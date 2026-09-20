@@ -415,22 +415,22 @@
     background:#ffffff;
     border:none;
     border-radius:0;
-    padding:34px 10%;
+    padding:16px 6%;
     display:grid;grid-template-columns:repeat(5,1fr);gap:10px;
-    box-shadow:0 12px 35px rgba(124, 182, 139, 0.18);
+    box-shadow:0 6px 20px rgba(0, 0, 0, 0.05);
     position:relative;
     z-index:5;
   }
-  .feature-item{text-align:center;padding:0 8px;border-right:none;}
+  .feature-item{text-align:center;padding:0 6px;border-right:none;}
   .feature-item:last-child{border-right:none;}
   .feature-icon{
-    width:52px;height:52px;border-radius:50%;
+    width:44px;height:44px;border-radius:50%;
     display:flex;align-items:center;justify-content:center;
-    margin:0 auto 14px;
+    margin:0 auto 6px;
   }
-  .feature-icon svg{width:24px;height:24px;stroke:#fff;}
-  .feature-item h4{font-size:14px;color:var(--navy);margin-bottom:6px;font-weight:700;}
-  .feature-item p{font-size:12px;color:#7c7c85;line-height:1.5;}
+  .feature-icon svg{width:20px;height:20px;stroke:#fff;}
+  .feature-item h4{font-size:13px;color:var(--navy);margin-bottom:3px;font-weight:800;line-height:1.3;}
+  .feature-item p{font-size:11.5px;color:#7c7c85;line-height:1.4;}
 
   /* ── Tentang / Profil Section (UI Persis Section Program) ── */
   .profil-section {
@@ -2303,55 +2303,72 @@
             </button>
           </div>
 
-          <!-- Content Tab 1: Semester 1 -->
+          @php
+            $defaultSem1Raw = "Bulan 1-2 • Jul-Agust | Tema 1: Identitasku & Tubuhku | Mengenal teman & guru, kemandirian, kebersihan tubuh, makanan sehat, perayaan HUT RI & kotak bekal.\n"
+             . "Bulan 3 • Sept | Tema 2: Panca Indera & Mandiri | Kesehatan panca indera, 4 sehat 5 sempurna, kebiasaan gosok gigi, cuci tangan, makan mandiri & hewan kesayangan.\n"
+             . "Bulan 4 • Okt | Tema 3: Tumbuhan, Warna & Angka | Menanam benih, eksperimen warna pelangi, finger painting, konsep angka 1-2 & ekspresi emosi wajah.\n"
+             . "Bulan 5-6 • Nov-Des | Tema 4: Bentuk & Evaluasi Sem. 1 | Mengenal bentuk geometri, bermain balok, kolase bentuk dasar, refleksi & evaluasi Semester 1.";
+
+            $defaultSem2Raw = "Bulan 7-8 • Jan-Feb | Tema 5: Liburan, Cuaca & Keselamatan | Cerita liburan, rambu lalu lintas & helm, pakaian musim hujan/kemarau, eksperimen warna & bentuk batik.\n"
+             . "Bulan 9 • Mar | Tema 6: Angka, Transportasi & Elemen Alam | Menyusun angka 1-3, kendaraan darat/air/udara & keselamatan, serta eksperimen air, api & udara.\n"
+             . "Bulan 10 • Apr | Tema 7: Siaga Bencana, Alam Semesta & Waktu | Simulasi siaga gempa/kebakaran, mengenal bumi & planet, membuat roket, jam & jadwal harian.\n"
+             . "Bulan 11-12 • Mei-Jun | Tema 8: Uang, Budaya & Perayaan Akhir Tahun | Main jual beli & menabung, alat komunikasi, seni budaya Indonesia, evaluasi capaian & pentas perpisahan.";
+
+            $sem1Lines = array_filter(array_map('trim', explode("\n", $profil->flyer_kurikulum_sem1 ?? $defaultSem1Raw)));
+            $sem2Lines = array_filter(array_map('trim', explode("\n", $profil->flyer_kurikulum_sem2 ?? $defaultSem2Raw)));
+          @endphp
+
+          <!-- Content Tab 1: Semester 1 (Ganjil) -->
           <div class="program-tab-content active" id="prog-sem1">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-              <div style="background:#FFF;padding:10px 12px;border-radius:12px;border:1px solid #FDE68A;font-size:12px;">
-                <strong style="color:#059669;display:block;margin-bottom:2px;">Bulan 1-2 • Jul-Agust</strong>
-                <div style="font-weight:800;color:#0F172A;">Tema 1: Aku &amp; Diriku</div>
-                <div style="color:#64748B;font-size:11px;margin-top:2px;">MPLS Ramah Anak, Cuci Tangan, Toilet Training &amp; Kolase.</div>
-              </div>
-              <div style="background:#FFF;padding:10px 12px;border-radius:12px;border:1px solid #FDE68A;font-size:12px;">
-                <strong style="color:#D97706;display:block;margin-bottom:2px;">Bulan 3 • Sept</strong>
-                <div style="font-weight:800;color:#0F172A;">Tema 2: Keluargaku</div>
-                <div style="color:#64748B;font-size:11px;margin-top:2px;">Roleplay Rumahku Surgaku &amp; Hari Apresiasi Ayah Bunda.</div>
-              </div>
-              <div style="background:#FFF;padding:10px 12px;border-radius:12px;border:1px solid #FDE68A;font-size:12px;">
-                <strong style="color:#2563EB;display:block;margin-bottom:2px;">Bulan 4 • Okt</strong>
-                <div style="font-weight:800;color:#0F172A;">Tema 3: Kebutuhanku</div>
-                <div style="color:#64748B;font-size:11px;margin-top:2px;">Cooking Class Cilik, Edukasi Gigi &amp; Busana Islami.</div>
-              </div>
-              <div style="background:#FFF;padding:10px 12px;border-radius:12px;border:1px solid #FDE68A;font-size:12px;">
-                <strong style="color:#BE123C;display:block;margin-bottom:2px;">Bulan 5-6 • Nov-Des</strong>
-                <div style="font-weight:800;color:#0F172A;">Tema 4: Fauna &amp; Flora</div>
-                <div style="color:#64748B;font-size:11px;margin-top:2px;">Menanam Biji, Mini Zoo &amp; Pembagian Rapor Semester 1.</div>
-              </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+              @foreach($sem1Lines as $line)
+                @php
+                  $parts = explode('|', $line);
+                  $badge = isset($parts[0]) ? trim($parts[0]) : '';
+                  $tema = isset($parts[1]) ? trim($parts[1]) : '';
+                  $topik = isset($parts[2]) ? trim($parts[2]) : '';
+                @endphp
+                <div style="background:#FFF; padding:10px 12px; border-radius:12px; border:1px solid #FDE68A; font-size:12px;">
+                  @if($badge)
+                    <strong style="color:#059669; display:block; margin-bottom:2px;">{{ $badge }}</strong>
+                  @endif
+                  @if($tema)
+                    <div style="font-weight:800; color:#0F172A;">{{ $tema }}</div>
+                  @endif
+                  @if($topik)
+                    <div style="color:#64748B; font-size:11px; margin-top:2px;">{{ $topik }}</div>
+                  @elseif(!$tema)
+                    <div style="color:#64748B; font-size:11px; margin-top:2px;">{{ $line }}</div>
+                  @endif
+                </div>
+              @endforeach
             </div>
           </div>
 
-          <!-- Content Tab 2: Semester 2 -->
+          <!-- Content Tab 2: Semester 2 (Genap) -->
           <div class="program-tab-content" id="prog-sem2">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-              <div style="background:#FFF;padding:10px 12px;border-radius:12px;border:1px solid #FDE68A;font-size:12px;">
-                <strong style="color:#4F46E5;display:block;margin-bottom:2px;">Bulan 7-8 • Jan-Feb</strong>
-                <div style="font-weight:800;color:#0F172A;">Tema 5: Transportasi</div>
-                <div style="color:#64748B;font-size:11px;margin-top:2px;">Polisi Sahabat Anak, Miniatur Mobil &amp; Outing Class.</div>
-              </div>
-              <div style="background:#FFF;padding:10px 12px;border-radius:12px;border:1px solid #FDE68A;font-size:12px;">
-                <strong style="color:#B45309;display:block;margin-bottom:2px;">Bulan 9 • Mar</strong>
-                <div style="font-weight:800;color:#0F172A;">Tema 6: Profesi Mulia</div>
-                <div style="color:#64748B;font-size:11px;margin-top:2px;">Career Day Profesi Cilik &amp; Kunjungan Pemadam.</div>
-              </div>
-              <div style="background:#FFF;padding:10px 12px;border-radius:12px;border:1px solid #FDE68A;font-size:12px;">
-                <strong style="color:#047857;display:block;margin-bottom:2px;">Bulan 10 • Apr</strong>
-                <div style="font-weight:800;color:#0F172A;">Tema 7: Negaraku &amp; Ramadhan</div>
-                <div style="color:#64748B;font-size:11px;margin-top:2px;">Pesantren Kilat Cilik, Hari Kartini &amp; Santunan.</div>
-              </div>
-              <div style="background:#FFF;padding:10px 12px;border-radius:12px;border:1px solid #FDE68A;font-size:12px;">
-                <strong style="color:#7C3AED;display:block;margin-bottom:2px;">Bulan 11-12 • Mei-Jun</strong>
-                <div style="font-weight:800;color:#0F172A;">Tema 8: Alam &amp; Kelulusan</div>
-                <div style="color:#64748B;font-size:11px;margin-top:2px;">Eksperimen Pelangi, Kesiapan SD &amp; Wisuda Kelulusan.</div>
-              </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+              @foreach($sem2Lines as $line)
+                @php
+                  $parts = explode('|', $line);
+                  $badge = isset($parts[0]) ? trim($parts[0]) : '';
+                  $tema = isset($parts[1]) ? trim($parts[1]) : '';
+                  $topik = isset($parts[2]) ? trim($parts[2]) : '';
+                @endphp
+                <div style="background:#FFF; padding:10px 12px; border-radius:12px; border:1px solid #FDE68A; font-size:12px;">
+                  @if($badge)
+                    <strong style="color:#4F46E5; display:block; margin-bottom:2px;">{{ $badge }}</strong>
+                  @endif
+                  @if($tema)
+                    <div style="font-weight:800; color:#0F172A;">{{ $tema }}</div>
+                  @endif
+                  @if($topik)
+                    <div style="color:#64748B; font-size:11px; margin-top:2px;">{{ $topik }}</div>
+                  @elseif(!$tema)
+                    <div style="color:#64748B; font-size:11px; margin-top:2px;">{{ $line }}</div>
+                  @endif
+                </div>
+              @endforeach
             </div>
           </div>
 

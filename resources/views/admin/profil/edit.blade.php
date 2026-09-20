@@ -343,6 +343,37 @@
                             @error('flyer_ekskul')<div class="invalid-feedback" style="display:block;">{{ $message }}</div>@enderror
                         </div>
                     </div>
+
+                    <!-- Textarea Kurikulum & Program Pembelajaran 1 Tahun -->
+                    <div style="margin-top:20px; padding:16px; background:#FFFFFF; border:1px solid #CBD5E1; border-radius:10px;">
+                        <h5 style="margin:0 0 6px 0; font-size:14px; font-weight:700; color:#1E293B; display:flex; align-items:center; gap:6px;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:#059669;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            <span>Agenda Kurikulum &amp; Program Pembelajaran 1 Tahun (Dapat Diubah Kapan Saja)</span>
+                        </h5>
+                        <small style="color:#64748B; display:block; margin-bottom:14px; line-height:1.5;">Format tiap baris: <code>Bulan &amp; Minggu | Tema : Judul Tema | Topik : Poin 1, Poin 2, dst.</code></small>
+
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:16px;">
+                            <!-- Semester 1 (Ganjil) -->
+                            <div class="form-group" style="margin-bottom:0;">
+                                <label for="flyer_kurikulum_sem1" style="font-weight:700; font-size:13px; color:#047857; display:flex; align-items:center; gap:6px; margin-bottom:6px;">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:#059669;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                                    <span>Kurikulum Semester 1 (Ganjil)</span>
+                                </label>
+                                <textarea id="flyer_kurikulum_sem1" name="flyer_kurikulum_sem1" class="form-control" rows="8" style="font-size:12px; line-height:1.5; font-family:Consolas, monospace;" placeholder="Bulan 1-2 • Jul-Agust | Tema 1: Identitasku & Tubuhku | Mengenal teman & guru, kemandirian...">{{ old('flyer_kurikulum_sem1', $profil->flyer_kurikulum_sem1 ?? "Bulan 1-2 • Jul-Agust | Tema 1: Identitasku & Tubuhku | Mengenal teman & guru, kemandirian, kebersihan tubuh, makanan sehat, perayaan HUT RI & kotak bekal.\nBulan 3 • Sept | Tema 2: Panca Indera & Mandiri | Kesehatan panca indera, 4 sehat 5 sempurna, kebiasaan gosok gigi, cuci tangan, makan mandiri & hewan kesayangan.\nBulan 4 • Okt | Tema 3: Tumbuhan, Warna & Angka | Menanam benih, eksperimen warna pelangi, finger painting, konsep angka 1-2 & ekspresi emosi wajah.\nBulan 5-6 • Nov-Des | Tema 4: Bentuk & Evaluasi Sem. 1 | Mengenal bentuk geometri, bermain balok, kolase bentuk dasar, refleksi & evaluasi Semester 1.") }}</textarea>
+                                @error('flyer_kurikulum_sem1')<div class="invalid-feedback" style="display:block;">{{ $message }}</div>@enderror
+                            </div>
+
+                            <!-- Semester 2 (Genap) -->
+                            <div class="form-group" style="margin-bottom:0;">
+                                <label for="flyer_kurikulum_sem2" style="font-weight:700; font-size:13px; color:#4F46E5; display:flex; align-items:center; gap:6px; margin-bottom:6px;">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:#6366F1;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                                    <span>Kurikulum Semester 2 (Genap)</span>
+                                </label>
+                                <textarea id="flyer_kurikulum_sem2" name="flyer_kurikulum_sem2" class="form-control" rows="8" style="font-size:12px; line-height:1.5; font-family:Consolas, monospace;" placeholder="Bulan 7-8 • Jan-Feb | Tema 5: Liburan, Cuaca & Keselamatan | Cerita liburan...">{{ old('flyer_kurikulum_sem2', $profil->flyer_kurikulum_sem2 ?? "Bulan 7-8 • Jan-Feb | Tema 5: Liburan, Cuaca & Keselamatan | Cerita liburan, rambu lalu lintas & helm, pakaian musim hujan/kemarau, eksperimen warna & bentuk batik.\nBulan 9 • Mar | Tema 6: Angka, Transportasi & Elemen Alam | Menyusun angka 1-3, kendaraan darat/air/udara & keselamatan, serta eksperimen air, api & udara.\nBulan 10 • Apr | Tema 7: Siaga Bencana, Alam Semesta & Waktu | Simulasi siaga gempa/kebakaran, mengenal bumi & planet, membuat roket, jam & jadwal harian.\nBulan 11-12 • Mei-Jun | Tema 8: Uang, Budaya & Perayaan Akhir Tahun | Main jual beli & menabung, alat komunikasi, seni budaya Indonesia, evaluasi capaian & pentas perpisahan.") }}</textarea>
+                                @error('flyer_kurikulum_sem2')<div class="invalid-feedback" style="display:block;">{{ $message }}</div>@enderror
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

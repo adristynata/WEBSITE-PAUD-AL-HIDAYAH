@@ -70,6 +70,8 @@ class ProfilSekolahController extends Controller
             'flyer_program_unggulan' => 'nullable|string',
             'flyer_persyaratan' => 'nullable|string',
             'flyer_ekskul' => 'nullable|string',
+            'flyer_kurikulum_sem1' => 'nullable|string',
+            'flyer_kurikulum_sem2' => 'nullable|string',
             'ttd_kepsek' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'ttd_kepsek_base64' => 'nullable|string',
             'fonnte_token' => 'nullable|string|max:255',
@@ -88,6 +90,8 @@ class ProfilSekolahController extends Controller
         $profil->flyer_program_unggulan = $request->flyer_program_unggulan;
         $profil->flyer_persyaratan = $request->flyer_persyaratan;
         $profil->flyer_ekskul = $request->flyer_ekskul;
+        $profil->flyer_kurikulum_sem1 = $request->flyer_kurikulum_sem1;
+        $profil->flyer_kurikulum_sem2 = $request->flyer_kurikulum_sem2;
         $profil->fonnte_token = $request->fonnte_token;
         $profil->fonnte_target = $request->fonnte_target;
         $profil->app_url = $request->app_url;
