@@ -2108,11 +2108,13 @@
               <h4>Visi Sekolah</h4>
             </div>
           </div>
-          <div class="pbox-body">
-            <p style="font-size: 14.5px; font-weight: 700; color: var(--navy); line-height: 1.5; margin-bottom: 8px; font-family: 'Baloo 2', sans-serif;">
-              "Membentuk anak yang cerdas, baik, terampil, berakhlak mulia, sholih/sholihah, kreatif, dan mandiri."
+          <div class="pbox-body" style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+            <p style="font-size: 15.5px; font-weight: 800; color: #166534; line-height: 1.6; margin-bottom: 12px; font-family: 'Baloo 2', sans-serif;">
+              &ldquo;Membentuk anak yang cerdas, baik, terampil, berakhlak mulia, sholih/sholihah, kreatif, dan mandiri.&rdquo;
             </p>
-            Visi ini menjadi arah dasar kami dalam membimbing tumbuh kembang buah hati Anda agar menjadi pribadi unggul:
+            <p style="font-size: 14px; color: #475569; line-height: 1.8; margin: 0;">
+              Visi ini menjadi komitmen dasar KB-PAUD Al-Hidayah dalam membimbing tumbuh kembang buah hati Anda secara holistik. Kami memadukan pembiasaan nilai keagamaan Islami dengan pendekatan belajar ceria agar setiap anak dapat berkembang secara optimal sesuai dengan potensi emasnya.
+            </p>
           </div>
         </div>
 
@@ -2611,53 +2613,80 @@
     </div>
 
     <div class="review-grid">
-      {{-- Review 1 --}}
-      <div class="testi-card">
-        <div>
-          <div style="color:#F59E0B; font-size:14px; margin-bottom:4px;">★★★★★</div>
-          <div class="quote-mark">&ldquo;</div>
-          <p>PAUD Al-Hidayah adalah keputusan terbaik untuk keluarga kami. Para guru benar-benar peduli, sabar, dan anak kami selalu menantikan sekolah setiap hari dengan gembira.</p>
-        </div>
-        <div class="testi-avatar">
-          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop" alt="Wali murid PAUD Al-Hidayah">
+      @forelse($testimonis as $t)
+        <div class="testi-card">
           <div>
-            <div class="testi-name">Ibu Siti R. &mdash; Wali Murid</div>
-            <div style="font-size:11.5px;color:#64748B;margin-top:2px">Orang tua siswa Kelompok B</div>
+            <div style="color:#F59E0B; font-size:14px; margin-bottom:4px;">
+              @for($i = 1; $i <= 5; $i++)
+                {{ $i <= $t->rating ? '★' : '☆' }}
+              @endfor
+            </div>
+            <div class="quote-mark">&ldquo;</div>
+            <p>{{ $t->isi_review }}</p>
+          </div>
+          <div class="testi-avatar">
+            @if($t->foto)
+              <img src="{{ asset('storage/' . $t->foto) }}" alt="{{ $t->nama_ortu }}">
+            @else
+              <div style="width:42px;height:42px;border-radius:50%;background:#10B981;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;">
+                {{ strtoupper(substr($t->nama_ortu, 0, 1)) }}
+              </div>
+            @endif
+            <div>
+              <div class="testi-name">{{ $t->nama_ortu }}</div>
+              <div style="font-size:11.5px;color:#64748B;margin-top:2px">{{ $t->tipe_ortu ?? 'Wali Murid' }}</div>
+            </div>
           </div>
         </div>
-      </div>
+      @empty
+        {{-- Fallback Review 1 --}}
+        <div class="testi-card">
+          <div>
+            <div style="color:#F59E0B; font-size:14px; margin-bottom:4px;">★★★★★</div>
+            <div class="quote-mark">&ldquo;</div>
+            <p>PAUD Al-Hidayah adalah keputusan terbaik untuk keluarga kami. Para guru benar-benar peduli, sabar, dan anak kami selalu menantikan sekolah setiap hari dengan gembira.</p>
+          </div>
+          <div class="testi-avatar">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop" alt="Wali murid PAUD Al-Hidayah">
+            <div>
+              <div class="testi-name">Ibu Siti R. &mdash; Wali Murid</div>
+              <div style="font-size:11.5px;color:#64748B;margin-top:2px">Orang tua siswa Kelompok B</div>
+            </div>
+          </div>
+        </div>
 
-      {{-- Review 2 --}}
-      <div class="testi-card">
-        <div>
-          <div style="color:#F59E0B; font-size:14px; margin-bottom:4px;">★★★★★</div>
-          <div class="quote-mark">&ldquo;</div>
-          <p>Metode pembelajarannya sangat ramah anak. Pembiasaan sholat Dhuha berjamaah dan hafalan surat pendek membuat perkembangan karakter dan keagamaan anak saya pesat sekali.</p>
-        </div>
-        <div class="testi-avatar">
-          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop" alt="Wali murid PAUD Al-Hidayah">
+        {{-- Fallback Review 2 --}}
+        <div class="testi-card">
           <div>
-            <div class="testi-name">Ibu Nurul H. &mdash; Wali Murid</div>
-            <div style="font-size:11.5px;color:#64748B;margin-top:2px">Orang tua siswa Kelompok Bermain</div>
+            <div style="color:#F59E0B; font-size:14px; margin-bottom:4px;">★★★★★</div>
+            <div class="quote-mark">&ldquo;</div>
+            <p>Metode pembelajarannya sangat ramah anak. Pembiasaan sholat Dhuha berjamaah dan hafalan surat pendek membuat perkembangan karakter dan keagamaan anak saya pesat sekali.</p>
+          </div>
+          <div class="testi-avatar">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop" alt="Wali murid PAUD Al-Hidayah">
+            <div>
+              <div class="testi-name">Ibu Nurul H. &mdash; Wali Murid</div>
+              <div style="font-size:11.5px;color:#64748B;margin-top:2px">Orang tua siswa Kelompok Bermain</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      {{-- Review 3 --}}
-      <div class="testi-card">
-        <div>
-          <div style="color:#F59E0B; font-size:14px; margin-bottom:4px;">★★★★★</div>
-          <div class="quote-mark">&ldquo;</div>
-          <p>Laporan perkembangan bulanan via portal online &amp; notifikasi WhatsApp sangat memudahkan kami memantau aspek kognitif, motorik &amp; bahasa anak meskipun kami sibuk bekerja.</p>
-        </div>
-        <div class="testi-avatar">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" alt="Wali murid PAUD Al-Hidayah">
+        {{-- Fallback Review 3 --}}
+        <div class="testi-card">
           <div>
-            <div class="testi-name">Bpk. Ahmad F. &mdash; Wali Murid</div>
-            <div style="font-size:11.5px;color:#64748B;margin-top:2px">Orang tua siswa Kelompok A</div>
+            <div style="color:#F59E0B; font-size:14px; margin-bottom:4px;">★★★★★</div>
+            <div class="quote-mark">&ldquo;</div>
+            <p>Laporan perkembangan bulanan via portal online &amp; notifikasi WhatsApp sangat memudahkan kami memantau aspek kognitif, motorik &amp; bahasa anak meskipun kami sibuk bekerja.</p>
+          </div>
+          <div class="testi-avatar">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" alt="Wali murid PAUD Al-Hidayah">
+            <div>
+              <div class="testi-name">Bpk. Ahmad F. &mdash; Wali Murid</div>
+              <div style="font-size:11.5px;color:#64748B;margin-top:2px">Orang tua siswa Kelompok A</div>
+            </div>
           </div>
         </div>
-      </div>
+      @endforelse
     </div>
 
   </div>

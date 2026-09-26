@@ -212,15 +212,22 @@
         $ttdGuruFile = ($guruUser && $guruUser->ttd && file_exists(public_path('images/' . $guruUser->ttd))) 
             ? public_path('images/' . $guruUser->ttd) 
             : null;
+
+        $stempelFile = file_exists(public_path('images/stempel.png')) 
+            ? public_path('images/stempel.png') 
+            : (file_exists(public_path('images/stempel.jpg')) ? public_path('images/stempel.jpg') : null);
     @endphp
     <table class="signature-table">
         <tr>
             <td class="signature-col">
                 <p>Mengetahui,</p>
                 <strong style="display:block; margin-top:2px;">Kepala Sekolah KB Al-Hidayah</strong>
-                <div class="signature-space">
+                <div class="signature-space" style="position:relative; width:170px; margin:4px auto;">
+                    @if($stempelFile)
+                        <img src="{{ $stempelFile }}" style="position:absolute; left:22px; top:-10px; width:85px; height:85px; opacity:0.85; z-index:1;" alt="Stempel Resmi PAUD Al-Hidayah">
+                    @endif
                     @if($ttdKepsekFile)
-                        <img src="{{ $ttdKepsekFile }}" class="signature-img" alt="TTD Kepala Sekolah">
+                        <img src="{{ $ttdKepsekFile }}" class="signature-img" style="position:relative; z-index:2; margin-left:15px;" alt="TTD Kepala Sekolah">
                     @endif
                 </div>
                 <strong style="text-decoration:underline;">{{ $profil->sambutan_nama ?? 'Sri Wahyuni, S.Pd.' }}</strong>

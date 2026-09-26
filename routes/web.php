@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $profil = \App\Models\ProfilSekolah::query()->first();
     $galeris = \App\Models\Galeri::query()->orderBy('created_at', 'desc')->take(6)->get();
-    return view('welcome', compact('profil', 'galeris'));
+    $testimonis = \App\Models\Testimoni::approved()->orderBy('created_at', 'desc')->take(6)->get();
+    return view('welcome', compact('profil', 'galeris', 'testimonis'));
 })->name('home');
 
 Route::get('/prestasi', function () {
@@ -76,6 +77,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 
     // Indikator Penilaian
     Route::resource('indikator', IndikatorController::class)->except(['show']);
+
+    // Review / Testimoni Orang Tua
+    Route::resource('testimoni', \App\Http\Controllers\Admin\TestimoniController::class)->only(['index', 'store', 'destroy']);
+    Route::patch('testimoni/{id}/status', [\App\Http\Controllers\Admin\TestimoniController::class, 'updateStatus'])->name('testimoni.update-status');
 });
 
 // ─── Guru ──────────────────────────────────────────────────────────────────────
@@ -103,4 +108,6 @@ Route::prefix('ortu')->name('ortu.')->middleware(['auth', 'role:orang_tua'])->gr
     Route::get('/laporan/{id}/download', [OrtuDashboard::class, 'downloadPdf'])->name('laporan.download');
     Route::get('/notifikasi/{id}/read', [OrtuDashboard::class, 'readNotifikasi'])->name('notifikasi.read');
     Route::post('/profil/foto', [OrtuDashboard::class, 'updateFoto'])->name('profil.foto');
+    Route::post('/testimoni', [\App\Http\Controllers\OrangTua\TestimoniController::class, 'store'])->name('testimoni.store');
+    Route::delete('/testimoni/{id?}', [\App\Http\Controllers\OrangTua\TestimoniController::class, 'destroy'])->name('testimoni.destroy');
 });

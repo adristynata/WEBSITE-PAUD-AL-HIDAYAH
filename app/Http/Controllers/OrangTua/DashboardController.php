@@ -58,7 +58,9 @@ class DashboardController extends Controller
             $capaianStatsPerSiswa[$s->id] = $capaianCounts;
         }
 
-        return view('ortu.dashboard', compact('siswas', 'notifications', 'latestCatatans', 'capaianStatsPerSiswa'));
+        $myTestimoni = \App\Models\Testimoni::where('user_id', $user->id)->first();
+
+        return view('ortu.dashboard', compact('siswas', 'notifications', 'latestCatatans', 'capaianStatsPerSiswa', 'myTestimoni'));
     }
 
     public function showLaporan($id)

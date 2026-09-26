@@ -386,6 +386,106 @@ $months = [1=>'Januari',2=>'Februari',3=>'Maret',4=>'April',5=>'Mei',6=>'Juni',7
     </div>
 @endforelse
 
+{{-- ── CARD FORM REVIEW & KESAN PESAN ORANG TUA ───────────────────────────── --}}
+<div class="card" style="margin-top:28px; border-radius:18px; border:1px solid var(--border); box-shadow:0 4px 14px rgba(0,0,0,0.03); overflow:hidden;">
+    <div class="card-header" style="background:linear-gradient(135deg, #FEF3C7, #FFFBEB); border-bottom:1px solid #FDE68A; padding:20px 24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+        <span style="display:inline-flex;align-items:center;gap:10px;font-size:16px;font-weight:800;color:#78350F;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2.2" style="width:22px;height:22px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span>Review &amp; Kesan Pesan Wali Murid</span>
+        </span>
+        @if($myTestimoni)
+            @if($myTestimoni->status === 'approved')
+                <span class="badge bg-success" style="font-size:12px;padding:6px 14px;border-radius:20px;font-weight:700;">
+                    ✔ Disetujui &amp; Tampil di Halaman Utama
+                </span>
+            @elseif($myTestimoni->status === 'pending')
+                <span class="badge bg-warning text-dark" style="font-size:12px;padding:6px 14px;border-radius:20px;font-weight:700;">
+                    ⏳ Menunggu Persetujuan Admin
+                </span>
+            @else
+                <span class="badge bg-danger" style="font-size:12px;padding:6px 14px;border-radius:20px;font-weight:700;">
+                    ✖ Belum Disetujui
+                </span>
+            @endif
+        @endif
+    </div>
+
+    <div class="card-body" style="padding:24px;">
+        <p style="font-size:13.5px;color:#475569;margin-bottom:20px;line-height:1.6;">
+            Bagikan kesan, pesan, dan pengalaman Anda mengenai proses pengasuhan &amp; perkembangan anak selama bersekolah di KB-PAUD Al-Hidayah. Ulasan yang dikirim akan ditinjau terlebih dahulu oleh Admin sebelum dipublikasikan di halaman depan website.
+        </p>
+
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert" style="border-radius:12px;font-size:13.5px;">
+                <strong>Berhasil!</strong> {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        @if($errors->any())
+            <div class="alert alert-danger" style="border-radius:12px;font-size:13.5px;">
+                <ul style="margin:0;padding-left:20px;">
+                    @foreach($errors->all() as $err)
+                        <li>{{ $err }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ route('ortu.testimoni.store') }}" method="POST">
+            @csrf
+            
+            {{-- Pilihan Rating Bintang --}}
+            <div style="margin-bottom:18px;">
+                <label style="font-weight:800;font-size:13.5px;color:var(--secondary);display:block;margin-bottom:8px;">
+                    Beri Bintang Rating:
+                </label>
+                <div style="display:flex;gap:12px;align-items:center;">
+                    @php $currentRating = old('rating', $myTestimoni->rating ?? 5); @endphp
+                    @for($bintang = 5; $bintang >= 1; $bintang--)
+                        <label style="cursor:pointer;display:inline-flex;align-items:center;gap:4px;background:#F8FAFC;border:1px solid var(--border);padding:6px 14px;border-radius:10px;font-weight:700;font-size:13px;color:#D97706;">
+                            <input type="radio" name="rating" value="{{ $bintang }}" {{ $currentRating == $bintang ? 'checked' : '' }} style="accent-color:#D97706;">
+                            <span>{{ $bintang }} ★</span>
+                        </label>
+                    @endfor
+                </div>
+            </div>
+
+            {{-- Textarea Isi Review --}}
+            <div style="margin-bottom:20px;">
+                <label style="font-weight:800;font-size:13.5px;color:var(--secondary);display:block;margin-bottom:8px;">
+                    Isi Review / Kesan &amp; Pesan Anda:
+                </label>
+                <textarea name="isi_review" rows="4" class="form-control" placeholder="Tuliskan pengalaman positif, bimbingan guru, atau kesan mengenai sekolah anak Anda di sini..." style="border-radius:12px;border:1px solid var(--border);padding:12px 14px;font-size:14px;line-height:1.6;" required>{{ old('isi_review', $myTestimoni->isi_review ?? '') }}</textarea>
+                <div style="font-size:11.5px;color:#94A3B8;margin-top:6px;display:flex;justify-content:space-between;">
+                    <span>Minimal 10 karakter, maksimal 600 karakter.</span>
+                    <span>Review dikirim sebagai akun <strong>{{ Auth::user()->name }}</strong></span>
+                </div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+                <button type="submit" class="btn btn-primary" style="background:#16A34A;border-color:#16A34A;padding:10px 24px;border-radius:12px;font-weight:800;display:inline-flex;align-items:center;gap:8px;font-size:14px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:16px;height:16px;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    <span>{{ $myTestimoni ? 'Perbarui Review Saya' : 'Kirim Review Sekolah' }}</span>
+                </button>
+
+                @if($myTestimoni)
+                    <button type="button" class="btn btn-link text-danger" onclick="if(confirm('Apakah Anda yakin ingin menghapus review ini?')) document.getElementById('deleteReviewForm').submit();" style="font-size:13px;text-decoration:none;font-weight:700;">
+                        Hapus Review Saya
+                    </button>
+                @endif
+            </div>
+        </form>
+
+        @if($myTestimoni)
+            <form id="deleteReviewForm" action="{{ route('ortu.testimoni.destroy', $myTestimoni->id) }}" method="POST" style="display:none;">
+                @csrf
+                @method('DELETE')
+            </form>
+        @endif
+    </div>
+</div>
+
 <script>
     function openPhotoModal() {
         document.getElementById('photoModal').classList.add('active');
